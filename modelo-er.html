@@ -1,0 +1,1480 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modelo Entidad-Relación y normalización 3FN · MotoUber</title>
+  <meta name="description" content="Modelo entidad-relación de MotoUber con diccionario de datos, relaciones, normalización en Tercera Forma Normal y script SQL.">
+  <meta name="author" content="Equipo MotoUber">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234338ca'/%3E%3Cg fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='43' r='7'/%3E%3Ccircle cx='46' cy='43' r='7'/%3E%3Cpath d='M25 43h11l5-12h6M32 43l-3-9h-6m10-3-4-6h-5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+</head>
+<body class="">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="print-only" style="display:none;padding:0 0 10pt;border-bottom:1px solid #cbd5e1;margin-bottom:12pt;font-size:9pt;color:#475569">
+    <strong style="color:#0f172a">MotoUber</strong> · Documentación técnica · Modelo Entidad-Relación y normalización 3FN
+  </div>
+
+  <header class="topbar no-print">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html" aria-label="MotoUber, inicio del dossier">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.3" cy="16.8" r="2.9"/><circle cx="18.7" cy="16.8" r="2.9"/><path d="M8.2 16.8h4.6l2.5-5.6h3.1"/><path d="M11.2 16.8 9.7 12H6.7"/><path d="m13 11.2-2.1-3.5H9.1"/></svg></span>
+        <span class="brand__text">
+          <span class="brand__name">MotoUber</span>
+          <span class="brand__sub">Dossier técnico</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a><a href="modelo-er.html" aria-current="page">Modelo E-R</a><a href="contexto.html">Contexto</a><a href="dfd.html">DFD</a>
+        <button class="nav__print" type="button" data-print title="Imprimir o guardar como PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17h10v4H7z"/><path d="M17 12h1"/></svg><span>Imprimir</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <div class="shell page">
+
+  <header class="page-head page-head--row">
+    <div>
+      <div class="eyebrow">Documento 01 · Datos</div>
+      <h1>Modelo Entidad-Relación y normalización 3FN</h1>
+      <p class="lead">
+        Nueve tablas, diez relaciones y un diccionario completo. El modelo separa la identidad
+        del usuario de sus perfiles de rol, coloca al viaje como eje de la operación y aísla
+        pagos, calificaciones y patrocinios para eliminar redundancias.
+      </p>
+    </div>
+    <div class="page-head__meta">
+      <span class="chip chip--brand">3FN verificada</span>
+      <span class="chip chip--teal">9 tablas</span>
+      <span class="chip chip--amber">SQL incluido</span>
+    </div>
+  </header>
+
+  <section class="section" id="diagrama" aria-labelledby="diagrama-title">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 id="diagrama-title">Diagrama entidad-relación</h2>
+        <p>Vista lógica completa. La línea punteada representa la clave foránea opcional con la que el administrador autoriza una liquidación.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="modelo-entidad-relacion">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 1</b> · Modelo E-R lógico</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1520 1180" width="1520" height="1180" role="img" aria-label="Diagrama entidad-relación del sistema MotoUber con nueve entidades, claves y cardinalidades" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1520" height="1180" fill="#ffffff"/>
+    <defs>
+    <marker id="er-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="er-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="er-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="er-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="er-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="er-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="er-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="er-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="er-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="er-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="er-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="er-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="er-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="er-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="er-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="er-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="er-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="er-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="er-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="er-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="er-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="er-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#4338ca"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >Modelo Entidad-Relación · MotoUber</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >Especialización de Usuario, núcleo del viaje y entidades transaccionales · Tercera Forma Normal (3FN)</text>
+    <text x="1486" y="45"  style="font-size:10px;font-weight:650;fill:#64748b;text-anchor:end" >9 tablas · 10 relaciones</text>
+              <text x="1486" y="62"  style="font-size:9.2px;font-weight:500;fill:#94a3b8;text-anchor:end" >Notación pata de gallo</text>
+  </g>
+    <circle cx="430" cy="97" r="4.5" fill="#4338ca"/><text x="439" y="101"  style="font-size:9.5px;font-weight:650;fill:#64748b" >Identidad</text><circle cx="555" cy="97" r="4.5" fill="#0f766e"/><text x="564" y="101"  style="font-size:9.5px;font-weight:650;fill:#64748b" >Viaje</text><circle cx="660" cy="97" r="4.5" fill="#b45309"/><text x="669" y="101"  style="font-size:9.5px;font-weight:650;fill:#64748b" >Pagos</text><circle cx="775" cy="97" r="4.5" fill="#1d4ed8"/><text x="784" y="101"  style="font-size:9.5px;font-weight:650;fill:#64748b" >Reputación</text><circle cx="920" cy="97" r="4.5" fill="#be123c"/><text x="929" y="101"  style="font-size:9.5px;font-weight:650;fill:#64748b" >Patrocinio</text>
+    
+    <g transform="translate(1110 82)">
+      <rect x="0" y="0" width="23" height="15" rx="3.5" fill="#fffbeb" stroke="#f59e0b" stroke-opacity=".5"/>
+      <text x="11.5" y="10.8" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+      <rect x="31" y="0" width="23" height="15" rx="3.5" fill="#eff6ff" stroke="#60a5fa" stroke-opacity=".5"/>
+      <text x="42.5" y="10.8" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+      <rect x="62" y="0" width="23" height="15" rx="3.5" fill="#f5f3ff" stroke="#a78bfa" stroke-opacity=".55"/>
+      <text x="73.5" y="10.8" class="mono" style="font-size:7.4px;font-weight:750;fill:#6d28d9;text-anchor:middle" >UQ</text>
+      <text x="96" y="10.8"  style="font-size:9px;font-weight:550;fill:#64748b" >clave / valor único</text>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="55" y="400" width="270" height="205" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.4"/>
+      <path d="M 55 411 Q 55 400 66 400 L 314 400 Q 325 400 325 411 L 325 446 L 55 446 Z" fill="#4338ca"/>
+      <text x="68" y="422"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >USUARIO</text>
+      <text x="68" y="437"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >ENTIDAD BASE · IDENTIDAD</text>
+      <g><rect x="262" y="413" width="50" height="19" rx="5" fill="#ffffff" fill-opacity=".16" stroke="#ffffff" stroke-opacity=".28"/>
+        <text x="287" y="426.5"  style="font-size:8.2px;font-weight:700;fill:#ffffff;text-anchor:middle;letter-spacing:0.7" >1FN · 2FN · 3FN</text></g>
+      <g>
+        <line x1="56" y1="446" x2="324" y2="446" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="64" y="451.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="75.5" y="461.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="93" y="463" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_usuario</text>
+        <text x="314" y="463" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="56" y1="471" x2="324" y2="471" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="488" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >nombre</text>
+        <text x="314" y="488" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(120)</text>
+      </g><g>
+        <line x1="56" y1="496" x2="324" y2="496" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="64" y="501.5" width="23" height="14" rx="3.5" fill="#f5f3ff" stroke="#6d28d9" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="75.5" y="511.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#6d28d9;text-anchor:middle" >UQ</text>
+        <text x="93" y="513" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >correo</text>
+        <text x="314" y="513" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(160)</text>
+      </g><g>
+        <line x1="56" y1="521" x2="324" y2="521" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="538" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >telefono</text>
+        <text x="314" y="538" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(20)</text>
+      </g><g>
+        <line x1="56" y1="546" x2="324" y2="546" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="563" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >contrasena</text>
+        <text x="314" y="563" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(255)</text>
+      </g><g>
+        <line x1="56" y1="571" x2="324" y2="571" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="588" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >rol</text>
+        <text x="314" y="588" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >ENUM</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="410" y="140" width="270" height="130" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.4"/>
+      <path d="M 410 151 Q 410 140 421 140 L 669 140 Q 680 140 680 151 L 680 186 L 410 186 Z" fill="#4338ca"/>
+      <text x="423" y="162"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >PASAJERO</text>
+      <text x="423" y="177"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >ESPECIALIZACIÓN 1:1</text>
+      
+      <g>
+        <line x1="411" y1="186" x2="679" y2="186" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="191.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="201.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="448" y="203" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_pasajero</text>
+        <text x="669" y="203" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="211" x2="679" y2="211" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="216.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="226.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="448" y="228" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_usuario</text>
+        <text x="669" y="228" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="236" x2="679" y2="236" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="253" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >metodo_pago_preferido</text>
+        <text x="669" y="253" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(40)</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="410" y="300" width="270" height="180" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.4"/>
+      <path d="M 410 311 Q 410 300 421 300 L 669 300 Q 680 300 680 311 L 680 346 L 410 346 Z" fill="#4338ca"/>
+      <text x="423" y="322"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >MOTOCONCHISTA</text>
+      <text x="423" y="337"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >ESPECIALIZACIÓN 1:1</text>
+      
+      <g>
+        <line x1="411" y1="346" x2="679" y2="346" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="351.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="361.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="448" y="363" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_motoconchista</text>
+        <text x="669" y="363" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="371" x2="679" y2="371" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="376.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="386.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="448" y="388" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_usuario</text>
+        <text x="669" y="388" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="396" x2="679" y2="396" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="413" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >licencia</text>
+        <text x="669" y="413" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(40)</text>
+      </g><g>
+        <line x1="411" y1="421" x2="679" y2="421" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="438" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >disponibilidad</text>
+        <text x="669" y="438" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >BOOLEAN</text>
+      </g><g>
+        <line x1="411" y1="446" x2="679" y2="446" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="463" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >datos_bancarios</text>
+        <text x="669" y="463" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(255)</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="410" y="520" width="270" height="130" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.4"/>
+      <path d="M 410 531 Q 410 520 421 520 L 669 520 Q 680 520 680 531 L 680 566 L 410 566 Z" fill="#4338ca"/>
+      <text x="423" y="542"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >ADMINISTRADOR</text>
+      <text x="423" y="557"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >ESPECIALIZACIÓN 1:1</text>
+      
+      <g>
+        <line x1="411" y1="566" x2="679" y2="566" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="571.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="581.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="448" y="583" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_administrador</text>
+        <text x="669" y="583" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="591" x2="679" y2="591" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="596.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="606.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="448" y="608" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_usuario</text>
+        <text x="669" y="608" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="616" x2="679" y2="616" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="633" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >nivel_permiso</text>
+        <text x="669" y="633" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(30)</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="55" y="800" width="270" height="180" rx="11" fill="#ffffff" stroke="#be123c" stroke-width="1.4"/>
+      <path d="M 55 811 Q 55 800 66 800 L 314 800 Q 325 800 325 811 L 325 846 L 55 846 Z" fill="#be123c"/>
+      <text x="68" y="822"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >PATROCINADOR</text>
+      <text x="68" y="837"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >ALIADO COMERCIAL</text>
+      
+      <g>
+        <line x1="56" y1="846" x2="324" y2="846" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="64" y="851.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="75.5" y="861.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="93" y="863" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_patrocinador</text>
+        <text x="314" y="863" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="56" y1="871" x2="324" y2="871" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="888" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >nombre_empresa</text>
+        <text x="314" y="888" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(140)</text>
+      </g><g>
+        <line x1="56" y1="896" x2="324" y2="896" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="913" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >contacto</text>
+        <text x="314" y="913" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(140)</text>
+      </g><g>
+        <line x1="56" y1="921" x2="324" y2="921" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="938" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >tipo_acuerdo</text>
+        <text x="314" y="938" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(60)</text>
+      </g><g>
+        <line x1="56" y1="946" x2="324" y2="946" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="68" y="963" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >estado</text>
+        <text x="314" y="963" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(20)</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="410" y="770" width="300" height="230" rx="11" fill="#ffffff" stroke="#be123c" stroke-width="1.4"/>
+      <path d="M 410 781 Q 410 770 421 770 L 699 770 Q 710 770 710 781 L 710 816 L 410 816 Z" fill="#be123c"/>
+      <text x="423" y="792"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >ACUERDO_PATROCINIO</text>
+      <text x="423" y="807"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >CONVENIO · 3FN</text>
+      
+      <g>
+        <line x1="411" y1="816" x2="709" y2="816" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="821.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="831.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="448" y="833" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_acuerdo</text>
+        <text x="699" y="833" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="841" x2="709" y2="841" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="846.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="856.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="448" y="858" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_patrocinador</text>
+        <text x="699" y="858" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="866" x2="709" y2="866" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="419" y="871.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="430.5" y="881.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="448" y="883" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_administrador</text>
+        <text x="699" y="883" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="411" y1="891" x2="709" y2="891" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="908" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >monto</text>
+        <text x="699" y="908" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DECIMAL(10,2)</text>
+      </g><g>
+        <line x1="411" y1="916" x2="709" y2="916" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="933" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha_inicio</text>
+        <text x="699" y="933" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATE</text>
+      </g><g>
+        <line x1="411" y1="941" x2="709" y2="941" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="958" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha_fin</text>
+        <text x="699" y="958" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATE</text>
+      </g><g>
+        <line x1="411" y1="966" x2="709" y2="966" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="423" y="983" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >estado</text>
+        <text x="699" y="983" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(20)</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="800" y="220" width="300" height="305" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.4"/>
+      <path d="M 800 231 Q 800 220 811 220 L 1089 220 Q 1100 220 1100 231 L 1100 266 L 800 266 Z" fill="#0f766e"/>
+      <text x="813" y="242"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >VIAJE</text>
+      <text x="813" y="257"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >NÚCLEO OPERATIVO</text>
+      <g><rect x="1037" y="233" width="50" height="19" rx="5" fill="#ffffff" fill-opacity=".16" stroke="#ffffff" stroke-opacity=".28"/>
+        <text x="1062" y="246.5"  style="font-size:8.2px;font-weight:700;fill:#ffffff;text-anchor:middle;letter-spacing:0.7" >P03–P08</text></g>
+      <g>
+        <line x1="801" y1="266" x2="1099" y2="266" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="809" y="271.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="820.5" y="281.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="838" y="283" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_viaje</text>
+        <text x="1089" y="283" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="801" y1="291" x2="1099" y2="291" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="809" y="296.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="820.5" y="306.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="838" y="308" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_pasajero</text>
+        <text x="1089" y="308" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="801" y1="316" x2="1099" y2="316" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="809" y="321.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="820.5" y="331.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="838" y="333" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_motoconchista</text>
+        <text x="1089" y="333" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="801" y1="341" x2="1099" y2="341" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="358" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >origen</text>
+        <text x="1089" y="358" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(200)</text>
+      </g><g>
+        <line x1="801" y1="366" x2="1099" y2="366" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="383" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >destino</text>
+        <text x="1089" y="383" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(200)</text>
+      </g><g>
+        <line x1="801" y1="391" x2="1099" y2="391" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="408" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >distancia_km</text>
+        <text x="1089" y="408" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DECIMAL(6,2)</text>
+      </g><g>
+        <line x1="801" y1="416" x2="1099" y2="416" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="433" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >tarifa</text>
+        <text x="1089" y="433" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DECIMAL(10,2)</text>
+      </g><g>
+        <line x1="801" y1="441" x2="1099" y2="441" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="458" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >estado</text>
+        <text x="1089" y="458" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(20)</text>
+      </g><g>
+        <line x1="801" y1="466" x2="1099" y2="466" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="483" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha_solicitud</text>
+        <text x="1089" y="483" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATETIME</text>
+      </g><g>
+        <line x1="801" y1="491" x2="1099" y2="491" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="813" y="508" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha_fin</text>
+        <text x="1089" y="508" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATETIME</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="1200" y="150" width="280" height="255" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.4"/>
+      <path d="M 1200 161 Q 1200 150 1211 150 L 1469 150 Q 1480 150 1480 161 L 1480 196 L 1200 196 Z" fill="#b45309"/>
+      <text x="1213" y="172"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >PAGO</text>
+      <text x="1213" y="187"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >TRANSACCIÓN 1:1 CON VIAJE</text>
+      <g><rect x="1417" y="163" width="50" height="19" rx="5" fill="#ffffff" fill-opacity=".16" stroke="#ffffff" stroke-opacity=".28"/>
+        <text x="1442" y="176.5"  style="font-size:8.2px;font-weight:700;fill:#ffffff;text-anchor:middle;letter-spacing:0.7" >P09</text></g>
+      <g>
+        <line x1="1201" y1="196" x2="1479" y2="196" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="1209" y="201.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="1220.5" y="211.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="1238" y="213" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_pago</text>
+        <text x="1469" y="213" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="1201" y1="221" x2="1479" y2="221" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="1209" y="226.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="1220.5" y="236.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="1238" y="238" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_viaje</text>
+        <text x="1469" y="238" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="1201" y1="246" x2="1479" y2="246" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="1209" y="251.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="1220.5" y="261.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="1238" y="263" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_administrador</text>
+        <text x="1469" y="263" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="1201" y1="271" x2="1479" y2="271" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="288" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >monto</text>
+        <text x="1469" y="288" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DECIMAL(10,2)</text>
+      </g><g>
+        <line x1="1201" y1="296" x2="1479" y2="296" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="313" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >metodo</text>
+        <text x="1469" y="313" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(30)</text>
+      </g><g>
+        <line x1="1201" y1="321" x2="1479" y2="321" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="338" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >estado</text>
+        <text x="1469" y="338" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(20)</text>
+      </g><g>
+        <line x1="1201" y1="346" x2="1479" y2="346" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="363" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >referencia</text>
+        <text x="1469" y="363" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(60)</text>
+      </g><g>
+        <line x1="1201" y1="371" x2="1479" y2="371" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="388" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha_pago</text>
+        <text x="1469" y="388" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATETIME</text>
+      </g>
+    </g>
+    <g filter="url(#er-soft)">
+      <rect x="1200" y="590" width="280" height="180" rx="11" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.4"/>
+      <path d="M 1200 601 Q 1200 590 1211 590 L 1469 590 Q 1480 590 1480 601 L 1480 636 L 1200 636 Z" fill="#1d4ed8"/>
+      <text x="1213" y="612"  style="font-size:14px;font-weight:750;fill:#ffffff;letter-spacing:0.2" >CALIFICACION</text>
+      <text x="1213" y="627"  style="font-size:8.6px;font-weight:600;fill:#ffffff;letter-spacing:0.9;opacity:0.74" >REPUTACIÓN · P10</text>
+      
+      <g>
+        <line x1="1201" y1="636" x2="1479" y2="636" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="1209" y="641.5" width="23" height="14" rx="3.5" fill="#fffbeb" stroke="#b45309" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="1220.5" y="651.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#92400e;text-anchor:middle" >PK</text>
+        <text x="1238" y="653" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_calificacion</text>
+        <text x="1469" y="653" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="1201" y1="661" x2="1479" y2="661" stroke="#f1f5f9" stroke-width="1"/>
+        <rect x="1209" y="666.5" width="23" height="14" rx="3.5" fill="#eff6ff" stroke="#1d4ed8" stroke-opacity=".45" stroke-width=".8"/>
+           <text x="1220.5" y="676.6" class="mono" style="font-size:7.4px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >FK</text>
+        <text x="1238" y="678" class="mono" style="font-size:10.3px;font-weight:700;fill:#1e293b" >id_viaje</text>
+        <text x="1469" y="678" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >INT</text>
+      </g><g>
+        <line x1="1201" y1="686" x2="1479" y2="686" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="703" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >puntuacion</text>
+        <text x="1469" y="703" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >TINYINT</text>
+      </g><g>
+        <line x1="1201" y1="711" x2="1479" y2="711" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="728" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >comentario</text>
+        <text x="1469" y="728" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >VARCHAR(500)</text>
+      </g><g>
+        <line x1="1201" y1="736" x2="1479" y2="736" stroke="#f1f5f9" stroke-width="1"/>
+        
+        <text x="1213" y="753" class="mono" style="font-size:10.3px;font-weight:550;fill:#1e293b" >fecha</text>
+        <text x="1469" y="753" class="mono" style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:end" >DATETIME</text>
+      </g>
+    </g>
+    <g>
+    <path d="M 325 450 L 358 450 Q 370 450 370 438 L 370 217 Q 370 205 382 205 L 410 205" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(325 450) rotate(180)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(410 205) rotate(0)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    
+  </g><g>
+    <path d="M 325 510 L 373 510 Q 385 510 385 498 L 385 402 Q 385 390 397 390 L 410 390" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(325 510) rotate(180)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(410 390) rotate(0)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    
+  </g><g>
+    <path d="M 325 560 L 383 560 Q 395 560 395 572 L 395 577.5 Q 395 585 402.5 585 L 410 585" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(325 560) rotate(180)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(410 585) rotate(0)" stroke="#4338ca" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    
+  </g><g>
+    <path d="M 680 205 L 728 205 Q 740 205 740 217 L 740 288 Q 740 300 752 300 L 800 300" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(680 205) rotate(180)" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(800 300) rotate(0)" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M 0 -7 L -14 0 M 0 0 L -14 0 M 0 7 L -14 0"/></g>
+    <text x="750" y="250"  style="font-size:9.4px;font-weight:650;fill:#0f766e" class="halo" stroke="#ffffff" stroke-width="4.5">solicita</text>
+  </g><g>
+    <path d="M 680 390 L 758 390 Q 770 390 770 378 L 770 372 Q 770 360 782 360 L 800 360" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(680 390) rotate(180)" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(800 360) rotate(0)" stroke="#0f766e" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M 0 -7 L -14 0 M 0 0 L -14 0 M 0 7 L -14 0"/></g>
+    <text x="782" y="348"  style="font-size:9.4px;font-weight:650;fill:#0f766e" class="halo" stroke="#ffffff" stroke-width="4.5">atiende</text>
+  </g><g>
+    <path d="M 1100 280 L 1200 280" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(1100 280) rotate(180)" stroke="#b45309" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(1200 280) rotate(0)" stroke="#b45309" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    <text x="1150" y="270"  style="font-size:9.4px;font-weight:650;fill:#b45309;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">genera</text>
+  </g><g>
+    <path d="M 1100 470 L 1138 470 Q 1150 470 1150 482 L 1150 648 Q 1150 660 1162 660 L 1200 660" fill="none" stroke="#1d4ed8" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(1100 470) rotate(180)" stroke="#1d4ed8" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(1200 660) rotate(0)" stroke="#1d4ed8" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    <text x="1157" y="545"  style="font-size:9.4px;font-weight:650;fill:#1d4ed8" class="halo" stroke="#ffffff" stroke-width="4.5">recibe</text>
+  </g><g>
+    <path d="M 325 870 L 360 870 Q 370 870 370 860 L 370 860 Q 370 850 380 850 L 410 850" fill="none" stroke="#be123c" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(325 870) rotate(180)" stroke="#be123c" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(410 850) rotate(0)" stroke="#be123c" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M 0 -7 L -14 0 M 0 0 L -14 0 M 0 7 L -14 0"/></g>
+    <text x="372" y="830"  style="font-size:9.4px;font-weight:650;fill:#be123c" class="halo" stroke="#ffffff" stroke-width="4.5">firma</text>
+  </g><g>
+    <path d="M 545 650 L 545 770" fill="none" stroke="#be123c" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="crowfoot" transform="translate(545 650) rotate(-90)" stroke="#be123c" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(545 770) rotate(90)" stroke="#be123c" stroke-width="1.5" fill="none" stroke-linecap="round"><path d="M 0 -7 L -14 0 M 0 0 L -14 0 M 0 7 L -14 0"/></g>
+    <text x="553" y="714"  style="font-size:9.4px;font-weight:650;fill:#be123c" class="halo" stroke="#ffffff" stroke-width="4.5">gestiona</text>
+  </g><g>
+    <path d="M 680 585 L 718 585 Q 730 585 730 597 L 730 1028 Q 730 1040 742 1040 L 1488 1040 Q 1500 1040 1500 1028 L 1500 432 Q 1500 420 1488 420 L 1457.5 420 Q 1450 420 1450 412.5 L 1450 405" fill="none" stroke="#475569" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4"/>
+    <g class="crowfoot" transform="translate(680 585) rotate(180)" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/></g>
+    <g class="crowfoot" transform="translate(1450 405) rotate(-90)" stroke="#475569" stroke-width="1.5" fill="none" stroke-linecap="round"><line x1="-13" y1="-5.5" x2="-13" y2="5.5"/><circle cx="-21" cy="0" r="4.3" fill="#ffffff"/></g>
+    <text x="945" y="1028"  style="font-size:9.4px;font-weight:650;fill:#475569;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">autoriza liquidación · FK id_administrador</text>
+  </g>
+
+    <g opacity=".92">
+      <g>
+    <rect x="55" y="1074" width="30" height="16" rx="3" fill="#eef2ff" stroke="#4338ca" stroke-width="1"/>
+    <text x="93" y="1085.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >Usuario y especializaciones</text>
+  </g>
+      <g>
+    <rect x="340" y="1074" width="30" height="16" rx="3" fill="#ecfdf5" stroke="#0f766e" stroke-width="1"/>
+    <text x="378" y="1085.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >Viaje</text>
+  </g>
+      <g>
+    <rect x="470" y="1074" width="30" height="16" rx="3" fill="#fffbeb" stroke="#b45309" stroke-width="1"/>
+    <text x="508" y="1085.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >Pago</text>
+  </g>
+      <g>
+    <rect x="610" y="1074" width="30" height="16" rx="3" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1"/>
+    <text x="648" y="1085.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >Calificación</text>
+  </g>
+      <g>
+    <rect x="780" y="1074" width="30" height="16" rx="3" fill="#fff1f2" stroke="#be123c" stroke-width="1"/>
+    <text x="818" y="1085.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >Patrocinio</text>
+  </g>
+      <text x="960" y="1086" class="mono" style="font-size:10px;font-weight:750;fill:#475569" >1 ── N</text>
+      <text x="1015" y="1086"  style="font-size:9px;font-weight:500;fill:#64748b" >uno a muchos</text>
+      <text x="1110" y="1086" class="mono" style="font-size:10px;font-weight:750;fill:#475569" >1 ── 0..1</text>
+      <text x="1180" y="1086"  style="font-size:9px;font-weight:500;fill:#64748b" >uno a uno opcional</text>
+    </g>
+    <g>
+    <line x1="34" y1="1132" x2="1486" y2="1132" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="1148"  style="font-size:9.8px;font-weight:500;fill:#64748b" >PK = clave primaria · FK = clave foránea · UQ = restricción de unicidad · La línea punteada representa la FK opcional de autorización de liquidación.</text>
+  </g>
+    <text x="34" y="1166"  style="font-size:9.2px;font-weight:500;fill:#94a3b8" >Cada especialización comparte la PK de USUARIO mediante una FK UNIQUE: un usuario posee exactamente un perfil de rol. Pago y calificación son 1:1 con el viaje.</text>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 1</span>
+        <span><b>Modelo E-R de MotoUber.</b> Usuario es la entidad base; Pasajero, Motoconchista y Administrador son especializaciones 1:1. Viaje relaciona ambos extremos del servicio y concentra pago y calificación. Patrocinador y Acuerdo_Patrocinio quedan fuera del ciclo operativo.</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Lectura de la pata de gallo:</strong> la barra perpendicular significa «uno»; el círculo, «opcional»; las tres líneas abiertas, «muchos». Así, <code>USUARIO 1 ── 0..1 PASAJERO</code> se lee: un usuario puede tener cero o un perfil de pasajero, y cada pasajero pertenece a exactamente un usuario.</p>
+    </div>
+  </section>
+
+  <section class="section" id="diccionario" aria-labelledby="diccionario-title">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 id="diccionario-title">Diccionario de datos</h2>
+        <p>Tipos, claves, nulabilidad y reglas de cada tabla. Los tipos son compatibles con MySQL 8.0 y PostgreSQL con cambios menores.</p>
+      </div>
+    </div>
+
+    <article class="entity-block" id="tb-usuario">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#4338ca"></span>
+        <span class="entity-block__name">usuario</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Entidad base · credenciales y rol</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_usuario</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador único autoincremental.</td></tr>
+            <tr><td class="mono">nombre</td><td class="mono">VARCHAR(120)</td><td>—</td><td>No</td><td>Nombre completo o razón social de la persona.</td></tr>
+            <tr><td class="mono">correo</td><td class="mono">VARCHAR(160)</td><td><span class="tag tag--uq">UQ</span></td><td>No</td><td>Credencial de acceso; restricción <code>UNIQUE</code> y validación de formato.</td></tr>
+            <tr><td class="mono">telefono</td><td class="mono">VARCHAR(20)</td><td>—</td><td>No</td><td>Contacto; se normaliza a formato internacional.</td></tr>
+            <tr><td class="mono">contrasena</td><td class="mono">VARCHAR(255)</td><td>—</td><td>No</td><td>Hash bcrypt o Argon2. Prohibido almacenar texto plano.</td></tr>
+            <tr><td class="mono">rol</td><td class="mono">ENUM</td><td>—</td><td>No</td><td><code>pasajero</code>, <code>motoconchista</code> o <code>administrador</code>. Discriminador del perfil.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-pasajero">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#4338ca"></span>
+        <span class="entity-block__name">pasajero</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Especialización 1:1 · datos propios del pasajero</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_pasajero</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador del perfil de pasajero.</td></tr>
+            <tr><td class="mono">id_usuario</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span> <span class="tag tag--uq">UQ</span></td><td>No</td><td>Referencia a <code>usuario.id_usuario</code>. <code>UNIQUE</code> garantiza la relación 1:1.</td></tr>
+            <tr><td class="mono">metodo_pago_preferido</td><td class="mono">VARCHAR(40)</td><td>—</td><td>Sí</td><td><code>efectivo</code>, <code>tarjeta</code>, <code>transferencia</code> u otro medio habilitado.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-motoconchista">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#0f766e"></span>
+        <span class="entity-block__name">motoconchista</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Especialización 1:1 · datos operativos y bancarios</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_motoconchista</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador del perfil de conductor.</td></tr>
+            <tr><td class="mono">id_usuario</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span> <span class="tag tag--uq">UQ</span></td><td>No</td><td>Referencia a <code>usuario.id_usuario</code>; <code>UNIQUE</code> para la relación 1:1.</td></tr>
+            <tr><td class="mono">licencia</td><td class="mono">VARCHAR(40)</td><td><span class="tag tag--uq">UQ</span></td><td>No</td><td>Número de licencia de conducir; <code>UNIQUE</code> para evitar duplicados.</td></tr>
+            <tr><td class="mono">disponibilidad</td><td class="mono">BOOLEAN</td><td>—</td><td>No</td><td>Estado persistido para recibir solicitudes; por defecto <code>TRUE</code>.</td></tr>
+            <tr><td class="mono">datos_bancarios</td><td class="mono">VARCHAR(255)</td><td>—</td><td>Sí</td><td>Referencia cifrada de la cuenta de liquidación. No se expone en la API pública.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-administrador">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#b45309"></span>
+        <span class="entity-block__name">administrador</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Especialización 1:1 · permisos administrativos</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_administrador</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador del perfil administrativo.</td></tr>
+            <tr><td class="mono">id_usuario</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span> <span class="tag tag--uq">UQ</span></td><td>No</td><td>Referencia a <code>usuario.id_usuario</code>; <code>UNIQUE</code> para la relación 1:1.</td></tr>
+            <tr><td class="mono">nivel_permiso</td><td class="mono">ENUM</td><td>—</td><td>No</td><td><code>basico</code>, <code>supervisor</code> o <code>total</code>. Controla operaciones sensibles.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-patrocinador">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#be123c"></span>
+        <span class="entity-block__name">patrocinador</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Aliado comercial · no es un rol de acceso</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_patrocinador</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador de la empresa patrocinadora.</td></tr>
+            <tr><td class="mono">nombre_empresa</td><td class="mono">VARCHAR(140)</td><td>—</td><td>No</td><td>Nombre comercial del aliado.</td></tr>
+            <tr><td class="mono">contacto</td><td class="mono">VARCHAR(140)</td><td>—</td><td>No</td><td>Persona, correo o teléfono de contacto.</td></tr>
+            <tr><td class="mono">tipo_acuerdo</td><td class="mono">VARCHAR(60)</td><td>—</td><td>No</td><td>Tipo de alianza preferente: <code>publicidad</code>, <code>descuento</code>, <code>patrocinio</code> u otro.</td></tr>
+            <tr><td class="mono">estado</td><td class="mono">VARCHAR(20)</td><td>—</td><td>No</td><td><code>activo</code>, <code>inactivo</code> o <code>suspendido</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-viaje">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#0f766e"></span>
+        <span class="entity-block__name">viaje</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Núcleo operativo · P03–P08</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_viaje</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador del servicio solicitado.</td></tr>
+            <tr><td class="mono">id_pasajero</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span></td><td>No</td><td>Pasajero que solicita el viaje.</td></tr>
+            <tr><td class="mono">id_motoconchista</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span></td><td>Sí</td><td>Nulo mientras el viaje está en búsqueda; se completa al asignar.</td></tr>
+            <tr><td class="mono">origen</td><td class="mono">VARCHAR(200)</td><td>—</td><td>No</td><td>Dirección o punto de recogida.</td></tr>
+            <tr><td class="mono">destino</td><td class="mono">VARCHAR(200)</td><td>—</td><td>No</td><td>Dirección o punto de entrega.</td></tr>
+            <tr><td class="mono">distancia_km</td><td class="mono">DECIMAL(6,2)</td><td>—</td><td>Sí</td><td>Distancia estimada o confirmada; se completa al calcular la tarifa.</td></tr>
+            <tr><td class="mono">tarifa</td><td class="mono">DECIMAL(10,2)</td><td>—</td><td>Sí</td><td>Precio final en la moneda del sistema. Instantánea histórica, no calculada al leer.</td></tr>
+            <tr><td class="mono">estado</td><td class="mono">VARCHAR(20)</td><td>—</td><td>No</td><td><code>solicitado</code>, <code>buscando</code>, <code>asignado</code>, <code>en_camino</code>, <code>en_curso</code>, <code>finalizado</code> o <code>cancelado</code>.</td></tr>
+            <tr><td class="mono">fecha_solicitud</td><td class="mono">DATETIME</td><td>—</td><td>No</td><td>Marca temporal de creación de la solicitud.</td></tr>
+            <tr><td class="mono">fecha_fin</td><td class="mono">DATETIME</td><td>—</td><td>Sí</td><td>Marca temporal de finalización o cancelación.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-pago">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#b45309"></span>
+        <span class="entity-block__name">pago</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Transacción 1:1 con viaje · P09</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_pago</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador de la transacción.</td></tr>
+            <tr><td class="mono">id_viaje</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span> <span class="tag tag--uq">UQ</span></td><td>No</td><td><code>UNIQUE</code>: un viaje genera como máximo un registro de pago.</td></tr>
+            <tr><td class="mono">id_administrador</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span></td><td>Sí</td><td>Administrador que autoriza la liquidación o el reverso.</td></tr>
+            <tr><td class="mono">monto</td><td class="mono">DECIMAL(10,2)</td><td>—</td><td>No</td><td>Importe cobrado; restricción <code>monto &gt;= 0</code>.</td></tr>
+            <tr><td class="mono">metodo</td><td class="mono">VARCHAR(30)</td><td>—</td><td>No</td><td><code>efectivo</code>, <code>tarjeta</code>, <code>transferencia</code> o pasarela externa.</td></tr>
+            <tr><td class="mono">estado</td><td class="mono">VARCHAR(20)</td><td>—</td><td>No</td><td><code>pendiente</code>, <code>pagado</code>, <code>liquidado</code>, <code>revertido</code> o <code>cancelado</code>.</td></tr>
+            <tr><td class="mono">referencia</td><td class="mono">VARCHAR(60)</td><td><span class="tag tag--uq">UQ</span></td><td>Sí</td><td>Referencia de la pasarela; <code>UNIQUE</code> cuando existe para evitar doble cobro.</td></tr>
+            <tr><td class="mono">fecha_pago</td><td class="mono">DATETIME</td><td>—</td><td>Sí</td><td>Fecha efectiva del cobro o de la liquidación.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-calificacion">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#1d4ed8"></span>
+        <span class="entity-block__name">calificacion</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Reputación 1:1 con viaje · P10</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_calificacion</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador de la calificación.</td></tr>
+            <tr><td class="mono">id_viaje</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span> <span class="tag tag--uq">UQ</span></td><td>No</td><td><code>UNIQUE</code>: una sola calificación por viaje.</td></tr>
+            <tr><td class="mono">puntuacion</td><td class="mono">TINYINT</td><td>—</td><td>No</td><td>Entero entre 1 y 5; restricción <code>CHECK</code>.</td></tr>
+            <tr><td class="mono">comentario</td><td class="mono">VARCHAR(500)</td><td>—</td><td>Sí</td><td>Texto libre moderado por el administrador.</td></tr>
+            <tr><td class="mono">fecha</td><td class="mono">DATETIME</td><td>—</td><td>No</td><td>Fecha de registro de la calificación.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <article class="entity-block" id="tb-acuerdo">
+      <div class="entity-block__head">
+        <span class="entity-block__dot" style="background:#be123c"></span>
+        <span class="entity-block__name">acuerdo_patrocinio</span>
+        <span class="tag tag--ok">3FN</span>
+        <span class="entity-block__desc">Convenio comercial · P11</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Campo</th><th>Tipo</th><th>Clave</th><th>Nulo</th><th>Descripción / restricción</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">id_acuerdo</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--pk">PK</span></td><td>No</td><td>Identificador del convenio.</td></tr>
+            <tr><td class="mono">id_patrocinador</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span></td><td>No</td><td>Empresa que firma el acuerdo.</td></tr>
+            <tr><td class="mono">id_administrador</td><td class="mono">INT UNSIGNED</td><td><span class="tag tag--fk">FK</span></td><td>No</td><td>Administrador responsable de la gestión.</td></tr>
+            <tr><td class="mono">monto</td><td class="mono">DECIMAL(10,2)</td><td>—</td><td>No</td><td>Valor económico del convenio; <code>monto &gt;= 0</code>.</td></tr>
+            <tr><td class="mono">fecha_inicio</td><td class="mono">DATE</td><td>—</td><td>No</td><td>Inicio de vigencia.</td></tr>
+            <tr><td class="mono">fecha_fin</td><td class="mono">DATE</td><td>—</td><td>No</td><td>Fin de vigencia; debe ser posterior a <code>fecha_inicio</code>.</td></tr>
+            <tr><td class="mono">estado</td><td class="mono">VARCHAR(20)</td><td>—</td><td>No</td><td><code>borrador</code>, <code>activo</code>, <code>vencido</code> o <code>suspendido</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <section class="section" id="relaciones" aria-labelledby="relaciones-title">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 id="relaciones-title">Relaciones y cardinalidades</h2>
+        <p>La implementación física de cada relación se resuelve con claves foráneas; no hay relaciones muchos-a-muchos sin tabla intermedia.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Relación</th><th>Entidades</th><th>Cardinalidad</th><th>Implementación</th><th>Regla de integridad</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Es un</td><td>Usuario → Pasajero</td><td class="nowrap">1 : 0..1</td><td><code>pasajero.id_usuario</code> FK UNIQUE</td><td><code>ON DELETE CASCADE</code>: al borrar el usuario se elimina su perfil.</td></tr>
+          <tr><td>Es un</td><td>Usuario → Motoconchista</td><td class="nowrap">1 : 0..1</td><td><code>motoconchista.id_usuario</code> FK UNIQUE</td><td><code>ON DELETE CASCADE</code>.</td></tr>
+          <tr><td>Es un</td><td>Usuario → Administrador</td><td class="nowrap">1 : 0..1</td><td><code>administrador.id_usuario</code> FK UNIQUE</td><td><code>ON DELETE CASCADE</code>.</td></tr>
+          <tr><td>Solicita</td><td>Pasajero → Viaje</td><td class="nowrap">1 : N</td><td><code>viaje.id_pasajero</code> FK</td><td><code>ON DELETE RESTRICT</code>: no se borra un pasajero con viajes.</td></tr>
+          <tr><td>Atiende</td><td>Motoconchista → Viaje</td><td class="nowrap">1 : N (opcional)</td><td><code>viaje.id_motoconchista</code> FK NULL</td><td><code>ON DELETE SET NULL</code>: el viaje conserva su historial si se elimina el conductor.</td></tr>
+          <tr><td>Genera</td><td>Viaje → Pago</td><td class="nowrap">1 : 0..1</td><td><code>pago.id_viaje</code> FK UNIQUE</td><td><code>ON DELETE RESTRICT</code>: un pago no se borra en cascada.</td></tr>
+          <tr><td>Recibe</td><td>Viaje → Calificación</td><td class="nowrap">1 : 0..1</td><td><code>calificacion.id_viaje</code> FK UNIQUE</td><td><code>ON DELETE CASCADE</code>: la calificación no existe sin el viaje.</td></tr>
+          <tr><td>Autoriza</td><td>Administrador → Pago</td><td class="nowrap">1 : N (opcional)</td><td><code>pago.id_administrador</code> FK NULL</td><td><code>ON DELETE SET NULL</code>: se conserva el pago y se pierde el responsable.</td></tr>
+          <tr><td>Firma</td><td>Patrocinador → Acuerdo</td><td class="nowrap">1 : N</td><td><code>acuerdo.id_patrocinador</code> FK</td><td><code>ON DELETE RESTRICT</code>: no se borra un patrocinador con convenios.</td></tr>
+          <tr><td>Gestiona</td><td>Administrador → Acuerdo</td><td class="nowrap">1 : N</td><td><code>acuerdo.id_administrador</code> FK</td><td><code>ON DELETE RESTRICT</code>: el convenio conserva un responsable.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout--amber mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 20h18z"/><path d="M12 9v5M12 17h.01"/></svg>
+      <p><strong>Decisión deliberada:</strong> el administrador no se conecta con <code>viaje</code> mediante una FK. Su supervisión es una capacidad de rol (consulta y auditoría), no una relación de datos. Si en el futuro se requiere un responsable por viaje, se añadiría <code>id_administrador_supervisor</code> con su propia regla.</p>
+    </div>
+  </section>
+
+  <section class="section" id="normalizacion" aria-labelledby="norm-title">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 id="norm-title">Normalización en Tercera Forma Normal</h2>
+        <p>El objetivo no es «quitar tablas», sino asegurar que cada hecho del negocio se almacene una sola vez y que una actualización no pueda contradecir otra fila.</p>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></div>
+        <h3>1FN · Atomicidad</h3>
+        <p>Cada celda contiene un valor indivisible, no listas ni grupos repetidos. Cada fila se identifica por una clave primaria.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></svg></div>
+        <h3>2FN · Dependencia total</h3>
+        <p>Ningún atributo no clave depende solo de una parte de una clave compuesta. Si la clave es simple, la condición se cumple por construcción.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h6v6H5zM13 13h6v6h-6z"/><path d="M11 8h4v5M8 11v5h5"/></svg></div>
+        <h3>3FN · Sin transitivas</h3>
+        <p>Ningún atributo no clave determina a otro atributo no clave. Los datos de otra entidad se alcanzan por clave foránea, no por copia.</p>
+      </div>
+    </div>
+
+    <div class="steps" aria-label="Recorrido de normalización">
+      <div class="step">
+        <div class="step__tag">UNF</div>
+        <h4>Relación universal</h4>
+        <p>Un solo registro de viaje con columnas repetidas para pagos, calificaciones y patrocinadores.</p>
+        <ul>
+          <li>Grupos repetidos</li>
+          <li>Datos del pasajero y del conductor duplicados</li>
+          <li>Datos del patrocinador mezclados con el viaje</li>
+        </ul>
+      </div>
+      <div class="step">
+        <div class="step__tag">1FN</div>
+        <h4>Filas atómicas</h4>
+        <p>Se separan los grupos repetidos en relaciones independientes y se asigna una clave a cada fila.</p>
+        <ul>
+          <li><code>viaje_pago</code></li>
+          <li><code>viaje_calificacion</code></li>
+          <li><code>viaje_patrocinio</code></li>
+        </ul>
+      </div>
+      <div class="step">
+        <div class="step__tag">2FN</div>
+        <h4>Sin dependencias parciales</h4>
+        <p>Con claves compuestas, los datos del pasajero dependen solo de <code>id_pasajero</code>, no de la clave del pago.</p>
+        <ul>
+          <li>Se separa <code>pasajero</code></li>
+          <li>Se separa <code>motoconchista</code></li>
+          <li>El viaje conserva solo sus propios hechos</li>
+        </ul>
+      </div>
+      <div class="step">
+        <div class="step__tag">3FN</div>
+        <h4>Sin dependencias transitivas</h4>
+        <p>El banco del conductor depende del conductor, no del viaje; el nombre del patrocinador depende del patrocinador, no del acuerdo.</p>
+        <ul>
+          <li>Se separa <code>pago</code></li>
+          <li>Se separa <code>calificacion</code></li>
+          <li>Se separan <code>patrocinador</code> y <code>acuerdo_patrocinio</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="mt-3">Caso de estudio: de una tabla universal a nueve relaciones</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:7rem">Etapa</th><th>Situación de partida</th><th>Acción aplicada</th><th>Resultado</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag--no">UNF</span></td>
+            <td><code>registro_viaje</code> con <code>pago_1_monto</code>, <code>pago_2_monto</code>, <code>calificacion_1</code>, <code>patrocinador_1</code>, además de nombre y correo del pasajero y nombre y licencia del conductor en cada fila.</td>
+            <td>Identificar grupos repetidos y atributos multivaluados.</td>
+            <td>Se reconoce que un viaje puede tener pagos, calificaciones y convenios asociados; no son columnas del viaje.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">1FN</span></td>
+            <td>Columnas repetidas y listas dentro de una celda.</td>
+            <td>Separar cada grupo en una relación con su propia clave; una fila por pago, calificación o convenio.</td>
+            <td><code>viaje_pago</code>, <code>viaje_calificacion</code> y <code>viaje_patrocinio</code> con valores atómicos.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">2FN</span></td>
+            <td>Claves compuestas como <code>(id_viaje, id_pago)</code>; el nombre y el correo del pasajero dependen solo de <code>id_pasajero</code>.</td>
+            <td>Separar los datos que dependen de una sola parte de la clave: pasajero, conductor y viaje.</td>
+            <td><code>pasajero</code>, <code>motoconchista</code> y <code>viaje</code> con claves simples y dependencias completas.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">3FN</span></td>
+            <td>El banco del conductor viaja con el viaje; el nombre del patrocinador viaja con el acuerdo; el estado del pago viaja con el viaje.</td>
+            <td>Separar los hechos que dependen de otra entidad y dejar solo la clave foránea.</td>
+            <td><code>pago</code>, <code>calificacion</code>, <code>patrocinador</code> y <code>acuerdo_patrocinio</code>; el viaje conserva solo sus atributos propios.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Antes y después:</strong> <code>viaje(id_viaje, pasajero_nombre, pasajero_correo, conductor_nombre, conductor_licencia, pago_monto, …)</code> se convierte en <code>viaje(id_viaje, id_pasajero, id_motoconchista, …)</code> más <code>pasajero</code>, <code>motoconchista</code> y <code>pago</code>. El nombre del pasajero se escribe una vez y se lee por <code>JOIN</code>.</p>
+    </div>
+
+    <h3 class="mt-3">Cumplimiento por tabla</h3>
+    <p class="note">Notación: <code>{X} → {Y}</code> significa que <code>X</code> determina funcionalmente a <code>Y</code>. Las claves candidatas se indican entre paréntesis.</p>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead>
+          <tr><th>Tabla</th><th>Clave primaria</th><th>Dependencias funcionales</th><th>1FN</th><th>2FN</th><th>3FN</th><th>Justificación</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">usuario</td><td class="mono">id_usuario</td>
+            <td><code>{id_usuario} → {nombre, correo, telefono, contrasena, rol}</code><br><code>{correo} → {id_usuario}</code> (clave candidata)</td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>Todos los atributos describen al usuario. El correo es una clave alterna, no un dato derivado.</td>
+          </tr>
+          <tr>
+            <td class="mono">pasajero</td><td class="mono">id_pasajero</td>
+            <td><code>{id_pasajero} → {id_usuario, metodo_pago_preferido}</code><br><code>{id_usuario} → {id_pasajero}</code> (1:1)</td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>El perfil no repite nombre ni correo: los hereda por la FK a <code>usuario</code>.</td>
+          </tr>
+          <tr>
+            <td class="mono">motoconchista</td><td class="mono">id_motoconchista</td>
+            <td><code>{id_motoconchista} → {id_usuario, licencia, disponibilidad, datos_bancarios}</code><br><code>{id_usuario} → {id_motoconchista}</code><br><code>{licencia} → {id_motoconchista}</code></td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>La licencia es clave candidata. Los datos bancarios dependen del conductor, no del viaje.</td>
+          </tr>
+          <tr>
+            <td class="mono">administrador</td><td class="mono">id_administrador</td>
+            <td><code>{id_administrador} → {id_usuario, nivel_permiso}</code><br><code>{id_usuario} → {id_administrador}</code></td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>El nivel de permiso pertenece al administrador; no se duplica en <code>usuario</code>.</td>
+          </tr>
+          <tr>
+            <td class="mono">patrocinador</td><td class="mono">id_patrocinador</td>
+            <td><code>{id_patrocinador} → {nombre_empresa, contacto, tipo_acuerdo, estado}</code></td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>El tipo de alianza describe al patrocinador y no se repite en cada acuerdo.</td>
+          </tr>
+          <tr>
+            <td class="mono">viaje</td><td class="mono">id_viaje</td>
+            <td><code>{id_viaje} → {id_pasajero, id_motoconchista, origen, destino, distancia_km, tarifa, estado, fecha_solicitud, fecha_fin}</code></td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>La tarifa es una instantánea del precio cobrado; no se recalcula desde la distancia al leer.</td>
+          </tr>
+          <tr>
+            <td class="mono">pago</td><td class="mono">id_pago</td>
+            <td><code>{id_pago} → {id_viaje, id_administrador, monto, metodo, estado, referencia, fecha_pago}</code><br><code>{id_viaje} → {id_pago}</code> (1:1)</td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>Monto y estado pertenecen al acto de pago. La autorización del administrador es un hecho del pago.</td>
+          </tr>
+          <tr>
+            <td class="mono">calificacion</td><td class="mono">id_calificacion</td>
+            <td><code>{id_calificacion} → {id_viaje, puntuacion, comentario, fecha}</code><br><code>{id_viaje} → {id_calificacion}</code> (1:1)</td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>La puntuación depende de la calificación; el viaje solo la identifica y la hace única.</td>
+          </tr>
+          <tr>
+            <td class="mono">acuerdo_patrocinio</td><td class="mono">id_acuerdo</td>
+            <td><code>{id_acuerdo} → {id_patrocinador, id_administrador, monto, fecha_inicio, fecha_fin, estado}</code></td>
+            <td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td><td><span class="tag tag--ok">Sí</span></td>
+            <td>Monto y vigencia son del convenio. El tipo de alianza queda en el patrocinador para no duplicarlo.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col mt-3">
+      <div class="card">
+        <h3>Qué se evita con la 3FN</h3>
+        <ul class="list-check">
+          <li><strong>Duplicar el nombre del pasajero</strong> en cada viaje: se cambia en un solo lugar.</li>
+          <li><strong>Duplicar la licencia del conductor</strong> en el historial de viajes.</li>
+          <li><strong>Repetir el estado del pago</strong> dentro de <code>viaje</code>: el pago tiene su propio ciclo.</li>
+          <li><strong>Guardar el nombre del patrocinador</strong> en cada acuerdo: se obtiene por <code>JOIN</code>.</li>
+          <li><strong>Anomalías de borrado:</strong> al eliminar un acuerdo no se pierde el patrocinador ni su historial.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Qué se conserva a propósito</h3>
+        <ul class="list-check list-check--brand">
+          <li><strong><code>viaje.tarifa</code> y <code>pago.monto</code>:</strong> no son el mismo hecho. La tarifa es el precio acordado; el monto es lo efectivamente cobrado, liquidado o revertido.</li>
+          <li><strong><code>viaje.distancia_km</code>:</strong> es una medición del trayecto, no un atributo derivado de la tarifa.</li>
+          <li><strong><code>pago.id_administrador</code>:</strong> registra quién autorizó; no es una relación administrativa con el viaje.</li>
+          <li><strong><code>patrocinador.tipo_acuerdo</code>:</strong> describe la alianza preferente. Si el negocio exige un tipo por convenio, se mueve a <code>acuerdo_patrocinio</code>; nunca se duplica.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Verificación 3FN:</strong> en las nueve tablas, la clave primaria es simple y todas las dependencias funcionales parten de ella o de una clave candidata declarada. No hay atributos no clave que determinen a otros atributos no clave.</p>
+    </div>
+  </section>
+
+  <section class="section" id="integridad" aria-labelledby="int-title">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 id="int-title">Reglas de integridad y restricciones</h2>
+        <p>Las reglas se implementan en la base de datos cuando son declarativas y en la capa de servicio cuando requieren contexto de negocio.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:5rem">ID</th><th>Regla</th><th>Implementación</th><th>Efecto esperado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">RI-01</td><td>Identidad única de cada fila.</td><td><code>PRIMARY KEY</code> autoincremental en las nueve tablas.</td><td>No hay filas duplicadas ni identificadores reutilizados.</td></tr>
+          <tr><td class="mono">RI-02</td><td>Integridad referencial.</td><td><code>FOREIGN KEY</code> con las acciones <code>CASCADE</code>, <code>SET NULL</code> o <code>RESTRICT</code> indicadas en cada relación.</td><td>No existen referencias huérfanas.</td></tr>
+          <tr><td class="mono">RI-03</td><td>Un correo, una cuenta.</td><td><code>UNIQUE (correo)</code> en <code>usuario</code>.</td><td>El registro rechaza correos repetidos.</td></tr>
+          <tr><td class="mono">RI-04</td><td>Una licencia, un conductor.</td><td><code>UNIQUE (licencia)</code> en <code>motoconchista</code>.</td><td>No se duplica el perfil de un conductor.</td></tr>
+          <tr><td class="mono">RI-05</td><td>Un usuario, un perfil de rol.</td><td><code>UNIQUE (id_usuario)</code> en las tres especializaciones.</td><td>La relación 1:1 queda garantizada por el motor.</td></tr>
+          <tr><td class="mono">RI-06</td><td>Un viaje, un pago.</td><td><code>UNIQUE (id_viaje)</code> en <code>pago</code>.</td><td>No se cobra dos veces el mismo viaje.</td></tr>
+          <tr><td class="mono">RI-07</td><td>Un viaje, una calificación.</td><td><code>UNIQUE (id_viaje)</code> en <code>calificacion</code>.</td><td>No se duplica la reputación de un servicio.</td></tr>
+          <tr><td class="mono">RI-08</td><td>Estados válidos.</td><td><code>CHECK</code> con la lista de estados de viaje, pago, patrocinador y acuerdo.</td><td>El motor rechaza estados fuera del catálogo.</td></tr>
+          <tr><td class="mono">RI-09</td><td>Puntuación entre 1 y 5.</td><td><code>CHECK (puntuacion BETWEEN 1 AND 5)</code>.</td><td>No hay calificaciones fuera de escala.</td></tr>
+          <tr><td class="mono">RI-10</td><td>Montos y distancias no negativos.</td><td><code>CHECK (&gt;= 0)</code> en <code>monto</code>, <code>tarifa</code> y <code>distancia_km</code>.</td><td>Se evitan importes y distancias imposibles.</td></tr>
+          <tr><td class="mono">RI-11</td><td>Fechas coherentes.</td><td><code>CHECK (fecha_fin &gt;= fecha_inicio)</code> y <code>CHECK (fecha_fin &gt;= fecha_solicitud)</code>.</td><td>Un convenio o viaje no termina antes de empezar.</td></tr>
+          <tr><td class="mono">RI-12</td><td>El rol de <code>usuario</code> coincide con el perfil creado.</td><td>Transacción de registro en P01 + vista de verificación <code>v_usuario_rol</code>.</td><td>No hay usuarios con rol «pasajero» y perfil de conductor, ni perfiles sin usuario.</td></tr>
+          <tr><td class="mono">RI-13</td><td>Transiciones de estado permitidas.</td><td>Máquina de estados en P05–P09; el API rechaza transiciones inválidas.</td><td>Un viaje cancelado no se marca como finalizado; un pago revertido no vuelve a «pendiente».</td></tr>
+          <tr><td class="mono">RI-14</td><td>Contraseña siempre como hash.</td><td><code>VARCHAR(255)</code> + <code>CHECK (CHAR_LENGTH(contrasena) &gt;= 60)</code> + bcrypt/Argon2 en la capa de servicio.</td><td>Se almacena un hash; nunca texto plano.</td></tr>
+          <tr><td class="mono">RI-15</td><td>La autorización de pago es opcional y auditables.</td><td><code>pago.id_administrador</code> nullable con <code>ON DELETE SET NULL</code>.</td><td>El pago conserva su historial aunque se elimine el administrador.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Máquina de estados</h3>
+    <div class="two-col mt-1">
+      <div class="table-wrap">
+        <table class="data table--compact">
+          <thead><tr><th>Entidad</th><th>Desde</th><th>Evento</th><th>Hacia</th><th>Proceso</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">viaje</td><td><code>solicitado</code></td><td>registrar y buscar</td><td><code>buscando</code></td><td>P03–P04</td></tr>
+            <tr><td class="mono">viaje</td><td><code>buscando</code></td><td>asignar conductor</td><td><code>asignado</code></td><td>P05</td></tr>
+            <tr><td class="mono">viaje</td><td><code>asignado</code></td><td>conductor en camino</td><td><code>en_camino</code></td><td>P07</td></tr>
+            <tr><td class="mono">viaje</td><td><code>en_camino</code></td><td>iniciar trayecto</td><td><code>en_curso</code></td><td>P07</td></tr>
+            <tr><td class="mono">viaje</td><td><code>en_curso</code></td><td>finalizar</td><td><code>finalizado</code></td><td>P07–P08</td></tr>
+            <tr><td class="mono">viaje</td><td><code>solicitado</code> … <code>en_camino</code></td><td>cancelar</td><td><code>cancelado</code></td><td>P06</td></tr>
+            <tr><td class="mono">pago</td><td><code>pendiente</code></td><td>confirmar cobro</td><td><code>pagado</code></td><td>P09</td></tr>
+            <tr><td class="mono">pago</td><td><code>pagado</code></td><td>liquidar al conductor</td><td><code>liquidado</code></td><td>P09</td></tr>
+            <tr><td class="mono">pago</td><td><code>pendiente</code> / <code>pagado</code></td><td>cancelar</td><td><code>cancelado</code></td><td>P09</td></tr>
+            <tr><td class="mono">pago</td><td><code>pagado</code> / <code>liquidado</code></td><td>revertir por incidencia</td><td><code>revertido</code></td><td>P09</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Por qué la consistencia de rol no es un <code>CHECK</code></h3>
+        <p>Un <code>CHECK</code> de MySQL solo puede evaluar columnas de la misma fila. La correspondencia entre <code>usuario.rol</code> y la existencia de la fila en <code>pasajero</code>, <code>motoconchista</code> o <code>administrador</code> cruza tres tablas.</p>
+        <p>Por eso P01 crea el usuario y su perfil en una sola transacción. La vista <code>v_usuario_rol</code> permite auditar desviaciones sin bloquear la operación:</p>
+        <div class="fd-list">
+          <span>SELECT id_usuario, correo, rol</span>
+          <span>FROM v_usuario_rol</span>
+          <span>WHERE (rol = 'pasajero' AND NOT es_pasajero)</span>
+          <span>   OR (rol = 'motoconchista' AND NOT es_motoconchista)</span>
+          <span>   OR (rol = 'administrador' AND NOT es_administrador);</span>
+        </div>
+        <p class="note mt-2">Si la consulta devuelve filas, hay una inconsistencia que debe corregirse antes de continuar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="sql" aria-labelledby="sql-title">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <div>
+        <h2 id="sql-title">Script SQL listo para ejecutar</h2>
+        <p>DDL para MySQL 8.0.16 o superior. Incluye tablas, claves, restricciones <code>CHECK</code>, índices de consulta y dos vistas de verificación.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--amber">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 20h18z"/><path d="M12 9v5M12 17h.01"/></svg>
+      <p><strong>Antes de ejecutar:</strong> el script elimina las tablas de <code>motouber</code> en orden inverso. No lo ejecutes sobre una base con datos reales sin una copia de seguridad. En MariaDB, verifica la versión y la sintaxis de <code>CHECK</code>.</p>
+    </div>
+
+    <div class="code-block mt-2">
+      <div class="code-block__bar">
+        <span>motouber.sql · MySQL 8.0+</span>
+        <div class="btns"><button type="button" data-copy="#sql-code">Copiar SQL</button></div>
+      </div>
+      <pre id="sql-code"><code>-- =====================================================================
+-- MotoUber · Esquema relacional 3FN
+-- Motor: MySQL 8.0.16+ (CHECK constraints)
+-- Codificación: utf8mb4 / InnoDB
+-- =====================================================================
+
+CREATE DATABASE IF NOT EXISTS motouber
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_0900_ai_ci;
+
+USE motouber;
+
+-- Orden inverso de dependencias
+DROP TABLE IF EXISTS acuerdo_patrocinio;
+DROP TABLE IF EXISTS calificacion;
+DROP TABLE IF EXISTS pago;
+DROP TABLE IF EXISTS viaje;
+DROP TABLE IF EXISTS patrocinador;
+DROP TABLE IF EXISTS administrador;
+DROP TABLE IF EXISTS motoconchista;
+DROP TABLE IF EXISTS pasajero;
+DROP TABLE IF EXISTS usuario;
+
+-- ---------------------------------------------------------------------
+-- 1. USUARIO · identidad base y credenciales
+-- ---------------------------------------------------------------------
+CREATE TABLE usuario (
+  id_usuario   INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nombre       VARCHAR(120) NOT NULL,
+  correo       VARCHAR(160) NOT NULL,
+  telefono     VARCHAR(20)  NOT NULL,
+  contrasena   VARCHAR(255) NOT NULL,
+  rol          ENUM('pasajero','motoconchista','administrador') NOT NULL,
+  PRIMARY KEY (id_usuario),
+  UNIQUE KEY uq_usuario_correo (correo),
+  CONSTRAINT chk_usuario_correo CHECK (correo LIKE '%_@_%._%'),
+  CONSTRAINT chk_usuario_hash CHECK (CHAR_LENGTH(contrasena) &gt;= 60)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 2. PASAJERO · especialización 1:1
+-- ---------------------------------------------------------------------
+CREATE TABLE pasajero (
+  id_pasajero            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_usuario             INT UNSIGNED NOT NULL,
+  metodo_pago_preferido  VARCHAR(40) NULL,
+  PRIMARY KEY (id_pasajero),
+  UNIQUE KEY uq_pasajero_usuario (id_usuario),
+  CONSTRAINT fk_pasajero_usuario FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 3. MOTOCONCHISTA · especialización 1:1
+-- ---------------------------------------------------------------------
+CREATE TABLE motoconchista (
+  id_motoconchista  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_usuario        INT UNSIGNED NOT NULL,
+  licencia          VARCHAR(40) NOT NULL,
+  disponibilidad    BOOLEAN NOT NULL DEFAULT TRUE,
+  datos_bancarios   VARCHAR(255) NULL,
+  PRIMARY KEY (id_motoconchista),
+  UNIQUE KEY uq_motoconchista_usuario (id_usuario),
+  UNIQUE KEY uq_motoconchista_licencia (licencia),
+  CONSTRAINT fk_motoconchista_usuario FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 4. ADMINISTRADOR · especialización 1:1
+-- ---------------------------------------------------------------------
+CREATE TABLE administrador (
+  id_administrador  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_usuario        INT UNSIGNED NOT NULL,
+  nivel_permiso     ENUM('basico','supervisor','total') NOT NULL DEFAULT 'basico',
+  PRIMARY KEY (id_administrador),
+  UNIQUE KEY uq_administrador_usuario (id_usuario),
+  CONSTRAINT fk_administrador_usuario FOREIGN KEY (id_usuario)
+    REFERENCES usuario (id_usuario)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 5. PATROCINADOR · aliado comercial
+-- ---------------------------------------------------------------------
+CREATE TABLE patrocinador (
+  id_patrocinador  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  nombre_empresa   VARCHAR(140) NOT NULL,
+  contacto         VARCHAR(140) NOT NULL,
+  tipo_acuerdo     VARCHAR(60)  NOT NULL,
+  estado           VARCHAR(20)  NOT NULL DEFAULT 'activo',
+  PRIMARY KEY (id_patrocinador),
+  CONSTRAINT chk_patrocinador_estado
+    CHECK (estado IN ('activo','inactivo','suspendido'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 6. VIAJE · núcleo operativo
+-- ---------------------------------------------------------------------
+CREATE TABLE viaje (
+  id_viaje          INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_pasajero       INT UNSIGNED NOT NULL,
+  id_motoconchista  INT UNSIGNED NULL,
+  origen            VARCHAR(200) NOT NULL,
+  destino           VARCHAR(200) NOT NULL,
+  distancia_km      DECIMAL(6,2)  NULL,
+  tarifa            DECIMAL(10,2) NULL,
+  estado            VARCHAR(20)  NOT NULL DEFAULT 'solicitado',
+  fecha_solicitud   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  fecha_fin         DATETIME NULL,
+  PRIMARY KEY (id_viaje),
+  KEY idx_viaje_estado (estado, fecha_solicitud),
+  CONSTRAINT fk_viaje_pasajero FOREIGN KEY (id_pasajero)
+    REFERENCES pasajero (id_pasajero)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_viaje_motoconchista FOREIGN KEY (id_motoconchista)
+    REFERENCES motoconchista (id_motoconchista)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT chk_viaje_estado CHECK (estado IN
+    ('solicitado','buscando','asignado','en_camino','en_curso','finalizado','cancelado')),
+  CONSTRAINT chk_viaje_distancia CHECK (distancia_km IS NULL OR distancia_km &gt;= 0),
+  CONSTRAINT chk_viaje_tarifa CHECK (tarifa IS NULL OR tarifa &gt;= 0),
+  CONSTRAINT chk_viaje_fechas CHECK (fecha_fin IS NULL OR fecha_fin &gt;= fecha_solicitud)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 7. PAGO · transacción 1:1 con viaje
+-- ---------------------------------------------------------------------
+CREATE TABLE pago (
+  id_pago           INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_viaje          INT UNSIGNED NOT NULL,
+  id_administrador  INT UNSIGNED NULL,
+  monto             DECIMAL(10,2) NOT NULL,
+  metodo            VARCHAR(30) NOT NULL,
+  estado            VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+  referencia        VARCHAR(60) NULL,
+  fecha_pago        DATETIME NULL,
+  PRIMARY KEY (id_pago),
+  UNIQUE KEY uq_pago_viaje (id_viaje),
+  UNIQUE KEY uq_pago_referencia (referencia),
+  KEY idx_pago_estado (estado),
+  CONSTRAINT fk_pago_viaje FOREIGN KEY (id_viaje)
+    REFERENCES viaje (id_viaje)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_pago_administrador FOREIGN KEY (id_administrador)
+    REFERENCES administrador (id_administrador)
+    ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT chk_pago_monto CHECK (monto &gt;= 0),
+  CONSTRAINT chk_pago_estado CHECK (estado IN
+    ('pendiente','pagado','liquidado','revertido','cancelado'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 8. CALIFICACION · reputación 1:1 con viaje
+-- ---------------------------------------------------------------------
+CREATE TABLE calificacion (
+  id_calificacion  INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_viaje         INT UNSIGNED NOT NULL,
+  puntuacion       TINYINT UNSIGNED NOT NULL,
+  comentario       VARCHAR(500) NULL,
+  fecha            DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_calificacion),
+  UNIQUE KEY uq_calificacion_viaje (id_viaje),
+  CONSTRAINT fk_calificacion_viaje FOREIGN KEY (id_viaje)
+    REFERENCES viaje (id_viaje)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT chk_calificacion_puntuacion
+    CHECK (puntuacion BETWEEN 1 AND 5)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- 9. ACUERDO_PATROCINIO · convenio comercial
+-- ---------------------------------------------------------------------
+CREATE TABLE acuerdo_patrocinio (
+  id_acuerdo        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_patrocinador   INT UNSIGNED NOT NULL,
+  id_administrador  INT UNSIGNED NOT NULL,
+  monto             DECIMAL(10,2) NOT NULL,
+  fecha_inicio      DATE NOT NULL,
+  fecha_fin         DATE NOT NULL,
+  estado            VARCHAR(20) NOT NULL DEFAULT 'borrador',
+  PRIMARY KEY (id_acuerdo),
+  KEY idx_acuerdo_vigencia (fecha_inicio, fecha_fin),
+  CONSTRAINT fk_acuerdo_patrocinador FOREIGN KEY (id_patrocinador)
+    REFERENCES patrocinador (id_patrocinador)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT fk_acuerdo_administrador FOREIGN KEY (id_administrador)
+    REFERENCES administrador (id_administrador)
+    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT chk_acuerdo_monto CHECK (monto &gt;= 0),
+  CONSTRAINT chk_acuerdo_fechas CHECK (fecha_fin &gt;= fecha_inicio),
+  CONSTRAINT chk_acuerdo_estado CHECK (estado IN
+    ('borrador','activo','vencido','suspendido'))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ---------------------------------------------------------------------
+-- Vistas de verificación y reporte
+-- ---------------------------------------------------------------------
+CREATE OR REPLACE VIEW v_usuario_rol AS
+SELECT
+  u.id_usuario,
+  u.correo,
+  u.rol,
+  (p.id_pasajero IS NOT NULL)       AS es_pasajero,
+  (m.id_motoconchista IS NOT NULL)  AS es_motoconchista,
+  (a.id_administrador IS NOT NULL)  AS es_administrador
+FROM usuario u
+LEFT JOIN pasajero p       ON p.id_usuario = u.id_usuario
+LEFT JOIN motoconchista m  ON m.id_usuario = u.id_usuario
+LEFT JOIN administrador a  ON a.id_usuario = u.id_usuario;
+
+CREATE OR REPLACE VIEW v_acuerdo_vigente AS
+SELECT
+  ac.id_acuerdo,
+  pa.nombre_empresa,
+  ac.monto,
+  ac.fecha_inicio,
+  ac.fecha_fin,
+  CASE
+    WHEN CURDATE() BETWEEN ac.fecha_inicio AND ac.fecha_fin THEN 'vigente'
+    ELSE 'fuera_de_vigencia'
+  END AS vigencia
+FROM acuerdo_patrocinio ac
+JOIN patrocinador pa ON pa.id_patrocinador = ac.id_patrocinador
+WHERE ac.estado = 'activo';</code></pre>
+    </div>
+
+    <div class="grid grid--2 mt-2">
+      <div class="card">
+        <h3>Cómo ejecutarlo</h3>
+        <ol class="small">
+          <li>Abre MySQL Workbench o la consola <code>mysql</code>.</li>
+          <li>Conéctate con un usuario que pueda crear bases y tablas.</li>
+          <li>Pega el script completo y ejecútalo de una vez.</li>
+          <li>Verifica con <code>SHOW TABLES;</code> que aparezcan las nueve tablas y las dos vistas.</li>
+        </ol>
+      </div>
+      <div class="card card--soft">
+        <h3>Consultas de verificación</h3>
+        <div class="fd-list">
+          <span>-- Usuarios con rol y perfil inconsistentes</span>
+          <span>SELECT * FROM v_usuario_rol</span>
+          <span>WHERE (rol = 'pasajero' AND NOT es_pasajero)</span>
+          <span>   OR (rol = 'motoconchista' AND NOT es_motoconchista)</span>
+          <span>   OR (rol = 'administrador' AND NOT es_administrador);</span>
+          <span>-- Viajes finalizados sin pago</span>
+          <span>SELECT v.id_viaje FROM viaje v</span>
+          <span>LEFT JOIN pago p ON p.id_viaje = v.id_viaje</span>
+          <span>WHERE v.estado = 'finalizado' AND p.id_pago IS NULL;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="supuestos" aria-labelledby="sup-title">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <div>
+        <h2 id="sup-title">Supuestos, decisiones y referencias</h2>
+        <p>Límites explícitos del modelo y criterios que permiten verificarlo sin depender de una implementación concreta.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Supuestos del negocio</h3>
+        <ul class="list-check">
+          <li>Un viaje genera como máximo un pago y una calificación; si el negocio necesita pagos parciales, se cambia la cardinalidad y se añade una tabla de cuotas.</li>
+          <li>El patrocinador no inicia sesión: es un aliado comercial, no un rol de acceso.</li>
+          <li>La supervisión del administrador es una capacidad de rol; no se asigna un administrador obligatorio a cada viaje.</li>
+          <li>La moneda es única y parametrizable; los importes se guardan con dos decimales.</li>
+          <li>La distancia se expresa en kilómetros y la tarifa es el precio final cobrado, no una fórmula recalculada al leer.</li>
+          <li>Las fechas se almacenan en UTC y se presentan en la zona horaria del usuario.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Decisiones de diseño</h3>
+        <ul class="list-check list-check--brand">
+          <li><strong>Superusuario + subtipos 1:1:</strong> evita duplicar credenciales y permite permisos por rol.</li>
+          <li><strong>Claves sustitutas:</strong> cada tabla usa <code>INT UNSIGNED AUTO_INCREMENT</code>; las claves naturales se protegen con <code>UNIQUE</code>.</li>
+          <li><strong>Pago y calificación separados:</strong> tienen ciclos de vida y responsables distintos.</li>
+          <li><strong>Patrocinio independiente:</strong> no contamina el ciclo operativo del viaje.</li>
+          <li><strong>Sin borrado lógico:</strong> las FK <code>RESTRICT</code> protegen el historial; si se requiere baja lógica, se añade <code>activo</code> o <code>deleted_at</code> con una migración.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Checklist de verificación:</strong> nueve tablas, diez relaciones, una PK por tabla, una FK por relación, <code>UNIQUE</code> en las relaciones 1:1 y en las claves naturales, <code>CHECK</code> en estados, fechas, montos y puntuación, y acciones <code>ON DELETE</code> coherentes con la historia del negocio.</p>
+    </div>
+
+    <h3 class="mt-3">Referencias</h3>
+    <ul class="small">
+      <li>Chen, P. P. (1976). <em>The Entity-Relationship Model: Toward a Unified View of Data</em>. ACM Transactions on Database Systems.</li>
+      <li>Codd, E. F. (1970, 1971, 1972). Artículos fundacionales sobre el modelo relacional y las formas normales.</li>
+      <li>Elmasri, R. y Navathe, S. B. <em>Fundamentals of Database Systems</em>. Capítulos de modelo relacional, normalización y diseño lógico.</li>
+      <li>Date, C. J. <em>An Introduction to Database Systems</em>. Dependencias funcionales y descomposición sin pérdida.</li>
+      <li>Oracle. <em>MySQL 8.0 Reference Manual</em>: <a href="https://dev.mysql.com/doc/refman/8.0/en/create-table-check-constraints.html" rel="noopener">CHECK constraints</a> y <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-foreign-key-constraints.html" rel="noopener">claves foráneas InnoDB</a>.</li>
+      <li>OWASP. <em>Password Storage Cheat Sheet</em>: <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" rel="noopener">bcrypt, Argon2 y buenas prácticas</a>.</li>
+      <li>W3C. <em>Scalable Vector Graphics (SVG) 2</em>: <a href="https://www.w3.org/TR/SVG2/" rel="noopener">especificación</a>.</li>
+      <li>Yourdon, E. y DeMarco, T. <em>Structured Analysis and System Specification</em>. Notación de flujos de datos utilizada en el dossier.</li>
+    </ul>
+  </section>
+
+  <nav class="page-nav no-print" aria-label="Navegación entre documentos">
+    <a href="index.html">← Volver al inicio</a>
+    <a href="contexto.html">Diagrama de contexto →</a>
+  </nav>
+</div>
+
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="site-footer__inner">
+      <div><strong>MotoUber</strong> · Documentación de ingeniería · <span data-year>2026</span></div>
+      <div>Modelo E-R 3FN · Diagrama de contexto · DFD nivel 1 y 2</div>
+      <div><a href="index.html">Volver al índice</a></div>
+    </div>
+  </footer>
+
+  <button class="to-top no-print" type="button" aria-label="Volver arriba" title="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button>
+  <script src="assets/js/ui.js"></script>
+</body>
+</html>

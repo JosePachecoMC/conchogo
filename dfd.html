@@ -1,0 +1,1770 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagramas de flujo de datos (DFD) · MotoUber</title>
+  <meta name="description" content="DFD de MotoUber: nivel 1 por dominios y descomposiciones nivel 2 para identidad, ciclo del viaje, pagos, reputación y gobierno, con inventario de procesos, almacenes y flujos.">
+  <meta name="author" content="Equipo MotoUber">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234338ca'/%3E%3Cg fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='43' r='7'/%3E%3Ccircle cx='46' cy='43' r='7'/%3E%3Cpath d='M25 43h11l5-12h6M32 43l-3-9h-6m10-3-4-6h-5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+</head>
+<body class="">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="print-only" style="display:none;padding:0 0 10pt;border-bottom:1px solid #cbd5e1;margin-bottom:12pt;font-size:9pt;color:#475569">
+    <strong style="color:#0f172a">MotoUber</strong> · Documentación técnica · Diagramas de flujo de datos (DFD)
+  </div>
+
+  <header class="topbar no-print">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html" aria-label="MotoUber, inicio del dossier">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.3" cy="16.8" r="2.9"/><circle cx="18.7" cy="16.8" r="2.9"/><path d="M8.2 16.8h4.6l2.5-5.6h3.1"/><path d="M11.2 16.8 9.7 12H6.7"/><path d="m13 11.2-2.1-3.5H9.1"/></svg></span>
+        <span class="brand__text">
+          <span class="brand__name">MotoUber</span>
+          <span class="brand__sub">Dossier técnico</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a><a href="modelo-er.html">Modelo E-R</a><a href="contexto.html">Contexto</a><a href="dfd.html" aria-current="page">DFD</a>
+        <button class="nav__print" type="button" data-print title="Imprimir o guardar como PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17h10v4H7z"/><path d="M17 12h1"/></svg><span>Imprimir</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <div class="shell page">
+
+  <header class="page-head page-head--row">
+    <div>
+      <div class="eyebrow">Documento 03 · Transformación</div>
+      <h1>Diagramas de flujo de datos</h1>
+      <p class="lead">
+        Una vista por dominios y tres descomposiciones de nivel 2. Los doce procesos P01–P12
+        transforman entradas en salidas concretas y leen o escriben en almacenes identificables.
+        El recorrido cubre identidad, ciclo del viaje, pagos, reputación y gobierno.
+      </p>
+    </div>
+    <div class="page-head__meta">
+      <span class="chip chip--brand">Nivel 1 + 3 × nivel 2</span>
+      <span class="chip chip--teal">P01–P12</span>
+      <span class="chip chip--amber">D1–D6 + DR</span>
+    </div>
+  </header>
+
+  <section class="section" id="nivel-1" aria-labelledby="n1-title">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 id="n1-title">DFD nivel 1 · Vista por dominios</h2>
+        <p>Cuatro procesos agregados, almacenes D1–D6 y los flujos que conectan actores, procesos y datos. En este nivel, D5 y D6 se muestran juntos como D5–D6. Es la primera descomposición del contexto.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-1">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 1</b> · DFD nivel 1</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1700 835" width="1700" height="835" role="img" aria-label="DFD nivel 1 de MotoUber con cuatro dominios, actores y almacenes de datos" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1700" height="835" fill="#ffffff"/>
+    <defs>
+    <marker id="dfd1-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="dfd1-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="dfd1-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="dfd1-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="dfd1-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="dfd1-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="dfd1-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="dfd1-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="dfd1-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="dfd1-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="dfd1-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="dfd1-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="dfd1-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="dfd1-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="dfd1-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="dfd1-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="dfd1-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="dfd1-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="dfd1-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="dfd1-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="dfd1-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="dfd1-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#0f766e"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >DFD nivel 1 · Vista por dominios</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >Cuatro procesos agregados, almacenes D1–D6 y los actores del sistema MotoUber</text>
+    <g>
+      <rect x="1086" y="38" width="30" height="16" rx="4" fill="#ffffff" stroke="#4338ca" stroke-width="1.2"/>
+      <path d="M 1086 42 h 30" stroke="#4338ca" stroke-width="1.2"/>
+      <text x="1124" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >proceso</text>
+    </g>
+              <g>
+      <rect x="1206" y="38" width="30" height="16" rx="3" fill="#ecfdf5" stroke="#0f766e" stroke-width="1"/>
+      <line x1="1216" y1="38" x2="1216" y2="54" stroke="#0f766e" stroke-width="1"/>
+      <text x="1244" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >almacén</text>
+    </g>
+              <g>
+    <line x1="1332" y1="46" x2="1362" y2="46" stroke="#475569" stroke-width="1.7" stroke-linecap="round"/>
+    
+    <path d="M 1362 46 l -7 -3.4 v 6.8 z" fill="#475569"/>
+    <text x="1370" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >flujo</text>
+  </g>
+              <text x="1452" y="50"  style="font-size:9.2px;font-weight:600;fill:#64748b" >⇄ bidireccional</text>
+  </g>
+
+    <!-- Actores -->
+    <g filter="url(#dfd1-soft)">
+    <rect x="250" y="100" width="200" height="90" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="280" cy="145" r="19" fill="#eef2ff"/>
+    <g transform="translate(268 133) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="308" y="149"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="308" y="164"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >DEMANDA</text>
+    
+    
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="700" y="100" width="200" height="90" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.25"/>
+    <circle cx="730" cy="145" r="19" fill="#ecfdf5"/>
+    <g transform="translate(718 133) scale(1)" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.4" cy="17" r="2.7"/><circle cx="18.6" cy="17" r="2.7"/><path d="M8.1 17h4.7l2.4-5.2h3.4M11 17l-1.4-4.2H6.9m7.2 0-2-3.2H9.5"/></g>
+    <text x="758" y="149"  style="font-size:13px;font-weight:750;fill:#0f172a" >Motoconchista</text>
+    <text x="758" y="164"  style="font-size:8.2px;font-weight:700;fill:#0f766e;letter-spacing:0.8" >OFERTA</text>
+    
+    
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="1030" y="100" width="200" height="90" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.25"/>
+    <circle cx="1060" cy="145" r="19" fill="#fffbeb"/>
+    <g transform="translate(1048 133) scale(1)" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4 19 6v5.3c0 4.2-2.9 7.5-7 9.2-4.1-1.7-7-5-7-9.2V6z"/><path d="m9 12 2.1 2.1L15.2 10"/></g>
+    <text x="1088" y="149"  style="font-size:13px;font-weight:750;fill:#0f172a" >Administrador</text>
+    <text x="1088" y="164"  style="font-size:8.2px;font-weight:700;fill:#b45309;letter-spacing:0.8" >GOBIERNO</text>
+    
+    
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="1380" y="100" width="200" height="90" rx="11" fill="#ffffff" stroke="#be123c" stroke-width="1.25"/>
+    <circle cx="1410" cy="145" r="19" fill="#fff1f2"/>
+    <g transform="translate(1398 133) scale(1)" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6.2h8.6V20M12.6 10H20v10M3 20h18M7 9.3h2.6M7 13h2.6M7 16.6h2.6M16 13h1.2M16 16.6h1.2"/></g>
+    <text x="1438" y="149"  style="font-size:13px;font-weight:750;fill:#0f172a" >Patrocinador</text>
+    <text x="1438" y="164"  style="font-size:8.2px;font-weight:700;fill:#be123c;letter-spacing:0.8" >ALIADO</text>
+    
+    
+  </g>
+
+    <!-- Procesos agregados -->
+    <g filter="url(#dfd1-soft)">
+    <rect x="80" y="330" width="300" height="110" rx="10" fill="#ffffff" stroke="#4338ca" stroke-width="1.45"/>
+    <path d="M 80 340 Q 80 330 90 330 L 370 330 Q 380 330 380 340 L 380 356 L 80 356 Z" fill="#eef2ff"/>
+    <line x1="80" y1="356" x2="380" y2="356" stroke="#4338ca" stroke-opacity=".28" stroke-width="1"/>
+    <text x="93" y="348" class="mono" style="font-size:8.3px;font-weight:750;fill:#4338ca;letter-spacing:0.9" >1.0  ·  PROCESO</text>
+    <text x="93" y="379"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Identidad y acceso</text>
+    <text x="93" y="398"  style="font-size:9.4px;font-weight:500;fill:#64748b" >P01 · registro  |  P02 · inicio de sesión</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="480" y="330" width="300" height="110" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.45"/>
+    <path d="M 480 340 Q 480 330 490 330 L 770 330 Q 780 330 780 340 L 780 356 L 480 356 Z" fill="#ecfdf5"/>
+    <line x1="480" y1="356" x2="780" y2="356" stroke="#0f766e" stroke-opacity=".28" stroke-width="1"/>
+    <text x="493" y="348" class="mono" style="font-size:8.3px;font-weight:750;fill:#0f766e;letter-spacing:0.9" >2.0  ·  PROCESO</text>
+    <text x="493" y="379"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Operación del viaje</text>
+    <text x="493" y="398"  style="font-size:9.4px;font-weight:500;fill:#64748b" >P03–P08 · solicitud, asignación y ejecución</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="880" y="330" width="300" height="110" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1.45"/>
+    <path d="M 880 340 Q 880 330 890 330 L 1170 330 Q 1180 330 1180 340 L 1180 356 L 880 356 Z" fill="#fffbeb"/>
+    <line x1="880" y1="356" x2="1180" y2="356" stroke="#b45309" stroke-opacity=".28" stroke-width="1"/>
+    <text x="893" y="348" class="mono" style="font-size:8.3px;font-weight:750;fill:#b45309;letter-spacing:0.9" >3.0  ·  PROCESO</text>
+    <text x="893" y="379"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Pagos y finanzas</text>
+    <text x="893" y="398"  style="font-size:9.4px;font-weight:500;fill:#64748b" >P09 · cobro, liquidación y reverso</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="1280" y="330" width="300" height="110" rx="10" fill="#ffffff" stroke="#be123c" stroke-width="1.45"/>
+    <path d="M 1280 340 Q 1280 330 1290 330 L 1570 330 Q 1580 330 1580 340 L 1580 356 L 1280 356 Z" fill="#fff1f2"/>
+    <line x1="1280" y1="356" x2="1580" y2="356" stroke="#be123c" stroke-opacity=".28" stroke-width="1"/>
+    <text x="1293" y="348" class="mono" style="font-size:8.3px;font-weight:750;fill:#be123c;letter-spacing:0.9" >4.0  ·  PROCESO</text>
+    <text x="1293" y="379"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Servicio y gobierno</text>
+    <text x="1293" y="398"  style="font-size:9.4px;font-weight:500;fill:#64748b" >P10–P12 · reputación, patrocinio y control</text>
+  </g>
+
+    <!-- Flujos Pasajero -->
+    <path d="M 300 190 L 300 213 Q 300 225 288 225 L 282 225 Q 270 225 270 237 L 270 330" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-indigo-start)" marker-end="url(#dfd1-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="270" cy="275" r="10" fill="#4338ca"/>
+    <text x="270" y="278.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F1</text>
+  </g>
+    <text x="276" y="258"  style="font-size:8.4px;font-weight:650;fill:#4338ca" class="halo" stroke="#ffffff" stroke-width="4.5">registro /</text><text x="276" y="271.5"  style="font-size:8.4px;font-weight:650;fill:#4338ca" class="halo" stroke="#ffffff" stroke-width="4.5">sesión</text>
+
+    <path d="M 350 190 L 350 243 Q 350 255 362 255 L 538 255 Q 550 255 550 267 L 550 330" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-indigo-start)" marker-end="url(#dfd1-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="550" cy="292" r="10" fill="#4338ca"/>
+    <text x="550" y="295.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F2</text>
+  </g>
+    <text x="560" y="248"  style="font-size:9.2px;font-weight:650;fill:#4338ca" >solicitud / confirmación</text>
+
+    <path d="M 350 100 L 350 95 Q 350 90 355 90 L 928 90 Q 940 90 940 102 L 940 330" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-indigo-start)" marker-end="url(#dfd1-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="940" cy="312" r="10" fill="#4338ca"/>
+    <text x="940" y="315.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F3</text>
+  </g>
+    <text x="952" y="290"  style="font-size:9.2px;font-weight:650;fill:#4338ca" >pago del viaje / comprobante</text>
+
+    <!-- Flujos Motoconchista -->
+    <path d="M 740 190 L 740 203 Q 740 215 728 215 L 352 215 Q 340 215 340 227 L 340 330" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-teal-start)" marker-end="url(#dfd1-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="340" cy="275" r="10" fill="#0f766e"/>
+    <text x="340" y="278.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F4</text>
+  </g>
+    <text x="590" y="208"  style="font-size:9.2px;font-weight:650;fill:#0f766e" >registro / sesión</text>
+
+    <path d="M 820 190 L 820 238 Q 820 250 808 250 L 772 250 Q 760 250 760 262 L 760 330" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-teal-start)" marker-end="url(#dfd1-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="760" cy="305" r="10" fill="#0f766e"/>
+    <text x="760" y="308.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F5</text>
+  </g>
+    <text x="772" y="243"  style="font-size:9.2px;font-weight:650;fill:#0f766e;text-anchor:end" >oferta / estado del viaje</text>
+
+    <path d="M 880 360 L 870 360 Q 860 360 860 350 L 860 190" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd1-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="860" cy="280" r="10" fill="#0f766e"/>
+    <text x="860" y="283.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F6</text>
+  </g>
+    <text x="872" y="270"  style="font-size:9.2px;font-weight:650;fill:#0f766e" >liquidación</text>
+
+    <!-- Flujos Administrador -->
+    <path d="M 1130 190 L 1130 330" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-amber-start)" marker-end="url(#dfd1-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1130" cy="300" r="10" fill="#b45309"/>
+    <text x="1130" y="303.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F7</text>
+  </g>
+    <text x="1118" y="250"  style="font-size:9.2px;font-weight:650;fill:#b45309;text-anchor:end" >autorización / reporte</text>
+
+    <path d="M 1130 190 L 1130 243 Q 1130 255 1142 255 L 1338 255 Q 1350 255 1350 267 L 1350 330" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-amber-start)" marker-end="url(#dfd1-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1350" cy="292" r="10" fill="#b45309"/>
+    <text x="1350" y="295.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F8</text>
+  </g>
+    <text x="1140" y="220"  style="font-size:9.2px;font-weight:650;fill:#b45309;text-anchor:end" >gestión / reportes</text>
+
+    <!-- Flujo Patrocinador -->
+    <path d="M 1480 190 L 1480 330" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-rose-start)" marker-end="url(#dfd1-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1480" cy="300" r="10" fill="#be123c"/>
+    <text x="1480" y="303.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F9</text>
+  </g>
+    <text x="1492" y="250"  style="font-size:9.2px;font-weight:650;fill:#be123c" >convenios / métricas</text>
+
+    <!-- Flujos entre procesos -->
+    <path d="M 380 390 L 480 390" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-slate-start)" marker-end="url(#dfd1-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="430" cy="406" r="10" fill="#475569"/>
+    <text x="430" y="409.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F10</text>
+  </g>
+    <text x="430" y="382"  style="font-size:8.8px;font-weight:650;fill:#475569;text-anchor:middle" >identidad y rol</text>
+
+    <path d="M 780 390 L 880 390" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-slate-start)" marker-end="url(#dfd1-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="830" cy="406" r="10" fill="#475569"/>
+    <text x="830" y="409.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F11</text>
+  </g>
+    <text x="830" y="382"  style="font-size:8.8px;font-weight:650;fill:#475569;text-anchor:middle" >viaje + tarifa</text>
+
+    <path d="M 1180 390 L 1280 390" fill="none" stroke="#475569" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-slate-start)" marker-end="url(#dfd1-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="1200" cy="406" r="10" fill="#475569"/>
+    <text x="1200" y="409.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F12</text>
+  </g>
+    <text x="1150" y="322"  style="font-size:8.8px;font-weight:650;fill:#475569;text-anchor:middle" >transacciones</text>
+
+    <path d="M 630 440 L 630 548 Q 630 560 642 560 L 1418 560 Q 1430 560 1430 548 L 1430 440" fill="none" stroke="#be123c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd1-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1030" cy="578" r="10" fill="#be123c"/>
+    <text x="1030" y="581.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F13</text>
+  </g>
+    <text x="1055" y="552"  style="font-size:8.8px;font-weight:650;fill:#be123c" >viaje finalizado para calificar</text>
+
+    <path d="M 1130 100 L 1130 90 Q 1130 80 1120 80 L 222 80 Q 210 80 210 92 L 210 330" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-amber-start)" marker-end="url(#dfd1-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="210" cy="245" r="10" fill="#b45309"/>
+    <text x="210" y="248.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F14</text>
+  </g>
+    <text x="198" y="240"  style="font-size:9.2px;font-weight:650;fill:#b45309;text-anchor:end" >sesión / rol</text>
+
+    <!-- Almacenes -->
+    <g filter="url(#dfd1-soft)">
+    <rect x="80" y="680" width="300" height="68" rx="7" fill="#ffffff" stroke="#4338ca" stroke-width="1.3"/>
+    <path d="M 80 687 Q 80 680 87 680 L 126 680 L 126 748 L 87 748 Q 80 748 80 741 Z" fill="#eef2ff"/>
+    <line x1="126" y1="680" x2="126" y2="748" stroke="#4338ca" stroke-opacity=".3"/>
+    <text x="103" y="706" class="mono" style="font-size:11px;font-weight:750;fill:#4338ca;text-anchor:middle" >D1</text>
+    <text x="103" y="724"  style="font-size:7px;font-weight:700;fill:#4338ca;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="138" y="708"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >USUARIO</text>
+    <text x="138" y="726"  style="font-size:8.8px;font-weight:500;fill:#64748b" >perfiles, credenciales y rol</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="480" y="680" width="300" height="68" rx="7" fill="#ffffff" stroke="#0f766e" stroke-width="1.3"/>
+    <path d="M 480 687 Q 480 680 487 680 L 526 680 L 526 748 L 487 748 Q 480 748 480 741 Z" fill="#ecfdf5"/>
+    <line x1="526" y1="680" x2="526" y2="748" stroke="#0f766e" stroke-opacity=".3"/>
+    <text x="503" y="706" class="mono" style="font-size:11px;font-weight:750;fill:#0f766e;text-anchor:middle" >D2</text>
+    <text x="503" y="724"  style="font-size:7px;font-weight:700;fill:#0f766e;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="538" y="708"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >VIAJE</text>
+    <text x="538" y="726"  style="font-size:8.8px;font-weight:500;fill:#64748b" >solicitudes, asignación y estado</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="880" y="680" width="300" height="68" rx="7" fill="#ffffff" stroke="#b45309" stroke-width="1.3"/>
+    <path d="M 880 687 Q 880 680 887 680 L 926 680 L 926 748 L 887 748 Q 880 748 880 741 Z" fill="#fffbeb"/>
+    <line x1="926" y1="680" x2="926" y2="748" stroke="#b45309" stroke-opacity=".3"/>
+    <text x="903" y="706" class="mono" style="font-size:11px;font-weight:750;fill:#b45309;text-anchor:middle" >D3</text>
+    <text x="903" y="724"  style="font-size:7px;font-weight:700;fill:#b45309;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="938" y="708"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >PAGO</text>
+    <text x="938" y="726"  style="font-size:8.8px;font-weight:500;fill:#64748b" >cobros, liquidaciones y reversos</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="1240" y="680" width="220" height="68" rx="7" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <path d="M 1240 687 Q 1240 680 1247 680 L 1286 680 L 1286 748 L 1247 748 Q 1240 748 1240 741 Z" fill="#eff6ff"/>
+    <line x1="1286" y1="680" x2="1286" y2="748" stroke="#1d4ed8" stroke-opacity=".3"/>
+    <text x="1263" y="706" class="mono" style="font-size:11px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >D4</text>
+    <text x="1263" y="724"  style="font-size:7px;font-weight:700;fill:#1d4ed8;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="1298" y="708"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >CALIFICACION</text>
+    <text x="1298" y="726"  style="font-size:8.8px;font-weight:500;fill:#64748b" >reputación del servicio</text>
+  </g>
+    <g filter="url(#dfd1-soft)">
+    <rect x="1480" y="680" width="190" height="68" rx="7" fill="#ffffff" stroke="#be123c" stroke-width="1.3"/>
+    <path d="M 1480 687 Q 1480 680 1487 680 L 1526 680 L 1526 748 L 1487 748 Q 1480 748 1480 741 Z" fill="#fff1f2"/>
+    <line x1="1526" y1="680" x2="1526" y2="748" stroke="#be123c" stroke-opacity=".3"/>
+    <text x="1503" y="706" class="mono" style="font-size:11px;font-weight:750;fill:#be123c;text-anchor:middle" >D5–D6</text>
+    <text x="1503" y="724"  style="font-size:7px;font-weight:700;fill:#be123c;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="1538" y="708"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >PATROCINIO</text>
+    <text x="1538" y="726"  style="font-size:8.8px;font-weight:500;fill:#64748b" >patrocinadores y acuerdos</text>
+  </g>
+
+    <!-- Accesos a almacenes -->
+    <path d="M 230 440 L 230 680" fill="none" stroke="#4338ca" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-indigo-start)" marker-end="url(#dfd1-ar-indigo)" opacity="1"/>
+    <text x="240" y="570"  style="font-size:8.8px;font-weight:650;fill:#4338ca" >usuarios</text>
+
+    <path d="M 630 440 L 630 680" fill="none" stroke="#0f766e" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-teal-start)" marker-end="url(#dfd1-ar-teal)" opacity="1"/>
+    <text x="640" y="570"  style="font-size:8.8px;font-weight:650;fill:#0f766e" >viajes</text>
+
+    <path d="M 1030 440 L 1030 680" fill="none" stroke="#b45309" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-amber-start)" marker-end="url(#dfd1-ar-amber)" opacity="1"/>
+    <text x="1040" y="570"  style="font-size:8.8px;font-weight:650;fill:#b45309" >pagos</text>
+
+    <path d="M 1380 440 L 1380 680" fill="none" stroke="#1d4ed8" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-blue-start)" marker-end="url(#dfd1-ar-blue)" opacity="1"/>
+    <text x="1390" y="570"  style="font-size:8.8px;font-weight:650;fill:#1d4ed8" >calificaciones</text>
+
+    <path d="M 1450 440 L 1450 598 Q 1450 610 1462 610 L 1558 610 Q 1570 610 1570 622 L 1570 680" fill="none" stroke="#be123c" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd1-ar-rose-start)" marker-end="url(#dfd1-ar-rose)" opacity="1"/>
+    <text x="1575" y="652"  style="font-size:8.8px;font-weight:650;fill:#be123c" >patrocinios</text>
+
+    <g>
+    <line x1="34" y1="792" x2="1666" y2="792" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="808"  style="font-size:9.8px;font-weight:500;fill:#64748b" >Los procesos 1.0–4.0 agrupan P01–P12. D5–D6 se desdobla en PATROCINADOR y ACUERDO en el DFD 2C. El detalle de cada flujo y almacén se desarrolla en los DFD nivel 2.</text>
+  </g>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 1</span>
+        <span><b>Nivel 1.</b> 1.0 Identidad, 2.0 Operación del viaje, 3.0 Pagos y finanzas, 4.0 Servicio y gobierno. Los flujos externos se derivan de las interfases del contexto; los internos se numeran F10–F13 y el acceso administrativo se identifica como F14.</span>
+      </figcaption>
+    </figure>
+
+    <div class="grid grid--4 mt-2">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c.8-4 3.2-6 7-6s6.2 2 7 6"/></svg></div>
+        <h3>1.0 Identidad</h3>
+        <p>Registro, inicio de sesión, roles y perfiles. Alimenta de identidad al resto de dominios.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="2.5"/><circle cx="18.5" cy="17" r="2.5"/><path d="M8 17h4l2.4-5.2h3.1M11 17 9.7 13H7m7.2 0-2-3.2H9.6"/></svg></div>
+        <h3>2.0 Viaje</h3>
+        <p>Solicitud, búsqueda, asignación, cancelación, ejecución y precio. Es el eje operativo.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
+        <h3>3.0 Pagos</h3>
+        <p>Cobro al pasajero, liquidación al conductor, autorización y reverso.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.4-7 9.3-4.1-1.9-7-5.1-7-9.3V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>4.0 Gobierno</h3>
+        <p>Calificación, patrocinio, administración y reportes. Cierra el ciclo y audita.</p>
+      </div>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Los flujos internos no son decorativos:</strong> F10 transporta la identidad y el rol; F11 lleva el viaje y su tarifa hacia pagos; F12 entrega las transacciones a gobierno; F13 habilita la calificación cuando el viaje termina.</p>
+    </div>
+  </section>
+
+  <section class="section" id="procesos" aria-labelledby="proc-title">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 id="proc-title">Inventario de procesos P01–P12</h2>
+        <p>Cada proceso tiene entradas, salidas, almacén y acontecimientos asociados. La numeración coincide con la trazabilidad del dossier.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:3.5rem">ID</th><th>Proceso</th><th>Dominio</th><th>Entradas</th><th>Salidas</th><th>Almacén</th><th>Acontecimientos</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag--fk">P01</span></td><td><strong>Registro de cuentas</strong></td><td>Identidad</td>
+            <td>Datos personales, credenciales y rol elegido.</td><td>Usuario y perfil de rol creados.</td><td>D1</td><td class="nowrap">01–02</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--fk">P02</span></td><td><strong>Inicio de sesión</strong></td><td>Identidad</td>
+            <td>Correo y contraseña.</td><td>Sesión autenticada con rol y permisos.</td><td>D1</td><td class="nowrap">03</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P03</span></td><td><strong>Solicitud de viaje</strong></td><td>Viaje</td>
+            <td>Origen, destino y pasajero autenticado.</td><td>Viaje en estado <code>solicitado</code> y paso a <code>buscando</code>.</td><td>D2</td><td class="nowrap">04–05</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P04</span></td><td><strong>Búsqueda de conductores</strong></td><td>Viaje</td>
+            <td>Viaje pendiente y disponibilidad de conductores.</td><td>Lista de candidatos compatibles.</td><td>D1, D2</td><td class="nowrap">06</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P05</span></td><td><strong>Asignación</strong></td><td>Viaje</td>
+            <td>Candidatos y respuesta del conductor.</td><td>Viaje asignado, ETA y notificación al pasajero.</td><td>D1, D2</td><td class="nowrap">07–09, 11</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P06</span></td><td><strong>Cancelación</strong></td><td>Viaje</td>
+            <td>Solicitud de cancelación del pasajero o del conductor.</td><td>Viaje en <code>cancelado</code> y liberación del conductor.</td><td>D2</td><td class="nowrap">10</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P07</span></td><td><strong>Gestión del viaje</strong></td><td>Viaje</td>
+            <td>Eventos del conductor: en camino, inicio y fin.</td><td>Estado actualizado y datos para el pasajero.</td><td>D2</td><td class="nowrap">11–14</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P08</span></td><td><strong>Cálculo del precio</strong></td><td>Viaje</td>
+            <td>Distancia, tiempo y tarifa base.</td><td>Tarifa final y recibo del servicio.</td><td>D2</td><td class="nowrap">15</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">P09</span></td><td><strong>Registro y control de pagos</strong></td><td>Pagos</td>
+            <td>Pago del pasajero, autorización administrativa o incidencia.</td><td>Pago registrado, liquidación o reverso.</td><td>D3</td><td class="nowrap">16–18</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P10</span></td><td><strong>Calificación del servicio</strong></td><td>Gobierno</td>
+            <td>Puntuación, comentario y viaje finalizado.</td><td>Calificación registrada y reputación actualizada.</td><td>D2, D4</td><td class="nowrap">19</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P11</span></td><td><strong>Gestión de patrocinio</strong></td><td>Gobierno</td>
+            <td>Convenio, publicidad y pago del aliado.</td><td>Acuerdo registrado, estado y métricas.</td><td>D5, D6</td><td class="nowrap">20</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P12</span></td><td><strong>Administración general</strong></td><td>Gobierno</td>
+            <td>Gestión de usuarios, consultas y solicitudes de reporte.</td><td>Usuarios actualizados, reportes y alertas.</td><td>D1–D6, DR</td><td class="nowrap">21</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2a" aria-labelledby="n2a-title">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 id="n2a-title">DFD nivel 2A · Identidad y acceso</h2>
+        <p>Descomposición de P01 y P02. El almacén D1 concentra credenciales, rol y perfiles; la sesión resultante habilita el resto de procesos.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2a">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 2</b> · DFD nivel 2A</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1200 545" width="1200" height="545" role="img" aria-label="DFD nivel 2A de MotoUber: registro de cuentas e inicio de sesión" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1200" height="545" fill="#ffffff"/>
+    <defs>
+    <marker id="dfd2a-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="dfd2a-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="dfd2a-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="dfd2a-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="dfd2a-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="dfd2a-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="dfd2a-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="dfd2a-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="dfd2a-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="dfd2a-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="dfd2a-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="dfd2a-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="dfd2a-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="dfd2a-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="dfd2a-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="dfd2a-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="dfd2a-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="dfd2a-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="dfd2a-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="dfd2a-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="dfd2a-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="dfd2a-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#4338ca"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >DFD nivel 2A · Identidad y acceso</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >P01 Registro de cuentas · P02 Inicio de sesión verificado por rol</text>
+    <g>
+      <rect x="840" y="38" width="30" height="16" rx="4" fill="#ffffff" stroke="#4338ca" stroke-width="1.2"/>
+      <path d="M 840 42 h 30" stroke="#4338ca" stroke-width="1.2"/>
+      <text x="878" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >proceso</text>
+    </g>
+              <g>
+      <rect x="956" y="38" width="30" height="16" rx="3" fill="#ecfdf5" stroke="#0f766e" stroke-width="1"/>
+      <line x1="966" y1="38" x2="966" y2="54" stroke="#0f766e" stroke-width="1"/>
+      <text x="994" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >almacén</text>
+    </g>
+              <g>
+    <line x1="1068" y1="46" x2="1098" y2="46" stroke="#475569" stroke-width="1.7" stroke-linecap="round"/>
+    
+    <path d="M 1098 46 l -7 -3.4 v 6.8 z" fill="#475569"/>
+    <text x="1106" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >flujo</text>
+  </g>
+  </g>
+
+    <g filter="url(#dfd2a-soft)">
+    <rect x="60" y="100" width="190" height="85" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="90" cy="142.5" r="19" fill="#eef2ff"/>
+    <g transform="translate(78 130.5) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="118" y="146.5"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="118" y="161.5"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >ROL · PASAJERO</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2a-soft)">
+    <rect x="60" y="235" width="190" height="85" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.25"/>
+    <circle cx="90" cy="277.5" r="19" fill="#ecfdf5"/>
+    <g transform="translate(78 265.5) scale(1)" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.4" cy="17" r="2.7"/><circle cx="18.6" cy="17" r="2.7"/><path d="M8.1 17h4.7l2.4-5.2h3.4M11 17l-1.4-4.2H6.9m7.2 0-2-3.2H9.5"/></g>
+    <text x="118" y="281.5"  style="font-size:13px;font-weight:750;fill:#0f172a" >Motoconchista</text>
+    <text x="118" y="296.5"  style="font-size:8.2px;font-weight:700;fill:#0f766e;letter-spacing:0.8" >ROL · CONDUCTOR</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2a-soft)">
+    <rect x="60" y="370" width="190" height="85" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.25"/>
+    <circle cx="90" cy="412.5" r="19" fill="#fffbeb"/>
+    <g transform="translate(78 400.5) scale(1)" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4 19 6v5.3c0 4.2-2.9 7.5-7 9.2-4.1-1.7-7-5-7-9.2V6z"/><path d="m9 12 2.1 2.1L15.2 10"/></g>
+    <text x="118" y="416.5"  style="font-size:13px;font-weight:750;fill:#0f172a" >Administrador</text>
+    <text x="118" y="431.5"  style="font-size:8.2px;font-weight:700;fill:#b45309;letter-spacing:0.8" >ROL · ADMIN</text>
+    
+    
+  </g>
+
+    <g filter="url(#dfd2a-soft)">
+    <rect x="360" y="100" width="260" height="100" rx="10" fill="#ffffff" stroke="#4338ca" stroke-width="1.45"/>
+    <path d="M 360 110 Q 360 100 370 100 L 610 100 Q 620 100 620 110 L 620 126 L 360 126 Z" fill="#eef2ff"/>
+    <line x1="360" y1="126" x2="620" y2="126" stroke="#4338ca" stroke-opacity=".28" stroke-width="1"/>
+    <text x="373" y="118" class="mono" style="font-size:8.3px;font-weight:750;fill:#4338ca;letter-spacing:0.9" >P01  ·  PROCESO</text>
+    <text x="373" y="149"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Registro de cuentas</text>
+    <text x="373" y="168"  style="font-size:9.4px;font-weight:500;fill:#64748b" >valida datos y crea el perfil de rol</text>
+  </g>
+    <g filter="url(#dfd2a-soft)">
+    <rect x="360" y="330" width="260" height="100" rx="10" fill="#ffffff" stroke="#4338ca" stroke-width="1.45"/>
+    <path d="M 360 340 Q 360 330 370 330 L 610 330 Q 620 330 620 340 L 620 356 L 360 356 Z" fill="#eef2ff"/>
+    <line x1="360" y1="356" x2="620" y2="356" stroke="#4338ca" stroke-opacity=".28" stroke-width="1"/>
+    <text x="373" y="348" class="mono" style="font-size:8.3px;font-weight:750;fill:#4338ca;letter-spacing:0.9" >P02  ·  PROCESO</text>
+    <text x="373" y="379"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Inicio de sesión</text>
+    <text x="373" y="398"  style="font-size:9.4px;font-weight:500;fill:#64748b" >verifica credenciales y emite sesión</text>
+  </g>
+
+    <g filter="url(#dfd2a-soft)">
+    <rect x="820" y="215" width="260" height="90" rx="7" fill="#ffffff" stroke="#0f766e" stroke-width="1.3"/>
+    <path d="M 820 222 Q 820 215 827 215 L 866 215 L 866 305 L 827 305 Q 820 305 820 298 Z" fill="#ecfdf5"/>
+    <line x1="866" y1="215" x2="866" y2="305" stroke="#0f766e" stroke-opacity=".3"/>
+    <text x="843" y="241" class="mono" style="font-size:11px;font-weight:750;fill:#0f766e;text-anchor:middle" >D1</text>
+    <text x="843" y="259"  style="font-size:7px;font-weight:700;fill:#0f766e;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="878" y="243"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >USUARIO</text>
+    <text x="878" y="261"  style="font-size:8.8px;font-weight:500;fill:#64748b" >credenciales, rol y estado</text>
+  </g>
+
+    <!-- P01 -->
+    <path d="M 250 142 L 360 142" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2a-ar-indigo-start)" marker-end="url(#dfd2a-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="305" cy="142" r="10" fill="#4338ca"/>
+    <text x="305" y="145.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F1</text>
+  </g>
+    <text x="305" y="132"  style="font-size:8.6px;font-weight:650;fill:#4338ca;text-anchor:middle" >datos de registro</text>
+
+    <path d="M 250 277 L 298 277 Q 310 277 310 265 L 310 187 Q 310 175 322 175 L 360 175" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2a-ar-teal-start)" marker-end="url(#dfd2a-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="310" cy="242" r="10" fill="#0f766e"/>
+    <text x="310" y="245.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F2</text>
+  </g>
+    <text x="298" y="238"  style="font-size:8.6px;font-weight:650;fill:#0f766e;text-anchor:end" >datos de registro</text>
+
+    <path d="M 490 200 L 490 330" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2a-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="490" cy="270" r="10" fill="#4338ca"/>
+    <text x="490" y="273.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F6</text>
+  </g>
+    <text x="505" y="270"  style="font-size:8.6px;font-weight:650;fill:#4338ca" >usuario creado</text>
+
+    <path d="M 620 150 L 718 150 Q 730 150 730 162 L 730 228 Q 730 240 742 240 L 820 240" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2a-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="730" cy="215" r="10" fill="#0f766e"/>
+    <text x="730" y="218.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F7</text>
+  </g>
+    <text x="760" y="194"  style="font-size:8.6px;font-weight:650;fill:#0f766e" >nuevo usuario + rol</text>
+
+    <!-- P02 -->
+    <path d="M 250 160 L 328 160 Q 340 160 340 172 L 340 350 Q 340 360 350 360 L 360 360" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2a-ar-indigo-start)" marker-end="url(#dfd2a-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="340" cy="220" r="10" fill="#4338ca"/>
+    <text x="340" y="223.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F3</text>
+  </g>
+    <text x="295" y="172"  style="font-size:8.6px;font-weight:650;fill:#4338ca;text-anchor:middle" >credenciales</text>
+
+    <path d="M 250 290 L 318 290 Q 330 290 330 302 L 330 373 Q 330 385 342 385 L 360 385" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2a-ar-teal-start)" marker-end="url(#dfd2a-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="330" cy="338" r="10" fill="#0f766e"/>
+    <text x="330" y="341.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F4</text>
+  </g>
+    <text x="320" y="376"  style="font-size:8.6px;font-weight:650;fill:#0f766e;text-anchor:end" >credenciales</text>
+
+    <path d="M 250 412 L 360 412" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2a-ar-amber-start)" marker-end="url(#dfd2a-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="305" cy="412" r="10" fill="#b45309"/>
+    <text x="305" y="415.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F5</text>
+  </g>
+    <text x="305" y="402"  style="font-size:8.6px;font-weight:650;fill:#b45309;text-anchor:middle" >credenciales</text>
+
+    <path d="M 620 380 L 748 380 Q 760 380 760 368 L 760 302 Q 760 290 772 290 L 820 290" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2a-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="760" cy="335" r="10" fill="#0f766e"/>
+    <text x="760" y="338.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F8</text>
+  </g>
+    <text x="772" y="352"  style="font-size:8.6px;font-weight:650;fill:#0f766e" >verifica / actualiza</text>
+
+    <text x="750" y="500"  style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:middle;font-style:italic" >La sesión incluye el rol para habilitar las rutas y permisos del front-end React.</text>
+    <g>
+    <line x1="34" y1="508" x2="1166" y2="508" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="524"  style="font-size:9.8px;font-weight:500;fill:#64748b" >Regla de negocio: un correo solo puede pertenecer a un usuario y cada usuario tiene exactamente un rol. La contraseña se almacena como hash, nunca en texto plano.</text>
+  </g>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 2</span>
+        <span><b>Identidad y acceso.</b> P01 crea la cuenta y su perfil; P02 valida credenciales y emite una sesión con el rol. F6–F8 son flujos internos de persistencia y verificación.</span>
+      </figcaption>
+    </figure>
+
+    <div class="two-col mt-2">
+      <div class="card">
+        <h3>Decisiones del proceso</h3>
+        <ul class="list-check">
+          <li><strong>Un correo, una cuenta:</strong> la unicidad se valida antes de insertar y se refuerza con <code>UNIQUE</code>.</li>
+          <li><strong>Un rol, un perfil:</strong> P01 crea el usuario y su especialización en una sola transacción.</li>
+          <li><strong>Contraseña como hash:</strong> la capa de servicio aplica bcrypt o Argon2; la base solo guarda el hash.</li>
+          <li><strong>Sesión con rol:</strong> el token o la cookie de sesión incluye el rol para habilitar rutas y permisos.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Qué no hace este DFD</h3>
+        <ul class="list-x">
+          <li>No muestra la pantalla de registro ni el diseño de la interfaz.</li>
+          <li>No describe el algoritmo de hash ni la política de bloqueo por intentos.</li>
+          <li>No modela recuperación de contraseña: sería un proceso adicional P01.1 o P02.1.</li>
+          <li>No incluye autenticación social ni segundo factor; son extensiones del mismo dominio.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2b" aria-labelledby="n2b-title">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 id="n2b-title">DFD nivel 2B · Ciclo del viaje</h2>
+        <p>Descomposición de P03–P08. El viaje atraviesa solicitud, búsqueda, asignación, cancelación, ejecución y precio; cada transición actualiza D2.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2b">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 3</b> · DFD nivel 2B</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="DFD nivel 2B de MotoUber: ciclo completo del viaje, desde la solicitud hasta el cálculo del precio" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1600" height="900" fill="#ffffff"/>
+    <defs>
+    <marker id="dfd2b-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="dfd2b-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="dfd2b-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="dfd2b-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="dfd2b-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="dfd2b-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="dfd2b-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="dfd2b-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="dfd2b-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="dfd2b-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="dfd2b-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="dfd2b-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="dfd2b-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="dfd2b-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="dfd2b-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="dfd2b-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="dfd2b-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="dfd2b-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="dfd2b-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="dfd2b-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="dfd2b-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="dfd2b-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#0f766e"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >DFD nivel 2B · Ciclo del viaje</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >P03 solicitud · P04 búsqueda · P05 asignación · P06 cancelación · P07 gestión · P08 precio</text>
+    <g>
+      <rect x="1010" y="38" width="30" height="16" rx="4" fill="#ffffff" stroke="#0f766e" stroke-width="1.2"/>
+      <path d="M 1010 42 h 30" stroke="#0f766e" stroke-width="1.2"/>
+      <text x="1048" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >proceso</text>
+    </g>
+              <g>
+      <rect x="1126" y="38" width="30" height="16" rx="3" fill="#eef2ff" stroke="#4338ca" stroke-width="1"/>
+      <line x1="1136" y1="38" x2="1136" y2="54" stroke="#4338ca" stroke-width="1"/>
+      <text x="1164" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >almacén</text>
+    </g>
+              <g>
+    <line x1="1240" y1="46" x2="1270" y2="46" stroke="#475569" stroke-width="1.7" stroke-linecap="round"/>
+    
+    <path d="M 1270 46 l -7 -3.4 v 6.8 z" fill="#475569"/>
+    <text x="1278" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >flujo</text>
+  </g>
+              <text x="1370" y="50"  style="font-size:9px;font-weight:600;fill:#64748b" >⇄ solicitud / respuesta</text>
+  </g>
+
+    <g filter="url(#dfd2b-soft)">
+    <rect x="50" y="280" width="190" height="120" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="80" cy="340" r="19" fill="#eef2ff"/>
+    <g transform="translate(68 328) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="108" y="344"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="108" y="359"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >DEMANDA</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="1360" y="260" width="190" height="120" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.25"/>
+    <circle cx="1390" cy="320" r="19" fill="#ecfdf5"/>
+    <g transform="translate(1378 308) scale(1)" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.4" cy="17" r="2.7"/><circle cx="18.6" cy="17" r="2.7"/><path d="M8.1 17h4.7l2.4-5.2h3.4M11 17l-1.4-4.2H6.9m7.2 0-2-3.2H9.5"/></g>
+    <text x="1418" y="324"  style="font-size:13px;font-weight:750;fill:#0f172a" >Motoconchista</text>
+    <text x="1418" y="339"  style="font-size:8.2px;font-weight:700;fill:#0f766e;letter-spacing:0.8" >OFERTA</text>
+    
+    
+  </g>
+
+    <g filter="url(#dfd2b-soft)">
+    <rect x="320" y="90" width="240" height="96" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.45"/>
+    <path d="M 320 100 Q 320 90 330 90 L 550 90 Q 560 90 560 100 L 560 116 L 320 116 Z" fill="#ecfdf5"/>
+    <line x1="320" y1="116" x2="560" y2="116" stroke="#0f766e" stroke-opacity=".28" stroke-width="1"/>
+    <text x="333" y="108" class="mono" style="font-size:8.3px;font-weight:750;fill:#0f766e;letter-spacing:0.9" >P03  ·  PROCESO</text>
+    <text x="333" y="139"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Solicitud de viaje</text>
+    <text x="333" y="158"  style="font-size:9.4px;font-weight:500;fill:#64748b" >registra origen, destino y tarifa base</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="660" y="90" width="240" height="96" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.45"/>
+    <path d="M 660 100 Q 660 90 670 90 L 890 90 Q 900 90 900 100 L 900 116 L 660 116 Z" fill="#ecfdf5"/>
+    <line x1="660" y1="116" x2="900" y2="116" stroke="#0f766e" stroke-opacity=".28" stroke-width="1"/>
+    <text x="673" y="108" class="mono" style="font-size:8.3px;font-weight:750;fill:#0f766e;letter-spacing:0.9" >P04  ·  PROCESO</text>
+    <text x="673" y="139"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Búsqueda</text>
+    <text x="673" y="158"  style="font-size:9.4px;font-weight:500;fill:#64748b" >filtra conductores disponibles</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="1000" y="90" width="240" height="96" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.45"/>
+    <path d="M 1000 100 Q 1000 90 1010 90 L 1230 90 Q 1240 90 1240 100 L 1240 116 L 1000 116 Z" fill="#ecfdf5"/>
+    <line x1="1000" y1="116" x2="1240" y2="116" stroke="#0f766e" stroke-opacity=".28" stroke-width="1"/>
+    <text x="1013" y="108" class="mono" style="font-size:8.3px;font-weight:750;fill:#0f766e;letter-spacing:0.9" >P05  ·  PROCESO</text>
+    <text x="1013" y="139"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Asignación</text>
+    <text x="1013" y="158"  style="font-size:9.4px;font-weight:500;fill:#64748b" >notifica, acepta y vincula el viaje</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="320" y="380" width="240" height="96" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1.45"/>
+    <path d="M 320 390 Q 320 380 330 380 L 550 380 Q 560 380 560 390 L 560 406 L 320 406 Z" fill="#fffbeb"/>
+    <line x1="320" y1="406" x2="560" y2="406" stroke="#b45309" stroke-opacity=".28" stroke-width="1"/>
+    <text x="333" y="398" class="mono" style="font-size:8.3px;font-weight:750;fill:#b45309;letter-spacing:0.9" >P06  ·  PROCESO</text>
+    <text x="333" y="429"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Cancelación</text>
+    <text x="333" y="448"  style="font-size:9.4px;font-weight:500;fill:#64748b" >anula por pasajero o conductor</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="720" y="380" width="240" height="96" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="1.45"/>
+    <path d="M 720 390 Q 720 380 730 380 L 950 380 Q 960 380 960 390 L 960 406 L 720 406 Z" fill="#ecfdf5"/>
+    <line x1="720" y1="406" x2="960" y2="406" stroke="#0f766e" stroke-opacity=".28" stroke-width="1"/>
+    <text x="733" y="398" class="mono" style="font-size:8.3px;font-weight:750;fill:#0f766e;letter-spacing:0.9" >P07  ·  PROCESO</text>
+    <text x="733" y="429"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Gestión del viaje</text>
+    <text x="733" y="448"  style="font-size:9.4px;font-weight:500;fill:#64748b" >en camino, inicio y fin en tiempo real</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="1040" y="620" width="240" height="96" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1.45"/>
+    <path d="M 1040 630 Q 1040 620 1050 620 L 1270 620 Q 1280 620 1280 630 L 1280 646 L 1040 646 Z" fill="#fffbeb"/>
+    <line x1="1040" y1="646" x2="1280" y2="646" stroke="#b45309" stroke-opacity=".28" stroke-width="1"/>
+    <text x="1053" y="638" class="mono" style="font-size:8.3px;font-weight:750;fill:#b45309;letter-spacing:0.9" >P08  ·  PROCESO</text>
+    <text x="1053" y="669"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Cálculo del precio</text>
+    <text x="1053" y="688"  style="font-size:9.4px;font-weight:500;fill:#64748b" >confirma distancia y tarifa final</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="1360" y="620" width="190" height="70" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1.45" stroke-dasharray="6 4"/>
+    <path d="M 1360 630 Q 1360 620 1370 620 L 1540 620 Q 1550 620 1550 630 L 1550 646 L 1360 646 Z" fill="#fffbeb"/>
+    <line x1="1360" y1="646" x2="1550" y2="646" stroke="#b45309" stroke-opacity=".28" stroke-width="1"/>
+    <text x="1373" y="638" class="mono" style="font-size:8.3px;font-weight:750;fill:#b45309;letter-spacing:0.9" >P09  ·  PROCESO</text>
+    <text x="1373" y="669"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Pagos</text>
+    <text x="1373" y="688"  style="font-size:9.4px;font-weight:500;fill:#64748b" >continúa en el DFD 2C</text>
+  </g>
+
+    <g filter="url(#dfd2b-soft)">
+    <rect x="620" y="250" width="240" height="80" rx="7" fill="#ffffff" stroke="#0f766e" stroke-width="1.3"/>
+    <path d="M 620 257 Q 620 250 627 250 L 666 250 L 666 330 L 627 330 Q 620 330 620 323 Z" fill="#ecfdf5"/>
+    <line x1="666" y1="250" x2="666" y2="330" stroke="#0f766e" stroke-opacity=".3"/>
+    <text x="643" y="276" class="mono" style="font-size:11px;font-weight:750;fill:#0f766e;text-anchor:middle" >D2</text>
+    <text x="643" y="294"  style="font-size:7px;font-weight:700;fill:#0f766e;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="678" y="278"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >VIAJE</text>
+    <text x="678" y="296"  style="font-size:8.8px;font-weight:500;fill:#64748b" >solicitud, estado y tarifa</text>
+  </g>
+    <g filter="url(#dfd2b-soft)">
+    <rect x="1080" y="250" width="240" height="80" rx="7" fill="#ffffff" stroke="#4338ca" stroke-width="1.3"/>
+    <path d="M 1080 257 Q 1080 250 1087 250 L 1126 250 L 1126 330 L 1087 330 Q 1080 330 1080 323 Z" fill="#eef2ff"/>
+    <line x1="1126" y1="250" x2="1126" y2="330" stroke="#4338ca" stroke-opacity=".3"/>
+    <text x="1103" y="276" class="mono" style="font-size:11px;font-weight:750;fill:#4338ca;text-anchor:middle" >D1</text>
+    <text x="1103" y="294"  style="font-size:7px;font-weight:700;fill:#4338ca;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="1138" y="278"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >USUARIO</text>
+    <text x="1138" y="296"  style="font-size:8.8px;font-weight:500;fill:#64748b" >conductores y disponibilidad</text>
+  </g>
+
+    <!-- Solicitud -->
+    <path d="M 240 300 L 278 300 Q 290 300 290 288 L 290 152 Q 290 140 302 140 L 320 140" fill="none" stroke="#4338ca" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-indigo-start)" marker-end="url(#dfd2b-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="290" cy="220" r="10" fill="#4338ca"/>
+    <text x="290" y="223.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F1</text>
+  </g>
+    <text x="300" y="208"  style="font-size:8.7px;font-weight:650;fill:#4338ca" >origen / destino</text>
+
+    <path d="M 560 140 L 628 140 Q 640 140 640 152 L 640 250" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="590" cy="140" r="10" fill="#0f766e"/>
+    <text x="590" y="143.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F2</text>
+  </g>
+    <text x="570" y="210"  style="font-size:8.7px;font-weight:650;fill:#0f766e;text-anchor:middle" >nueva solicitud</text>
+
+    <path d="M 720 250 L 720 186" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="720" cy="218" r="10" fill="#0f766e"/>
+    <text x="720" y="221.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F3</text>
+  </g>
+    <text x="730" y="232"  style="font-size:8.5px;font-weight:650;fill:#0f766e" >pendientes</text>
+
+    <!-- Búsqueda y asignación -->
+    <path d="M 1080 290 L 992 290 Q 980 290 980 278 L 980 142 Q 980 130 968 130 L 900 130" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="980" cy="210" r="10" fill="#0f766e"/>
+    <text x="980" y="213.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F4</text>
+  </g>
+    <text x="1040" y="216"  style="font-size:8.6px;font-weight:650;fill:#0f766e" >disponibilidad</text>
+
+    <path d="M 900 160 L 1000 160" fill="none" stroke="#475569" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="950" cy="160" r="10" fill="#475569"/>
+    <text x="950" y="163.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F5</text>
+  </g>
+    <text x="920" y="178"  style="font-size:8.6px;font-weight:650;fill:#475569" >candidatos</text>
+
+    <path d="M 1240 160 L 1318 160 Q 1330 160 1330 172 L 1330 288 Q 1330 300 1342 300 L 1360 300" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-teal-start)" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="1330" cy="235" r="10" fill="#0f766e"/>
+    <text x="1330" y="238.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F6</text>
+  </g>
+    <text x="1318" y="228"  style="font-size:8.6px;font-weight:650;fill:#0f766e;text-anchor:end" >solicitud / respuesta</text>
+
+    <path d="M 1030 186 L 1030 218 Q 1030 230 1018 230 L 810 230 Q 800 230 800 240 L 800 250" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="900" cy="230" r="10" fill="#0f766e"/>
+    <text x="900" y="233.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F7</text>
+  </g>
+    <text x="880" y="218"  style="font-size:8.6px;font-weight:650;fill:#0f766e;text-anchor:middle" >asignación</text>
+
+    <path d="M 1120 90 L 1120 87 Q 1120 84 1117 84 L 162 84 Q 150 84 150 96 L 150 280" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="150" cy="150" r="10" fill="#4338ca"/>
+    <text x="150" y="153.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F8</text>
+  </g>
+    <text x="610" y="76"  style="font-size:8.7px;font-weight:650;fill:#4338ca" >conductor asignado y ETA</text>
+
+    <path d="M 1240 130 L 1338 130 Q 1350 130 1350 142 L 1350 428 Q 1350 440 1338 440 L 960 440" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="1350" cy="200" r="10" fill="#0f766e"/>
+    <text x="1350" y="203.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F13</text>
+  </g>
+    <text x="1362" y="240"  style="font-size:8.6px;font-weight:650;fill:#0f766e" >viaje activo</text>
+
+    <!-- Cancelación -->
+    <path d="M 240 340 L 268 340 Q 280 340 280 352 L 280 388 Q 280 400 292 400 L 320 400" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-amber-start)" marker-end="url(#dfd2b-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="280" cy="370" r="10" fill="#b45309"/>
+    <text x="280" y="373.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F9</text>
+  </g>
+    <text x="292" y="362"  style="font-size:8.6px;font-weight:650;fill:#b45309" >cancelación</text>
+
+    <path d="M 440 380 L 440 352 Q 440 340 452 340 L 655 340 Q 660 340 660 335 L 660 330" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="520" cy="340" r="10" fill="#b45309"/>
+    <text x="520" y="343.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F10</text>
+  </g>
+    <text x="520" y="330"  style="font-size:8.6px;font-weight:650;fill:#b45309" >estado cancelado</text>
+
+    <path d="M 560 430 L 588 430 Q 600 430 600 442 L 600 588 Q 600 600 612 600 L 1388 600 Q 1400 600 1400 588 L 1400 380" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-amber-start)" marker-end="url(#dfd2b-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="760" cy="600" r="10" fill="#b45309"/>
+    <text x="760" y="603.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F11</text>
+  </g>
+    <text x="870" y="592"  style="font-size:8.7px;font-weight:650;fill:#b45309" >cancelación del conductor</text>
+
+    <!-- Gestión -->
+    <path d="M 820 380 L 820 330" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-teal-start)" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <text x="832" y="362"  style="font-size:8.5px;font-weight:650;fill:#0f766e" >estado</text>
+
+    <path d="M 960 420 L 1288 420 Q 1300 420 1300 408 L 1300 352 Q 1300 340 1312 340 L 1360 340" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-teal-start)" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="1120" cy="420" r="10" fill="#0f766e"/>
+    <text x="1120" y="423.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F12</text>
+  </g>
+    <text x="1180" y="410"  style="font-size:8.7px;font-weight:650;fill:#0f766e" >en camino / inicio / fin</text>
+
+    <path d="M 800 476 L 800 548 Q 800 560 812 560 L 1088 560 Q 1100 560 1100 572 L 1100 620" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="900" cy="560" r="10" fill="#0f766e"/>
+    <text x="900" y="563.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F14</text>
+  </g>
+    <text x="900" y="550"  style="font-size:8.6px;font-weight:650;fill:#0f766e" >viaje finalizado</text>
+
+    <!-- Precio -->
+    <path d="M 1040 660 L 712 660 Q 700 660 700 648 L 700 330" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2b-ar-teal-start)" marker-end="url(#dfd2b-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="700" cy="440" r="10" fill="#0f766e"/>
+    <text x="700" y="443.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F15</text>
+  </g>
+    <text x="698" y="490"  style="font-size:8.6px;font-weight:650;fill:#0f766e;text-anchor:end" >distancia / tarifa</text>
+
+    <path d="M 1280 668 L 1360 668" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1320" cy="668" r="10" fill="#b45309"/>
+    <text x="1320" y="671.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F16</text>
+  </g>
+    <text x="1320" y="658"  style="font-size:8.5px;font-weight:650;fill:#b45309" >monto</text>
+
+    <path d="M 1040 700 L 1012 700 Q 1000 700 1000 712 L 1000 768 Q 1000 780 988 780 L 152 780 Q 140 780 140 768 L 140 400" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2b-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="620" cy="780" r="10" fill="#4338ca"/>
+    <text x="620" y="783.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F17</text>
+  </g>
+    <text x="620" y="770"  style="font-size:8.7px;font-weight:650;fill:#4338ca" >tarifa confirmada / recibo</text>
+
+    <g>
+    <line x1="34" y1="856" x2="1566" y2="856" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="872"  style="font-size:9.8px;font-weight:500;fill:#64748b" >Los flujos de cancelación y rechazo no eliminan el registro: actualizan el estado del viaje y disparan la reversión o liberación del pago en P09.</text>
+  </g>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 3</span>
+        <span><b>Ciclo del viaje.</b> P03 solicita, P04 busca, P05 asigna, P06 cancela, P07 ejecuta y P08 calcula. F17 entrega la tarifa confirmada y el recibo al pasajero.</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Regla de estado:</strong> cancelar no elimina el viaje. Se actualiza <code>estado = 'cancelado'</code>, se registra <code>fecha_fin</code> y se libera al conductor. La trazabilidad se conserva para auditoría y para el cálculo de reputación.</p>
+    </div>
+
+    <div class="two-col mt-2">
+      <div class="card">
+        <h3>Flujo feliz</h3>
+        <ol class="small">
+          <li>P03 registra origen y destino; el viaje queda en <code>buscando</code>.</li>
+          <li>P04 consulta disponibilidad en D1 y obtiene candidatos.</li>
+          <li>P05 notifica, recibe la aceptación y asigna; el viaje pasa a <code>asignado</code>.</li>
+          <li>P07 recibe «en camino», «inicio» y «fin»; el viaje llega a <code>finalizado</code>.</li>
+          <li>P08 confirma distancia y tarifa; el viaje queda listo para P09.</li>
+        </ol>
+      </div>
+      <div class="card card--soft">
+        <h3>Excepciones</h3>
+        <ul class="list-x">
+          <li><strong>Sin candidatos:</strong> P04 devuelve lista vacía; el viaje permanece en <code>buscando</code> o se cancela.</li>
+          <li><strong>Rechazo:</strong> P05 libera al conductor y vuelve a buscar.</li>
+          <li><strong>Cancelación:</strong> P06 actualiza el estado y libera al conductor.</li>
+          <li><strong>Incidencia en el trayecto:</strong> P07 registra el estado y deriva a P09 para el reverso si corresponde.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2c" aria-labelledby="n2c-title">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 id="n2c-title">DFD nivel 2C · Dinero, reputación y gobierno</h2>
+        <p>Descomposición de P09–P12. Pagos, calificación, patrocinio y administración comparten el cierre del viaje y la producción de reportes.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2c">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 4</b> · DFD nivel 2C</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1700 900" width="1700" height="900" role="img" aria-label="DFD nivel 2C de MotoUber: pagos, calificación, patrocinio y administración" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1700" height="900" fill="#ffffff"/>
+    <defs>
+    <marker id="dfd2c-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="dfd2c-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="dfd2c-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="dfd2c-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="dfd2c-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="dfd2c-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="dfd2c-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="dfd2c-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="dfd2c-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="dfd2c-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="dfd2c-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="dfd2c-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="dfd2c-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="dfd2c-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="dfd2c-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="dfd2c-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="dfd2c-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="dfd2c-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="dfd2c-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="dfd2c-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="dfd2c-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="dfd2c-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#b45309"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >DFD nivel 2C · Dinero, reputación y gobierno</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >P09 pagos · P10 calificación · P11 patrocinio · P12 administración general</text>
+    <g>
+      <rect x="1060" y="38" width="30" height="16" rx="4" fill="#ffffff" stroke="#b45309" stroke-width="1.2"/>
+      <path d="M 1060 42 h 30" stroke="#b45309" stroke-width="1.2"/>
+      <text x="1098" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >proceso</text>
+    </g>
+              <g>
+      <rect x="1176" y="38" width="30" height="16" rx="3" fill="#fff1f2" stroke="#be123c" stroke-width="1"/>
+      <line x1="1186" y1="38" x2="1186" y2="54" stroke="#be123c" stroke-width="1"/>
+      <text x="1214" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >almacén</text>
+    </g>
+              <g>
+    <line x1="1290" y1="46" x2="1320" y2="46" stroke="#475569" stroke-width="1.7" stroke-linecap="round"/>
+    
+    <path d="M 1320 46 l -7 -3.4 v 6.8 z" fill="#475569"/>
+    <text x="1328" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >flujo</text>
+  </g>
+              <text x="1410" y="50"  style="font-size:9px;font-weight:600;fill:#64748b" >↺ actor repetido</text>
+  </g>
+
+    <!-- Actores -->
+    <g filter="url(#dfd2c-soft)">
+    <rect x="100" y="80" width="220" height="80" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="130" cy="120" r="19" fill="#eef2ff"/>
+    <g transform="translate(118 108) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="158" y="124"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="158" y="139"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >PAGA EL SERVICIO</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="490" y="80" width="220" height="80" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="520" cy="120" r="19" fill="#eef2ff"/>
+    <g transform="translate(508 108) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="548" y="124"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="548" y="139"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >CALIFICA EL SERVICIO</text>
+    
+    <g><circle cx="694" cy="95" r="9" fill="#eef2ff" stroke="#4338ca" stroke-width="1"/>
+      <text x="694" y="98.5"  style="font-size:10.5px;font-weight:750;fill:#4338ca;text-anchor:middle" >↺</text></g>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="880" y="80" width="240" height="80" rx="11" fill="#ffffff" stroke="#be123c" stroke-width="1.25"/>
+    <circle cx="910" cy="120" r="19" fill="#fff1f2"/>
+    <g transform="translate(898 108) scale(1)" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6.2h8.6V20M12.6 10H20v10M3 20h18M7 9.3h2.6M7 13h2.6M7 16.6h2.6M16 13h1.2M16 16.6h1.2"/></g>
+    <text x="938" y="124"  style="font-size:13px;font-weight:750;fill:#0f172a" >Patrocinador</text>
+    <text x="938" y="139"  style="font-size:8.2px;font-weight:700;fill:#be123c;letter-spacing:0.8" >ALIADO COMERCIAL</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="1270" y="80" width="240" height="80" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.25"/>
+    <circle cx="1300" cy="120" r="19" fill="#fffbeb"/>
+    <g transform="translate(1288 108) scale(1)" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4 19 6v5.3c0 4.2-2.9 7.5-7 9.2-4.1-1.7-7-5-7-9.2V6z"/><path d="m9 12 2.1 2.1L15.2 10"/></g>
+    <text x="1328" y="124"  style="font-size:13px;font-weight:750;fill:#0f172a" >Administrador</text>
+    <text x="1328" y="139"  style="font-size:8.2px;font-weight:700;fill:#b45309;letter-spacing:0.8" >GOBIERNO Y CONTROL</text>
+    
+    
+  </g>
+
+    <g filter="url(#dfd2c-soft)">
+    <rect x="60" y="475" width="180" height="70" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.25"/>
+    <circle cx="90" cy="510" r="19" fill="#ecfdf5"/>
+    <g transform="translate(78 498) scale(1)" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.4" cy="17" r="2.7"/><circle cx="18.6" cy="17" r="2.7"/><path d="M8.1 17h4.7l2.4-5.2h3.4M11 17l-1.4-4.2H6.9m7.2 0-2-3.2H9.5"/></g>
+    <text x="118" y="514"  style="font-size:13px;font-weight:750;fill:#0f172a" >Motoconchista</text>
+    <text x="118" y="529"  style="font-size:8.2px;font-weight:700;fill:#0f766e;letter-spacing:0.8" >COBRA</text>
+    
+    
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="250" y="475" width="150" height="70" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.25"/>
+    <circle cx="280" cy="510" r="19" fill="#fffbeb"/>
+    <g transform="translate(268 498) scale(1)" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4 19 6v5.3c0 4.2-2.9 7.5-7 9.2-4.1-1.7-7-5-7-9.2V6z"/><path d="m9 12 2.1 2.1L15.2 10"/></g>
+    <text x="308" y="514"  style="font-size:13px;font-weight:750;fill:#0f172a" >Admin</text>
+    <text x="308" y="529"  style="font-size:8.2px;font-weight:700;fill:#b45309;letter-spacing:0.8" >AUTORIZA</text>
+    
+    <g><circle cx="384" cy="490" r="9" fill="#fffbeb" stroke="#b45309" stroke-width="1"/>
+      <text x="384" y="493.5"  style="font-size:10.5px;font-weight:750;fill:#b45309;text-anchor:middle" >↺</text></g>
+  </g>
+
+    <!-- Procesos -->
+    <g filter="url(#dfd2c-soft)">
+    <rect x="70" y="300" width="300" height="100" rx="10" fill="#ffffff" stroke="#b45309" stroke-width="1.45"/>
+    <path d="M 70 310 Q 70 300 80 300 L 360 300 Q 370 300 370 310 L 370 326 L 70 326 Z" fill="#fffbeb"/>
+    <line x1="70" y1="326" x2="370" y2="326" stroke="#b45309" stroke-opacity=".28" stroke-width="1"/>
+    <text x="83" y="318" class="mono" style="font-size:8.3px;font-weight:750;fill:#b45309;letter-spacing:0.9" >P09  ·  PROCESO</text>
+    <text x="83" y="349"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Registro y control de pagos</text>
+    <text x="83" y="368"  style="font-size:9.4px;font-weight:500;fill:#64748b" >cobro al pasajero y liquidación al conductor</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="460" y="300" width="300" height="100" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.45"/>
+    <path d="M 460 310 Q 460 300 470 300 L 750 300 Q 760 300 760 310 L 760 326 L 460 326 Z" fill="#eff6ff"/>
+    <line x1="460" y1="326" x2="760" y2="326" stroke="#1d4ed8" stroke-opacity=".28" stroke-width="1"/>
+    <text x="473" y="318" class="mono" style="font-size:8.3px;font-weight:750;fill:#1d4ed8;letter-spacing:0.9" >P10  ·  PROCESO</text>
+    <text x="473" y="349"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Calificación del servicio</text>
+    <text x="473" y="368"  style="font-size:9.4px;font-weight:500;fill:#64748b" >puntuación y comentario del pasajero</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="850" y="300" width="300" height="100" rx="10" fill="#ffffff" stroke="#be123c" stroke-width="1.45"/>
+    <path d="M 850 310 Q 850 300 860 300 L 1140 300 Q 1150 300 1150 310 L 1150 326 L 850 326 Z" fill="#fff1f2"/>
+    <line x1="850" y1="326" x2="1150" y2="326" stroke="#be123c" stroke-opacity=".28" stroke-width="1"/>
+    <text x="863" y="318" class="mono" style="font-size:8.3px;font-weight:750;fill:#be123c;letter-spacing:0.9" >P11  ·  PROCESO</text>
+    <text x="863" y="349"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Gestión de patrocinio</text>
+    <text x="863" y="368"  style="font-size:9.4px;font-weight:500;fill:#64748b" >convenios, publicidad y estado del aliado</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="1240" y="300" width="300" height="100" rx="10" fill="#ffffff" stroke="#4338ca" stroke-width="1.45"/>
+    <path d="M 1240 310 Q 1240 300 1250 300 L 1530 300 Q 1540 300 1540 310 L 1540 326 L 1240 326 Z" fill="#eef2ff"/>
+    <line x1="1240" y1="326" x2="1540" y2="326" stroke="#4338ca" stroke-opacity=".28" stroke-width="1"/>
+    <text x="1253" y="318" class="mono" style="font-size:8.3px;font-weight:750;fill:#4338ca;letter-spacing:0.9" >P12  ·  PROCESO</text>
+    <text x="1253" y="349"  style="font-size:13.6px;font-weight:750;fill:#0f172a;letter-spacing:-0.1" >Administración general</text>
+    <text x="1253" y="368"  style="font-size:9.4px;font-weight:500;fill:#64748b" >usuarios, supervisión y reportes</text>
+  </g>
+
+    <!-- Almacenes -->
+    <g filter="url(#dfd2c-soft)">
+    <rect x="70" y="650" width="300" height="80" rx="7" fill="#ffffff" stroke="#b45309" stroke-width="1.3"/>
+    <path d="M 70 657 Q 70 650 77 650 L 116 650 L 116 730 L 77 730 Q 70 730 70 723 Z" fill="#fffbeb"/>
+    <line x1="116" y1="650" x2="116" y2="730" stroke="#b45309" stroke-opacity=".3"/>
+    <text x="93" y="676" class="mono" style="font-size:11px;font-weight:750;fill:#b45309;text-anchor:middle" >D3</text>
+    <text x="93" y="694"  style="font-size:7px;font-weight:700;fill:#b45309;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="128" y="678"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >PAGO</text>
+    <text x="128" y="696"  style="font-size:8.8px;font-weight:500;fill:#64748b" >cobros, estados y liquidaciones</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="460" y="650" width="300" height="80" rx="7" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.3"/>
+    <path d="M 460 657 Q 460 650 467 650 L 506 650 L 506 730 L 467 730 Q 460 730 460 723 Z" fill="#eff6ff"/>
+    <line x1="506" y1="650" x2="506" y2="730" stroke="#1d4ed8" stroke-opacity=".3"/>
+    <text x="483" y="676" class="mono" style="font-size:11px;font-weight:750;fill:#1d4ed8;text-anchor:middle" >D4</text>
+    <text x="483" y="694"  style="font-size:7px;font-weight:700;fill:#1d4ed8;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="518" y="678"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >CALIFICACION</text>
+    <text x="518" y="696"  style="font-size:8.8px;font-weight:500;fill:#64748b" >puntuación y comentarios</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="460" y="760" width="300" height="70" rx="7" fill="#ffffff" stroke="#0f766e" stroke-width="1.3"/>
+    <path d="M 460 767 Q 460 760 467 760 L 506 760 L 506 830 L 467 830 Q 460 830 460 823 Z" fill="#ecfdf5"/>
+    <line x1="506" y1="760" x2="506" y2="830" stroke="#0f766e" stroke-opacity=".3"/>
+    <text x="483" y="786" class="mono" style="font-size:11px;font-weight:750;fill:#0f766e;text-anchor:middle" >D2</text>
+    <text x="483" y="804"  style="font-size:7px;font-weight:700;fill:#0f766e;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="518" y="788"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >VIAJE</text>
+    <text x="518" y="806"  style="font-size:8.8px;font-weight:500;fill:#64748b" >validación del viaje calificado</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="850" y="650" width="300" height="80" rx="7" fill="#ffffff" stroke="#be123c" stroke-width="1.3"/>
+    <path d="M 850 657 Q 850 650 857 650 L 896 650 L 896 730 L 857 730 Q 850 730 850 723 Z" fill="#fff1f2"/>
+    <line x1="896" y1="650" x2="896" y2="730" stroke="#be123c" stroke-opacity=".3"/>
+    <text x="873" y="676" class="mono" style="font-size:11px;font-weight:750;fill:#be123c;text-anchor:middle" >D5</text>
+    <text x="873" y="694"  style="font-size:7px;font-weight:700;fill:#be123c;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="908" y="678"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >PATROCINADOR</text>
+    <text x="908" y="696"  style="font-size:8.8px;font-weight:500;fill:#64748b" >empresa, contacto y estado</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="850" y="760" width="300" height="70" rx="7" fill="#ffffff" stroke="#be123c" stroke-width="1.3"/>
+    <path d="M 850 767 Q 850 760 857 760 L 896 760 L 896 830 L 857 830 Q 850 830 850 823 Z" fill="#fff1f2"/>
+    <line x1="896" y1="760" x2="896" y2="830" stroke="#be123c" stroke-opacity=".3"/>
+    <text x="873" y="786" class="mono" style="font-size:11px;font-weight:750;fill:#be123c;text-anchor:middle" >D6</text>
+    <text x="873" y="804"  style="font-size:7px;font-weight:700;fill:#be123c;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="908" y="788"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >ACUERDO_PATROCINIO</text>
+    <text x="908" y="806"  style="font-size:8.8px;font-weight:500;fill:#64748b" >monto y vigencia</text>
+  </g>
+    <g filter="url(#dfd2c-soft)">
+    <rect x="1240" y="650" width="300" height="110" rx="7" fill="#ffffff" stroke="#475569" stroke-width="1.3"/>
+    <path d="M 1240 657 Q 1240 650 1247 650 L 1286 650 L 1286 760 L 1247 760 Q 1240 760 1240 753 Z" fill="#f1f5f9"/>
+    <line x1="1286" y1="650" x2="1286" y2="760" stroke="#475569" stroke-opacity=".3"/>
+    <text x="1263" y="676" class="mono" style="font-size:11px;font-weight:750;fill:#475569;text-anchor:middle" >DR</text>
+    <text x="1263" y="694"  style="font-size:7px;font-weight:700;fill:#475569;text-anchor:middle;letter-spacing:0.8" >BD</text>
+    <text x="1298" y="678"  style="font-size:11.6px;font-weight:750;fill:#0f172a" >REPORTES</text>
+    <text x="1298" y="696"  style="font-size:8.8px;font-weight:500;fill:#64748b" >vista de lectura D1–D6</text>
+  </g>
+
+    <!-- P09 -->
+    <path d="M 210 160 L 210 300" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="210" cy="265" r="10" fill="#4338ca"/>
+    <text x="210" y="268.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F1</text>
+  </g>
+    <text x="220" y="238"  style="font-size:8.7px;font-weight:650;fill:#4338ca" >pago + comprobante</text>
+
+    <path d="M 120 400 L 120 475" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="120" cy="438" r="10" fill="#b45309"/>
+    <text x="120" y="441.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F2</text>
+  </g>
+    <text x="132" y="452"  style="font-size:8.7px;font-weight:650;fill:#b45309" >liquidación</text>
+
+    <path d="M 330 475 L 330 400" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="330" cy="442" r="10" fill="#b45309"/>
+    <text x="330" y="445.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F3</text>
+  </g>
+    <text x="342" y="456"  style="font-size:8.7px;font-weight:650;fill:#b45309" >autoriza / reversa</text>
+
+    <path d="M 90 400 L 90 443 Q 90 455 78 455 L 62 455 Q 50 455 50 467 L 50 588 Q 50 600 62 600 L 108 600 Q 120 600 120 612 L 120 650" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-amber-start)" marker-end="url(#dfd2c-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="85" cy="600" r="10" fill="#b45309"/>
+    <text x="85" y="603.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F4</text>
+  </g>
+    <text x="100" y="590"  style="font-size:8.6px;font-weight:650;fill:#b45309" >pagos y estados</text>
+
+    <path d="M 370 350 L 460 350" fill="none" stroke="#475569" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="415" cy="350" r="10" fill="#475569"/>
+    <text x="415" y="353.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F5</text>
+  </g>
+    <text x="415" y="340"  style="font-size:8.2px;font-weight:650;fill:#475569;text-anchor:middle" >pago confirmado</text>
+
+    <!-- P10 -->
+    <path d="M 600 160 L 600 300" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="600" cy="260" r="10" fill="#4338ca"/>
+    <text x="600" y="263.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F6</text>
+  </g>
+    <text x="610" y="236"  style="font-size:8.7px;font-weight:650;fill:#4338ca" >puntuación + comentario</text>
+
+    <path d="M 610 400 L 610 650" fill="none" stroke="#1d4ed8" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-blue-start)" marker-end="url(#dfd2c-ar-blue)" opacity="1"/>
+    <g>
+    <circle cx="610" cy="520" r="10" fill="#1d4ed8"/>
+    <text x="610" y="523.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F7</text>
+  </g>
+    <text x="622" y="514"  style="font-size:8.6px;font-weight:650;fill:#1d4ed8" >calificaciones</text>
+
+    <path d="M 460 380 L 442 380 Q 430 380 430 392 L 430 783 Q 430 795 442 795 L 460 795" fill="none" stroke="#0f766e" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-teal-start)" marker-end="url(#dfd2c-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="430" cy="690" r="10" fill="#0f766e"/>
+    <text x="430" y="693.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F8</text>
+  </g>
+    <text x="420" y="620"  style="font-size:8.5px;font-weight:650;fill:#0f766e;text-anchor:end" >valida viaje</text>
+
+    <!-- P11 -->
+    <path d="M 1000 160 L 1000 300" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1000" cy="260" r="10" fill="#be123c"/>
+    <text x="1000" y="263.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F9</text>
+  </g>
+    <text x="1010" y="232"  style="font-size:8.7px;font-weight:650;fill:#be123c" >convenio / publicidad</text>
+
+    <path d="M 1000 400 L 1000 650" fill="none" stroke="#be123c" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-rose-start)" marker-end="url(#dfd2c-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1000" cy="520" r="10" fill="#be123c"/>
+    <text x="1000" y="523.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F10</text>
+  </g>
+    <text x="1012" y="514"  style="font-size:8.6px;font-weight:650;fill:#be123c" >patrocinadores</text>
+
+    <path d="M 1150 380 L 1178 380 Q 1190 380 1190 392 L 1190 783 Q 1190 795 1178 795 L 1150 795" fill="none" stroke="#be123c" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-rose-start)" marker-end="url(#dfd2c-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1190" cy="570" r="10" fill="#be123c"/>
+    <text x="1190" y="573.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F11</text>
+  </g>
+    <text x="1200" y="564"  style="font-size:8.6px;font-weight:650;fill:#be123c" >acuerdos</text>
+
+    <path d="M 1150 350 L 1240 350" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#dfd2c-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="1195" cy="350" r="10" fill="#be123c"/>
+    <text x="1195" y="353.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F12</text>
+  </g>
+    <text x="1195" y="340"  style="font-size:8.5px;font-weight:650;fill:#be123c;text-anchor:middle" >acuerdo activo</text>
+
+    <!-- P12 -->
+    <path d="M 1390 160 L 1390 300" fill="none" stroke="#b45309" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#dfd2c-ar-amber-start)" marker-end="url(#dfd2c-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1390" cy="260" r="10" fill="#b45309"/>
+    <text x="1390" y="263.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F13</text>
+  </g>
+    <text x="1400" y="232"  style="font-size:8.7px;font-weight:650;fill:#b45309" >gestión / reportes</text>
+
+    <path d="M 1390 400 L 1390 650" fill="none" stroke="#475569" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6 4" marker-start="url(#dfd2c-ar-slate-start)" marker-end="url(#dfd2c-ar-slate)" opacity="1"/>
+    <g>
+    <circle cx="1390" cy="520" r="10" fill="#475569"/>
+    <text x="1390" y="523.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F14</text>
+  </g>
+    <text x="1402" y="514"  style="font-size:8.6px;font-weight:650;fill:#475569" >consulta D1–D6</text>
+
+    <text x="1402" y="620"  style="font-size:8px;font-weight:500;fill:#94a3b8;font-style:italic" >vista de solo lectura · no es una tabla normalizada</text>
+    <g>
+    <line x1="34" y1="856" x2="1666" y2="856" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="872"  style="font-size:9.8px;font-weight:500;fill:#64748b" >El administrador autoriza la liquidación y también puede reversarla ante una incidencia. Toda modificación de estado queda registrada en D3 (PAGO) para auditoría.</text>
+  </g>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 4</span>
+        <span><b>Dinero, reputación y gobierno.</b> P09 cobra y liquida, P10 califica, P11 gestiona patrocinios y P12 administra. DR es una vista de lectura para reportes, no una tabla normalizada.</span>
+      </figcaption>
+    </figure>
+
+    <div class="grid grid--2 mt-2">
+      <div class="card">
+        <h3>P09 · Pagos</h3>
+        <p>Recibe el pago del pasajero, la autorización del administrador y las incidencias. Actualiza D3 con el estado y la referencia de la pasarela. La liquidación al conductor y el reverso son transiciones del mismo pago, no viajes nuevos.</p>
+      </div>
+      <div class="card">
+        <h3>P10 · Calificación</h3>
+        <p>Valida que el viaje esté finalizado y que no exista otra calificación. Guarda puntuación y comentario en D4. La reputación del conductor se calcula como promedio, no se almacena duplicada en <code>usuario</code>.</p>
+      </div>
+      <div class="card">
+        <h3>P11 · Patrocinio</h3>
+        <p>Gestiona patrocinadores y acuerdos en D5 y D6. Un acuerdo tiene vigencia y monto propios; el tipo de alianza preferente vive en el patrocinador. El estado del acuerdo dispara F12 hacia P12.</p>
+      </div>
+      <div class="card">
+        <h3>P12 · Administración</h3>
+        <p>Consulta D1–D6 y produce reportes desde DR. No modifica D3 directamente: cualquier ajuste de pago pasa por P09 para conservar la auditoría y la regla de autorización.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--amber mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 20h18z"/><path d="M12 9v5M12 17h.01"/></svg>
+      <p><strong>DR no es una tabla:</strong> representa el conjunto de vistas y consultas agregadas que alimentan los reportes. No tiene clave primaria ni se normaliza porque no almacena hechos nuevos; solo lee D1–D6.</p>
+    </div>
+  </section>
+
+  <section class="section" id="almacenes" aria-labelledby="store-title">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <div>
+        <h2 id="store-title">Diccionario de almacenes</h2>
+        <p>Seis almacenes lógicos y un almacén de reportes. Cada uno se corresponde con una o más tablas del modelo E-R.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:4rem">ID</th><th>Almacén</th><th>Contenido</th><th>Clave</th><th>Procesos</th><th>Acceso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tag--fk">D1</span></td><td><strong>USUARIO</strong></td><td><code>usuario</code>, <code>pasajero</code>, <code>motoconchista</code>, <code>administrador</code>.</td><td class="mono">id_usuario</td><td>P01, P02, P04, P05, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--ok">D2</span></td><td><strong>VIAJE</strong></td><td><code>viaje</code>: origen, destino, estado, distancia, tarifa y fechas.</td><td class="mono">id_viaje</td><td>P03–P08, P10, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">D3</span></td><td><strong>PAGO</strong></td><td><code>pago</code>: monto, método, estado, referencia y autorización.</td><td class="mono">id_pago</td><td>P09, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--uq">D4</span></td><td><strong>CALIFICACION</strong></td><td><code>calificacion</code>: puntuación, comentario y fecha.</td><td class="mono">id_calificacion</td><td>P10, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--no">D5</span></td><td><strong>PATROCINADOR</strong></td><td><code>patrocinador</code>: empresa, contacto, tipo de alianza y estado.</td><td class="mono">id_patrocinador</td><td>P11, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--no">D6</span></td><td><strong>ACUERDO_PATROCINIO</strong></td><td><code>acuerdo_patrocinio</code>: monto, vigencia, estado y responsables.</td><td class="mono">id_acuerdo</td><td>P11, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--nn">DR</span></td><td><strong>REPORTES</strong></td><td>Vistas <code>v_usuario_rol</code> y <code>v_acuerdo_vigente</code> más agregados de D1–D6.</td><td class="mono">— (vista)</td><td>P12</td><td>Solo lectura</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>D5 y D6 están separados por diseño:</strong> un patrocinador puede existir sin acuerdo y un acuerdo no se entiende sin patrocinador. Sus ciclos de vida y reglas de borrado son distintos, por eso el DFD los trata como almacenes diferentes.</p>
+    </div>
+  </section>
+
+  <section class="section" id="flujos" aria-labelledby="flows-title">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <div>
+        <h2 id="flows-title">Inventario de flujos</h2>
+        <p>Numeración por diagrama. En los flujos bidireccionales, la etiqueta describe el par solicitud/respuesta; el detalle de cada dirección está en la tabla de interfases del contexto.</p>
+      </div>
+    </div>
+
+    <h3>Nivel 1 · F1–F14</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ 1.0 Identidad</td><td>Registro y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>Pasajero ↔ 2.0 Viaje</td><td>Solicitud y confirmación.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Pasajero ↔ 3.0 Pagos</td><td>Pago del viaje y comprobante.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>Motoconchista ↔ 1.0 Identidad</td><td>Registro y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>Motoconchista ↔ 2.0 Viaje</td><td>Oferta y estado del viaje.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>3.0 Pagos → Motoconchista</td><td>Liquidación.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>Administrador ↔ 3.0 Pagos</td><td>Autorización y reporte.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>Administrador ↔ 4.0 Gobierno</td><td>Gestión y reportes.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Patrocinador ↔ 4.0 Gobierno</td><td>Convenios y métricas.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--nn">F10</span></td><td>1.0 Identidad → 2.0 Viaje</td><td>Identidad y rol.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F11</span></td><td>2.0 Viaje → 3.0 Pagos</td><td>Viaje y tarifa.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F12</span></td><td>3.0 Pagos → 4.0 Gobierno</td><td>Transacciones.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F13</span></td><td>2.0 Viaje → 4.0 Gobierno</td><td>Viaje finalizado para calificar.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>Administrador → 1.0 Identidad</td><td>Sesión y rol administrativo.</td><td>Entrada</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2A · F1–F8</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ P01</td><td>Datos de registro.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>Motoconchista ↔ P01</td><td>Datos de registro.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Pasajero ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>Motoconchista ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>Administrador ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--nn">F6</span></td><td>P01 → P02</td><td>Usuario creado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F7</span></td><td>P01 → D1</td><td>Nuevo usuario y rol.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--nn">F8</span></td><td>P02 ↔ D1</td><td>Verificación y actualización de sesión.</td><td>Lectura / escritura</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2B · F1–F17</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ P03</td><td>Origen y destino.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>P03 → D2</td><td>Nueva solicitud.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>D2 → P04</td><td>Viajes pendientes.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>D1 → P04</td><td>Disponibilidad de conductores.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>P04 → P05</td><td>Candidatos.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>P05 ↔ Motoconchista</td><td>Solicitud y respuesta.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>P05 → D2</td><td>Asignación.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>P05 → Pasajero</td><td>Conductor asignado y ETA.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Pasajero ↔ P06</td><td>Cancelación.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F10</span></td><td>P06 → D2</td><td>Estado cancelado.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F11</span></td><td>P06 ↔ Motoconchista</td><td>Cancelación del conductor.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F12</span></td><td>P07 ↔ Motoconchista</td><td>En camino, inicio y fin.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F13</span></td><td>P05 → P07</td><td>Viaje activo.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>P07 → P08</td><td>Viaje finalizado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F15</span></td><td>P08 ↔ D2</td><td>Distancia y tarifa.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F16</span></td><td>P08 → P09</td><td>Monto a cobrar.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F17</span></td><td>P08 → Pasajero</td><td>Tarifa confirmada y recibo.</td><td>Salida</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2C · F1–F14</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero → P09</td><td>Pago y comprobante.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>P09 → Motoconchista</td><td>Liquidación.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Administrador → P09</td><td>Autorización o reverso.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>P09 ↔ D3</td><td>Pagos y estados.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>P09 → P10</td><td>Pago confirmado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>Pasajero → P10</td><td>Puntuación y comentario.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>P10 ↔ D4</td><td>Calificaciones.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>P10 ↔ D2</td><td>Validación del viaje.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Patrocinador → P11</td><td>Convenio y publicidad.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F10</span></td><td>P11 ↔ D5</td><td>Patrocinadores.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F11</span></td><td>P11 ↔ D6</td><td>Acuerdos.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F12</span></td><td>P11 → P12</td><td>Acuerdo activo.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F13</span></td><td>Administrador ↔ P12</td><td>Gestión y reportes.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>P12 ↔ DR</td><td>Consulta de D1–D6.</td><td>Solo lectura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="convenciones" aria-labelledby="conv-title">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <div>
+        <h2 id="conv-title">Convenciones y verificación</h2>
+        <p>Cómo se numeran los elementos y qué garantiza que los cuatro diagramas sean consistentes entre sí.</p>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg></div>
+        <h3>Procesos</h3>
+        <p>Los agregados usan <code>1.0</code>–<code>4.0</code>; los procesos detallados usan <code>P01</code>–<code>P12</code>. Cada P pertenece a un solo dominio y a un solo DFD de nivel 2.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v4H4zM4 14h16v4H4z"/><path d="M8 6v4M8 14v4"/></svg></div>
+        <h3>Almacenes</h3>
+        <p><code>D1</code>–<code>D6</code> son almacenes lógicos; <code>DR</code> es un almacén de reportes de solo lectura. En el nivel 1, D5 y D6 aparecen agregados como D5–D6; el nivel 2 los desdobla. Cada D se traza a una tabla del modelo E-R.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+        <h3>Flujos</h3>
+        <p>La numeración es local a cada diagrama. Los flujos externos conservan el sentido del contexto; los internos se marcan como <em>interno</em>, <em>lectura</em> o <em>escritura</em>.</p>
+      </div>
+    </div>
+
+    <div class="two-col mt-3">
+      <div class="card">
+        <h3>Qué muestra y qué no muestra un DFD</h3>
+        <ul class="list-check">
+          <li><strong>Muestra:</strong> procesos, flujos, almacenes y actores; entradas y salidas de cada transformación.</li>
+          <li><strong>No muestra:</strong> secuencia temporal, decisiones, condiciones, protocolos ni diseño de interfaz.</li>
+          <li><strong>Tampoco muestra:</strong> el modelo físico de índices, triggers o transacciones; eso pertenece al DDL y a la arquitectura.</li>
+          <li><strong>Los cruces de líneas</strong> no implican conexión: solo los extremos con flecha indican un flujo.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Checklist de consistencia</h3>
+        <ul class="list-check list-check--brand">
+          <li>Todo P01–P12 aparece en un DFD de nivel 2 y en el inventario.</li>
+          <li>Todo almacén D1–D6 tiene tabla y clave en el modelo E-R; DR es una vista.</li>
+          <li>Todo flujo tiene origen, destino y datos; los bidireccionales se leen como par solicitud/respuesta.</li>
+          <li>Los actores del nivel 1 son los mismos cuatro del contexto.</li>
+          <li>Las interfaces F1–F8 del contexto se trazan a los procesos y flujos internos.</li>
+          <li>Las reglas de estado de P05–P09 coinciden con los <code>CHECK</code> y la máquina de estados del modelo E-R.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Verificación global:</strong> los cuatro diagramas cubren los veintiún acontecimientos, los doce procesos, los seis almacenes lógicos y las ocho interfases externas. Ningún proceso lee o escribe un almacén que no exista en el modelo E-R.</p>
+    </div>
+  </section>
+
+  <nav class="page-nav no-print" aria-label="Navegación entre documentos">
+    <a href="contexto.html">← Diagrama de contexto</a>
+    <a href="index.html">Volver al inicio →</a>
+  </nav>
+</div>
+
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="site-footer__inner">
+      <div><strong>MotoUber</strong> · Documentación de ingeniería · <span data-year>2026</span></div>
+      <div>Modelo E-R 3FN · Diagrama de contexto · DFD nivel 1 y 2</div>
+      <div><a href="index.html">Volver al índice</a></div>
+    </div>
+  </footer>
+
+  <button class="to-top no-print" type="button" aria-label="Volver arriba" title="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button>
+  <script src="assets/js/ui.js"></script>
+</body>
+</html>

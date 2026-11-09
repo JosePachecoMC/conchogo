@@ -1,0 +1,360 @@
+[
+  {
+    "page": "index.html",
+    "title": "Dossier técnico · MotoUber",
+    "url": "file:///C:/Users/Administrator/Documents/Default%20Project/index.html",
+    "width": 1424,
+    "docWidth": 1424,
+    "height": 4362,
+    "horizontalOverflow": 0,
+    "unresolved": [],
+    "missingAnchors": [],
+    "overflow": [],
+    "tableOverflow": [],
+    "textOverflow": [],
+    "textOverlaps": [],
+    "boxOverlaps": [],
+    "foreignText": [],
+    "figures": [],
+    "sections": [
+      {
+        "id": "mapa",
+        "h": 436.3
+      },
+      {
+        "id": "resumen",
+        "h": 462.7
+      },
+      {
+        "id": "trazabilidad",
+        "h": 1011.3
+      },
+      {
+        "id": "convenciones",
+        "h": 294.9
+      },
+      {
+        "id": "impresion",
+        "h": 402.9
+      },
+      {
+        "id": "alcance",
+        "h": 369.4
+      }
+    ],
+    "svgTotal": 18,
+    "brokenImages": [],
+    "consoleErrors": []
+  },
+  {
+    "page": "modelo-er.html",
+    "title": "Modelo Entidad-Relación y normalización 3FN · MotoUber",
+    "url": "file:///C:/Users/Administrator/Documents/Default%20Project/modelo-er.html",
+    "width": 1424,
+    "docWidth": 1424,
+    "height": 15674,
+    "horizontalOverflow": 0,
+    "unresolved": [],
+    "missingAnchors": [],
+    "overflow": [],
+    "tableOverflow": [
+      {
+        "scroll": 640,
+        "client": 577
+      }
+    ],
+    "textOverflow": [],
+    "textOverlaps": [],
+    "boxOverlaps": [],
+    "foreignText": [],
+    "figures": [
+      {
+        "aria": "Diagrama entidad-relación del sistema MotoUber con nueve entidades, claves y cardinalidades",
+        "viewBox": [
+          0,
+          0,
+          1520,
+          1180
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1520,
+          "h": 1180
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 619.9,
+          "w": 1149.2,
+          "h": 892.2
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "diagrama",
+        "h": 1242.4
+      },
+      {
+        "id": "diccionario",
+        "h": 3146.8
+      },
+      {
+        "id": "relaciones",
+        "h": 658.6
+      },
+      {
+        "id": "normalizacion",
+        "h": 2183.2
+      },
+      {
+        "id": "integridad",
+        "h": 1376.4
+      },
+      {
+        "id": "sql",
+        "h": 5262.4
+      },
+      {
+        "id": "supuestos",
+        "h": 763.7
+      }
+    ],
+    "svgTotal": 15,
+    "brokenImages": [],
+    "consoleErrors": []
+  },
+  {
+    "page": "contexto.html",
+    "title": "Diagrama de contexto e interfases externas · MotoUber",
+    "url": "file:///C:/Users/Administrator/Documents/Default%20Project/contexto.html",
+    "width": 1424,
+    "docWidth": 1424,
+    "height": 4669,
+    "horizontalOverflow": 0,
+    "unresolved": [],
+    "missingAnchors": [],
+    "overflow": [],
+    "tableOverflow": [],
+    "textOverflow": [],
+    "textOverlaps": [],
+    "boxOverlaps": [
+      {
+        "a": {
+          "x": 560,
+          "y": 330,
+          "w": 380,
+          "h": 240
+        },
+        "b": {
+          "x": 560,
+          "y": 330,
+          "w": 380,
+          "h": 240
+        },
+        "area": 91200
+      }
+    ],
+    "foreignText": [],
+    "figures": [
+      {
+        "aria": "Diagrama de contexto de MotoUber con los actores Pasajero, Motoconchista, Administrador y Patrocinador",
+        "viewBox": [
+          0,
+          0,
+          1500,
+          900
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1500,
+          "h": 900
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 619.9,
+          "w": 1149.2,
+          "h": 689.5
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "diagrama",
+        "h": 1039.8
+      },
+      {
+        "id": "actores",
+        "h": 559.2
+      },
+      {
+        "id": "interfases",
+        "h": 848.3
+      },
+      {
+        "id": "frontera",
+        "h": 727.3
+      },
+      {
+        "id": "supuestos",
+        "h": 559.8
+      }
+    ],
+    "svgTotal": 10,
+    "brokenImages": [],
+    "consoleErrors": []
+  },
+  {
+    "page": "dfd.html",
+    "title": "Diagramas de flujo de datos (DFD) · MotoUber",
+    "url": "file:///C:/Users/Administrator/Documents/Default%20Project/dfd.html",
+    "width": 1424,
+    "docWidth": 1424,
+    "height": 10297,
+    "horizontalOverflow": 0,
+    "unresolved": [],
+    "missingAnchors": [],
+    "overflow": [],
+    "tableOverflow": [],
+    "textOverflow": [],
+    "textOverlaps": [],
+    "boxOverlaps": [],
+    "foreignText": [],
+    "figures": [
+      {
+        "aria": "DFD nivel 1 de MotoUber con cuatro dominios, actores y almacenes de datos",
+        "viewBox": [
+          0,
+          0,
+          1700,
+          835
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1700,
+          "h": 835
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 591,
+          "w": 1149.2,
+          "h": 564.5
+        }
+      },
+      {
+        "aria": "DFD nivel 2A de MotoUber: registro de cuentas e inicio de sesión",
+        "viewBox": [
+          0,
+          0,
+          1200,
+          545
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1200,
+          "h": 545
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 2516.1,
+          "w": 1149.2,
+          "h": 521.9
+        }
+      },
+      {
+        "aria": "DFD nivel 2B de MotoUber: ciclo completo del viaje, desde la solicitud hasta el cálculo del precio",
+        "viewBox": [
+          0,
+          0,
+          1600,
+          900
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1600,
+          "h": 900
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 3595.7,
+          "w": 1149.2,
+          "h": 646.4
+        }
+      },
+      {
+        "aria": "DFD nivel 2C de MotoUber: pagos, calificación, patrocinio y administración",
+        "viewBox": [
+          0,
+          0,
+          1700,
+          900
+        ],
+        "bbox": {
+          "x": 0,
+          "y": 0,
+          "w": 1700,
+          "h": 900
+        },
+        "outside": false,
+        "outTexts": [],
+        "css": {
+          "x": 137.4,
+          "y": 4870.9,
+          "w": 1149.2,
+          "h": 608.4
+        }
+      }
+    ],
+    "sections": [
+      {
+        "id": "nivel-1",
+        "h": 1145
+      },
+      {
+        "id": "procesos",
+        "h": 700.3
+      },
+      {
+        "id": "nivel-2a",
+        "h": 1026.8
+      },
+      {
+        "id": "nivel-2b",
+        "h": 1222.4
+      },
+      {
+        "id": "nivel-2c",
+        "h": 1247.5
+      },
+      {
+        "id": "almacenes",
+        "h": 529.6
+      },
+      {
+        "id": "flujos",
+        "h": 2635.7
+      },
+      {
+        "id": "convenciones",
+        "h": 750.6
+      }
+    ],
+    "svgTotal": 27,
+    "brokenImages": [],
+    "consoleErrors": []
+  }
+]

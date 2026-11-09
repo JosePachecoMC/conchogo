@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagrama de contexto e interfases externas · MotoUber</title>
+  <meta name="description" content="Diagrama de contexto de MotoUber: frontera del sistema, cuatro actores externos y las ocho interfases F1–F8 con sus datos, disparadores y respuestas.">
+  <meta name="author" content="Equipo MotoUber">
+  <meta name="theme-color" content="#4338ca">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%234338ca'/%3E%3Cg fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='18' cy='43' r='7'/%3E%3Ccircle cx='46' cy='43' r='7'/%3E%3Cpath d='M25 43h11l5-12h6M32 43l-3-9h-6m10-3-4-6h-5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+</head>
+<body class="">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="print-only" style="display:none;padding:0 0 10pt;border-bottom:1px solid #cbd5e1;margin-bottom:12pt;font-size:9pt;color:#475569">
+    <strong style="color:#0f172a">MotoUber</strong> · Documentación técnica · Diagrama de contexto e interfases externas
+  </div>
+
+  <header class="topbar no-print">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html" aria-label="MotoUber, inicio del dossier">
+        <span class="brand__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.3" cy="16.8" r="2.9"/><circle cx="18.7" cy="16.8" r="2.9"/><path d="M8.2 16.8h4.6l2.5-5.6h3.1"/><path d="M11.2 16.8 9.7 12H6.7"/><path d="m13 11.2-2.1-3.5H9.1"/></svg></span>
+        <span class="brand__text">
+          <span class="brand__name">MotoUber</span>
+          <span class="brand__sub">Dossier técnico</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a><a href="modelo-er.html">Modelo E-R</a><a href="contexto.html" aria-current="page">Contexto</a><a href="dfd.html">DFD</a>
+        <button class="nav__print" type="button" data-print title="Imprimir o guardar como PDF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17h10v4H7z"/><path d="M17 12h1"/></svg><span>Imprimir</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <div class="shell page">
+
+  <header class="page-head page-head--row">
+    <div>
+      <div class="eyebrow">Documento 02 · Frontera</div>
+      <h1>Diagrama de contexto e interfases externas</h1>
+      <p class="lead">
+        El sistema se representa como un único proceso y cuatro actores externos. La frontera
+        separa lo que MotoUber controla de lo que solo puede solicitar, recibir o autorizar.
+        Las ocho interfases F1–F8 resumen todos los intercambios del negocio.
+      </p>
+    </div>
+    <div class="page-head__meta">
+      <span class="chip chip--brand">DFD nivel 0</span>
+      <span class="chip chip--teal">4 actores</span>
+      <span class="chip chip--amber">8 interfases</span>
+    </div>
+  </header>
+
+  <section class="section" id="diagrama" aria-labelledby="diagrama-title">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 id="diagrama-title">Diagrama de contexto</h2>
+        <p>Vista de nivel 0: no muestra almacenes ni procesos internos. Su única responsabilidad es delimitar el sistema y nombrar los flujos que cruzan la frontera.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="diagrama-contexto">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 1</b> · Contexto del sistema</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        <svg viewBox="0 0 1500 900" width="1500" height="900" role="img" aria-label="Diagrama de contexto de MotoUber con los actores Pasajero, Motoconchista, Administrador y Patrocinador" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="1500" height="900" fill="#ffffff"/>
+    <defs>
+    <marker id="contexto-ar-ink" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f172a"/>
+    </marker>
+    <marker id="contexto-ar-ink-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f172a"/>
+    </marker><marker id="contexto-ar-indigo" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4338ca"/>
+    </marker>
+    <marker id="contexto-ar-indigo-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#4338ca"/>
+    </marker><marker id="contexto-ar-teal" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+    <marker id="contexto-ar-teal-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#0f766e"/>
+    </marker><marker id="contexto-ar-amber" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/>
+    </marker>
+    <marker id="contexto-ar-amber-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#b45309"/>
+    </marker><marker id="contexto-ar-rose" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#be123c"/>
+    </marker>
+    <marker id="contexto-ar-rose-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#be123c"/>
+    </marker><marker id="contexto-ar-slate" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="contexto-ar-slate-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#475569"/>
+    </marker><marker id="contexto-ar-blue" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+    </marker>
+    <marker id="contexto-ar-blue-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#1d4ed8"/>
+    </marker><marker id="contexto-ar-green" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#15803d"/>
+    </marker>
+    <marker id="contexto-ar-green-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#15803d"/>
+    </marker><marker id="contexto-ar-violet" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d28d9"/>
+    </marker>
+    <marker id="contexto-ar-violet-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#6d28d9"/>
+    </marker><marker id="contexto-ar-white" viewBox="0 0 10 10" refX="9.2" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ffffff"/>
+    </marker>
+    <marker id="contexto-ar-white-start" viewBox="0 0 10 10" refX="0.8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 10 0 L 0 5 L 10 10 z" fill="#ffffff"/>
+    </marker>
+    <filter id="contexto-soft" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.6" flood-color="#0f172a" flood-opacity=".10"/>
+    </filter>
+    <filter id="contexto-soft-lg" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+    <style>
+      text{font-family:'Segoe UI',Inter,-apple-system,'Helvetica Neue',Arial,sans-serif;}
+      .mono{font-family:'Cascadia Mono',Consolas,'Courier New',monospace;}
+      .halo{paint-order:stroke;stroke-linejoin:round;}
+    </style>
+  </defs>
+    
+    
+    <defs>
+      <linearGradient id="contexto-sysGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1e1b4b"/>
+        <stop offset="55%" stop-color="#3730a3"/>
+        <stop offset="100%" stop-color="#0f766e"/>
+      </linearGradient>
+      <radialGradient id="contexto-sysGlow" cx="50%" cy="0%" r="85%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity=".20"/>
+        <stop offset="70%" stop-color="#ffffff" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g>
+    <rect x="34" y="26" width="5" height="34" rx="2.5" fill="#1d4ed8"/>
+    <text x="50" y="44"  style="font-size:21px;font-weight:750;fill:#0f172a;letter-spacing:-0.3" >Diagrama de contexto · Sistema MotoUber</text>
+    <text x="50" y="64"  style="font-size:11.5px;font-weight:500;fill:#64748b" >DFD nivel 0 · el sistema se representa como un único proceso y cuatro actores externos</text>
+    <g>
+    <line x1="1080" y1="46" x2="1110" y2="46" stroke="#475569" stroke-width="1.7" stroke-linecap="round"/>
+    
+    <path d="M 1110 46 l -7 -3.4 v 6.8 z" fill="#475569"/>
+    <text x="1118" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >flujo de datos</text>
+  </g>
+              <g>
+      <rect x="1270" y="38" width="30" height="16" rx="4" fill="#eef2ff" stroke="#4338ca" stroke-width="1"/>
+      <circle cx="1285" cy="46" r="3.2" fill="none" stroke="#4338ca" stroke-width="1.2"/>
+      <text x="1308" y="49.6"  style="font-size:9.4px;font-weight:600;fill:#64748b" >actor externo</text>
+    </g>
+  </g>
+
+    <!-- Frontera del sistema -->
+    <g filter="url(#contexto-soft-lg)">
+      <rect x="560" y="330" width="380" height="240" rx="20" fill="url(#contexto-sysGrad)" stroke="#312e81" stroke-width="1.2"/>
+      <rect x="560" y="330" width="380" height="240" rx="20" fill="url(#contexto-sysGlow)"/>
+      <circle cx="750" cy="371" r="24" fill="#ffffff" fill-opacity=".14" stroke="#ffffff" stroke-opacity=".3"/>
+      <g transform="translate(738 359) scale(1)" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.2"/><path d="M7.5 9h9M7.5 12.5h6.5M7.5 16h4"/></g>
+      <text x="750" y="416"  style="font-size:27px;font-weight:750;fill:#ffffff;text-anchor:middle;letter-spacing:-0.4" >MotoUber</text>
+      <text x="750" y="435"  style="font-size:8.6px;font-weight:700;fill:#c7d2fe;text-anchor:middle;letter-spacing:1.7" >SISTEMA DE MOVILIDAD URBANA</text>
+      <line x1="612" y1="451" x2="888" y2="451" stroke="#ffffff" stroke-opacity=".2"/>
+      <text x="750" y="472"  style="font-size:9.4px;font-weight:750;fill:#a5b4fc;text-anchor:middle;letter-spacing:1.3" >PROCESO 0 · PLATAFORMA WEB</text>
+      <text x="750" y="492"  style="font-size:10.2px;font-weight:500;fill:#e0e7ff;text-anchor:middle" >React · API REST · base de datos relacional</text>
+      <text x="750" y="518"  style="font-size:9.6px;font-weight:500;fill:#c7d2fe;text-anchor:middle" >Autenticación · Viajes · Pagos · Reputación · Patrocinios</text>
+      <text x="750" y="547"  style="font-size:8.4px;font-weight:650;fill:#99f6e4;text-anchor:middle;letter-spacing:0.8" >Frontera del sistema</text>
+    </g>
+
+    <!-- Actores -->
+    <g filter="url(#contexto-soft)">
+    <rect x="70" y="255" width="270" height="140" rx="11" fill="#ffffff" stroke="#4338ca" stroke-width="1.25"/>
+    <circle cx="100" cy="325" r="19" fill="#eef2ff"/>
+    <g transform="translate(88 313) scale(1)" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.6" r="3.3"/><path d="M5.4 20c.8-4.1 3.1-6.1 6.6-6.1s5.8 2 6.6 6.1"/></g>
+    <text x="128" y="320"  style="font-size:13px;font-weight:750;fill:#0f172a" >Pasajero</text>
+    <text x="128" y="336"  style="font-size:8.2px;font-weight:700;fill:#4338ca;letter-spacing:0.8" >ACTOR EXTERNO · DEMANDA</text>
+    <text x="128" y="351"  style="font-size:8.2px;font-weight:500;fill:#64748b" >Solicita, paga y califica</text>
+    
+  </g>
+    <g filter="url(#contexto-soft)">
+    <rect x="590" y="70" width="320" height="140" rx="11" fill="#ffffff" stroke="#0f766e" stroke-width="1.25"/>
+    <circle cx="620" cy="140" r="19" fill="#ecfdf5"/>
+    <g transform="translate(608 128) scale(1)" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.4" cy="17" r="2.7"/><circle cx="18.6" cy="17" r="2.7"/><path d="M8.1 17h4.7l2.4-5.2h3.4M11 17l-1.4-4.2H6.9m7.2 0-2-3.2H9.5"/></g>
+    <text x="648" y="135"  style="font-size:13px;font-weight:750;fill:#0f172a" >Motoconchista</text>
+    <text x="648" y="151"  style="font-size:8.2px;font-weight:700;fill:#0f766e;letter-spacing:0.8" >ACTOR EXTERNO · OFERTA</text>
+    <text x="648" y="166"  style="font-size:8.2px;font-weight:500;fill:#64748b" >Recibe, acepta y ejecuta</text>
+    
+  </g>
+    <g filter="url(#contexto-soft)">
+    <rect x="1160" y="255" width="270" height="140" rx="11" fill="#ffffff" stroke="#b45309" stroke-width="1.25"/>
+    <circle cx="1190" cy="325" r="19" fill="#fffbeb"/>
+    <g transform="translate(1178 313) scale(1)" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.4 19 6v5.3c0 4.2-2.9 7.5-7 9.2-4.1-1.7-7-5-7-9.2V6z"/><path d="m9 12 2.1 2.1L15.2 10"/></g>
+    <text x="1218" y="320"  style="font-size:13px;font-weight:750;fill:#0f172a" >Administrador</text>
+    <text x="1218" y="336"  style="font-size:8.2px;font-weight:700;fill:#b45309;letter-spacing:0.8" >ACTOR EXTERNO · GOBIERNO</text>
+    <text x="1218" y="351"  style="font-size:8.2px;font-weight:500;fill:#64748b" >Supervisa, autoriza y reporta</text>
+    
+  </g>
+    <g filter="url(#contexto-soft)">
+    <rect x="590" y="710" width="320" height="140" rx="11" fill="#ffffff" stroke="#be123c" stroke-width="1.25"/>
+    <circle cx="620" cy="780" r="19" fill="#fff1f2"/>
+    <g transform="translate(608 768) scale(1)" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6.2h8.6V20M12.6 10H20v10M3 20h18M7 9.3h2.6M7 13h2.6M7 16.6h2.6M16 13h1.2M16 16.6h1.2"/></g>
+    <text x="648" y="775"  style="font-size:13px;font-weight:750;fill:#0f172a" >Patrocinador</text>
+    <text x="648" y="791"  style="font-size:8.2px;font-weight:700;fill:#be123c;letter-spacing:0.8" >ACTOR EXTERNO · ALIADO</text>
+    <text x="648" y="806"  style="font-size:8.2px;font-weight:500;fill:#64748b" >Gestiona convenios y publicidad</text>
+    
+  </g>
+
+    <!-- Flujos Pasajero -->
+    <path d="M 340 355 L 560 355" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="450" cy="355" r="10" fill="#4338ca"/>
+    <text x="450" y="358.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F1</text>
+  </g>
+    <text x="424" y="324"  style="font-size:9.3px;font-weight:600;fill:#4338ca;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">registro, solicitud, cancelación,</text><text x="424" y="337.5"  style="font-size:9.3px;font-weight:600;fill:#4338ca;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">pago y calificación</text>
+    <path d="M 560 375 L 340 375" fill="none" stroke="#4338ca" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-indigo)" opacity="1"/>
+    <g>
+    <circle cx="492" cy="375" r="10" fill="#4338ca"/>
+    <text x="492" y="378.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F2</text>
+  </g>
+    <text x="425" y="397"  style="font-size:8.9px;font-weight:600;fill:#4338ca;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">confirmación, datos del conductor,</text><text x="425" y="410.5"  style="font-size:8.9px;font-weight:600;fill:#4338ca;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">tarifa y recibo</text>
+
+    <!-- Flujos Motoconchista -->
+    <path d="M 660 330 L 660 210" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="660" cy="310" r="10" fill="#0f766e"/>
+    <text x="660" y="313.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F3</text>
+  </g>
+    <text x="646" y="264"  style="font-size:9.1px;font-weight:600;fill:#0f766e;text-anchor:end" class="halo" stroke="#ffffff" stroke-width="4.5">registro / solicitudes,</text><text x="646" y="277.5"  style="font-size:9.1px;font-weight:600;fill:#0f766e;text-anchor:end" class="halo" stroke="#ffffff" stroke-width="4.5">asignación y liquidación</text>
+    <path d="M 820 210 L 820 330" fill="none" stroke="#0f766e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-teal)" opacity="1"/>
+    <g>
+    <circle cx="820" cy="310" r="10" fill="#0f766e"/>
+    <text x="820" y="313.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F4</text>
+  </g>
+    <text x="834" y="264"  style="font-size:9.1px;font-weight:600;fill:#0f766e" class="halo" stroke="#ffffff" stroke-width="4.5">sesión, disponibilidad,</text><text x="834" y="277.5"  style="font-size:9.1px;font-weight:600;fill:#0f766e" class="halo" stroke="#ffffff" stroke-width="4.5">aceptación y estado</text>
+
+    <!-- Flujos Administrador -->
+    <path d="M 1160 355 L 940 355" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1050" cy="355" r="10" fill="#b45309"/>
+    <text x="1050" y="358.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F5</text>
+  </g>
+    <text x="1058" y="324"  style="font-size:9.3px;font-weight:600;fill:#b45309;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">sesión, gestión,</text><text x="1058" y="337.5"  style="font-size:9.3px;font-weight:600;fill:#b45309;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">supervisión y autorización</text>
+    <path d="M 940 375 L 1160 375" fill="none" stroke="#b45309" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-amber)" opacity="1"/>
+    <g>
+    <circle cx="1008" cy="375" r="10" fill="#b45309"/>
+    <text x="1008" y="378.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F6</text>
+  </g>
+    <text x="1055" y="397"  style="font-size:9.3px;font-weight:600;fill:#b45309;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">reportes, transacciones</text><text x="1055" y="410.5"  style="font-size:9.3px;font-weight:600;fill:#b45309;text-anchor:middle" class="halo" stroke="#ffffff" stroke-width="4.5">y alertas</text>
+
+    <!-- Flujos Patrocinador -->
+    <path d="M 700 710 L 700 570" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="700" cy="670" r="10" fill="#be123c"/>
+    <text x="700" y="673.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F7</text>
+  </g>
+    <text x="686" y="626"  style="font-size:9.1px;font-weight:600;fill:#be123c;text-anchor:end" class="halo" stroke="#ffffff" stroke-width="4.5">convenios,</text><text x="686" y="639.5"  style="font-size:9.1px;font-weight:600;fill:#be123c;text-anchor:end" class="halo" stroke="#ffffff" stroke-width="4.5">publicidad y pagos</text>
+    <path d="M 820 570 L 820 710" fill="none" stroke="#be123c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#contexto-ar-rose)" opacity="1"/>
+    <g>
+    <circle cx="820" cy="670" r="10" fill="#be123c"/>
+    <text x="820" y="673.4" class="mono" style="font-size:9.4px;font-weight:750;fill:#ffffff;text-anchor:middle" >F8</text>
+  </g>
+    <text x="834" y="626"  style="font-size:9.1px;font-weight:600;fill:#be123c" class="halo" stroke="#ffffff" stroke-width="4.5">estado del acuerdo</text><text x="834" y="639.5"  style="font-size:9.1px;font-weight:600;fill:#be123c" class="halo" stroke="#ffffff" stroke-width="4.5">y métricas</text>
+
+    <text x="750" y="64"  style="font-size:9px;font-weight:500;fill:#94a3b8;text-anchor:middle;font-style:italic" >Cada flujo se detalla en la tabla de interfases del sistema</text>
+    <g>
+    <line x1="34" y1="856" x2="1466" y2="856" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="34" y="872"  style="font-size:9.8px;font-weight:500;fill:#64748b" >DFD nivel 0: no muestra almacenes ni la descomposición interna. Los flujos F1–F8 se especifican en la tabla «Interfases externas» de esta página.</text>
+  </g>
+  
+  </svg>
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 1</span>
+        <span><b>Contexto de MotoUber.</b> El pasajero demanda, el motoconchista ejecuta, el administrador gobierna y el patrocinador aporta. Los flujos F1–F8 son lógicos: agrupan solicitudes, respuestas y estados, no llamadas HTTP individuales.</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Cómo leerlo:</strong> el rectángulo central es la frontera del sistema; las cajas exteriores son actores; las flechas son flujos de datos. Una flecha que entra al sistema es una entrada; una que sale es una salida. La etiqueta describe el contenido, no el protocolo.</p>
+    </div>
+  </section>
+
+  <section class="section" id="actores" aria-labelledby="actores-title">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 id="actores-title">Actores externos</h2>
+        <p>Cuatro actores con intereses distintos. Ninguno pertenece a la implementación interna: todos interactúan a través de una interfaz.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data">
+        <thead>
+          <tr><th>Actor</th><th>Rol en el ecosistema</th><th>Objetivo</th><th>Envía al sistema</th><th>Recibe del sistema</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Pasajero</strong><br><span class="note">Persona que demanda el servicio</span></td>
+            <td><span class="chip chip--brand">Demanda</span></td>
+            <td>Solicitar un viaje, seguirlo, pagarlo y calificarlo.</td>
+            <td>Registro, solicitud, cancelación, pago y calificación.</td>
+            <td>Confirmación, datos del conductor, tarifa, recibo y estado del servicio.</td>
+          </tr>
+          <tr>
+            <td><strong>Motoconchista</strong><br><span class="note">Persona que presta el servicio</span></td>
+            <td><span class="chip chip--teal">Oferta</span></td>
+            <td>Recibir solicitudes, aceptar viajes, ejecutarlos y cobrar su liquidación.</td>
+            <td>Registro, disponibilidad, aceptación o rechazo, y cambios de estado del viaje.</td>
+            <td>Solicitudes, asignación, datos del pasajero y liquidación.</td>
+          </tr>
+          <tr>
+            <td><strong>Administrador</strong><br><span class="note">Responsable de la operación</span></td>
+            <td><span class="chip chip--amber">Gobierno</span></td>
+            <td>Supervisar la operación, gestionar usuarios, autorizar pagos y producir reportes.</td>
+            <td>Gestión de usuarios, supervisión, autorización o reverso de pagos.</td>
+            <td>Reportes, transacciones, alertas e indicadores de la operación.</td>
+          </tr>
+          <tr>
+            <td><strong>Patrocinador</strong><br><span class="note">Aliado comercial</span></td>
+            <td><span class="chip chip--rose">Aliado</span></td>
+            <td>Gestionar convenios, publicidad y pagos de patrocinio.</td>
+            <td>Convenios, piezas publicitarias y pagos acordados.</td>
+            <td>Estado del acuerdo, vigencia y métricas de exposición.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>El patrocinador no es un rol de acceso.</strong> En el modelo E-R es una entidad independiente; no comparte credenciales con <code>usuario</code> ni inicia sesión como pasajero o conductor. Su interfaz es un portal de aliados.</p>
+    </div>
+  </section>
+
+  <section class="section" id="interfases" aria-labelledby="interfases-title">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 id="interfases-title">Interfases externas F1–F8</h2>
+        <p>Cada flujo del contexto se especifica con su origen, destino, contenido, disparador y respuesta esperada.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:3.5rem">ID</th><th>Dirección</th><th>Datos</th><th>Disparador</th><th>Respuesta esperada</th><th>Canal típico</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag--pk">F1</span></td>
+            <td><strong>Pasajero → MotoUber</strong><br><span class="note">Entrada</span></td>
+            <td>Registro e inicio de sesión, solicitud de viaje, cancelación, pago y calificación.</td>
+            <td>Acción del pasajero en la app o la web.</td>
+            <td>Validación, cambio de estado o comprobante.</td>
+            <td>App/Web · HTTPS</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F2</span></td>
+            <td><strong>MotoUber → Pasajero</strong><br><span class="note">Salida</span></td>
+            <td>Confirmación, datos del conductor, tarifa y recibo.</td>
+            <td>Asignación, cierre o consulta del viaje.</td>
+            <td>Lectura o acuse en la interfaz.</td>
+            <td>App/Web + notificación</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F3</span></td>
+            <td><strong>MotoUber → Motoconchista</strong><br><span class="note">Salida</span></td>
+            <td>Confirmación de registro y sesión, solicitudes, asignación y liquidación.</td>
+            <td>Viaje pendiente, asignado o liquidado.</td>
+            <td>Aceptación, rechazo o confirmación de cobro.</td>
+            <td>App/Web · HTTPS</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F4</span></td>
+            <td><strong>Motoconchista → MotoUber</strong><br><span class="note">Entrada</span></td>
+            <td>Registro, inicio de sesión, disponibilidad, aceptación y estado del viaje.</td>
+            <td>Acción del conductor.</td>
+            <td>Actualización del estado y notificación al pasajero.</td>
+            <td>App/Web · HTTPS</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F5</span></td>
+            <td><strong>Administrador → MotoUber</strong><br><span class="note">Entrada</span></td>
+            <td>Inicio de sesión administrativo, gestión de usuarios, supervisión y autorización de pagos.</td>
+            <td>Acción administrativa o incidencia.</td>
+            <td>Validación, auditoría y confirmación.</td>
+            <td>Panel administrativo</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F6</span></td>
+            <td><strong>MotoUber → Administrador</strong><br><span class="note">Salida</span></td>
+            <td>Reportes, transacciones y alertas.</td>
+            <td>Cierre de viaje, cambio de pago o consulta.</td>
+            <td>Tablero, exportación o acuse.</td>
+            <td>Panel administrativo</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F7</span></td>
+            <td><strong>Patrocinador → MotoUber</strong><br><span class="note">Entrada</span></td>
+            <td>Convenios, publicidad y pagos del patrocinio.</td>
+            <td>Gestión comercial del aliado.</td>
+            <td>Validación y registro del acuerdo.</td>
+            <td>Portal de aliados</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">F8</span></td>
+            <td><strong>MotoUber → Patrocinador</strong><br><span class="note">Salida</span></td>
+            <td>Estado del acuerdo, vigencia y métricas.</td>
+            <td>Cambio de estado o consulta del aliado.</td>
+            <td>Reporte de exposición o acuse.</td>
+            <td>Portal de aliados</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Flujos lógicos, no endpoints:</strong> F1 agrupa varias acciones del pasajero para mantener legible el nivel 0. La descomposición en procesos, validaciones y llamadas concretas aparece en el DFD nivel 1 y en los DFD nivel 2.</p>
+    </div>
+  </section>
+
+  <section class="section" id="frontera" aria-labelledby="frontera-title">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 id="frontera-title">Frontera del sistema</h2>
+        <p>Lo que está dentro se implementa; lo que está fuera se integra o se consume. La distinción evita confundir servicios técnicos con actores del negocio.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Dentro de la frontera</h3>
+        <ul class="list-check">
+          <li><strong>Dominio de identidad:</strong> registro, inicio de sesión, roles y perfiles.</li>
+          <li><strong>Dominio del viaje:</strong> solicitud, búsqueda, asignación, cancelación, ejecución y precio.</li>
+          <li><strong>Dominio financiero:</strong> cobro, liquidación, reverso y autorización administrativa.</li>
+          <li><strong>Dominio de reputación y gobierno:</strong> calificaciones, patrocinios, reportes y supervisión.</li>
+          <li><strong>Datos:</strong> las nueve tablas en 3FN y las vistas de verificación.</li>
+          <li><strong>Aplicación:</strong> front-end React, API REST y base de datos relacional.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Fuera de la frontera</h3>
+        <ul class="list-x">
+          <li>Los cuatro actores externos: pasajero, motoconchista, administrador y patrocinador.</li>
+          <li>Servicio de mapas y geolocalización: calcula rutas y distancias; MotoUber consume el resultado.</li>
+          <li>Pasarela de pago: autoriza el cargo; MotoUber registra el estado y la referencia.</li>
+          <li>Notificaciones push, correo y SMS: entregan mensajes; no son actores del negocio.</li>
+          <li>Almacenamiento de imágenes o documentos: guarda comprobantes y piezas publicitarias.</li>
+        </ul>
+        <p class="note mt-2">Estos servicios se representan como integraciones técnicas detrás de la API, no como cajas del diagrama de contexto.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-3">Trazabilidad contexto → DFD</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead>
+          <tr><th>Interfase</th><th>Proceso agregado (nivel 1)</th><th>DFD nivel 2</th><th>Datos principales</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span> / <span class="tag tag--pk">F2</span></td><td>1.0 Identidad y acceso · 2.0 Operación del viaje · 3.0 Pagos y finanzas · 4.0 Servicio y gobierno</td><td>2A · 2B · 2C</td><td>Usuario, viaje, pago, calificación.</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span> / <span class="tag tag--pk">F4</span></td><td>1.0 Identidad y acceso · 2.0 Operación del viaje · 3.0 Pagos y finanzas</td><td>2A · 2B · 2C</td><td>Usuario, motoconchista, viaje, liquidación.</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span> / <span class="tag tag--pk">F6</span></td><td>1.0 Identidad y acceso · 3.0 Pagos y finanzas · 4.0 Servicio y gobierno</td><td>2A · 2C</td><td>Usuario administrador, pago, reportes.</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span> / <span class="tag tag--pk">F8</span></td><td>4.0 Servicio y gobierno</td><td>2C</td><td>Patrocinador, acuerdo, métricas.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="supuestos" aria-labelledby="sup-title">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 id="sup-title">Supuestos y verificación</h2>
+        <p>Criterios para que el contexto sea interpretable y para que la frontera no se diluya en la implementación.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Supuestos</h3>
+        <ul class="list-check">
+          <li>Cada actor es una persona u organización, no un dispositivo ni un servicio.</li>
+          <li>El diagrama de contexto agrega los veintiún acontecimientos; no muestra secuencia temporal.</li>
+          <li>Las flechas representan flujos de datos, no llamadas de red ni dependencias de despliegue.</li>
+          <li>La autenticación y la autorización ocurren dentro de la frontera; los actores solo aportan credenciales o tokens.</li>
+          <li>El administrador es un rol de <code>usuario</code>; el patrocinador es una entidad independiente.</li>
+          <li>Los servicios externos son integraciones técnicas y no se dibujan como actores para no confundir el negocio con la infraestructura.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Checklist de verificación</h3>
+        <ul class="list-check list-check--brand">
+          <li>Cuatro actores externos identificados y ninguno duplicado.</li>
+          <li>Ocho interfases F1–F8 con origen, destino, datos y respuesta.</li>
+          <li>Todos los flujos cruzan la frontera en una sola dirección lógica; los pares solicitud/respuesta se separan en dos flujos.</li>
+          <li>Cada interfase se traza a un proceso de nivel 1 y a un DFD de nivel 2.</li>
+          <li>Los servicios técnicos quedan fuera de las cajas de actor.</li>
+          <li>El diagrama no incluye almacenes: eso pertenece al nivel 1.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout--amber mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 20h18z"/><path d="M12 9v5M12 17h.01"/></svg>
+      <p><strong>Límite deliberado:</strong> el contexto no modela el chat, el rastreo GPS en tiempo real ni la facturación fiscal. Si se incorporan, deben aparecer como nuevos flujos o como servicios externos, no como procesos internos ocultos.</p>
+    </div>
+  </section>
+
+  <nav class="page-nav no-print" aria-label="Navegación entre documentos">
+    <a href="modelo-er.html">← Modelo Entidad-Relación</a>
+    <a href="dfd.html">Diagramas de flujo de datos →</a>
+  </nav>
+</div>
+
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="site-footer__inner">
+      <div><strong>MotoUber</strong> · Documentación de ingeniería · <span data-year>2026</span></div>
+      <div>Modelo E-R 3FN · Diagrama de contexto · DFD nivel 1 y 2</div>
+      <div><a href="index.html">Volver al índice</a></div>
+    </div>
+  </footer>
+
+  <button class="to-top no-print" type="button" aria-label="Volver arriba" title="Volver arriba"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 6-6 6 6"/></svg></button>
+  <script src="assets/js/ui.js"></script>
+</body>
+</html>

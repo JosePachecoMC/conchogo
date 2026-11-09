@@ -1,0 +1,520 @@
+<!--META
+{
+  "title": "Diagramas de flujo de datos (DFD)",
+  "page": "dfd.html",
+  "description": "DFD de MotoUber: nivel 1 por dominios y descomposiciones nivel 2 para identidad, ciclo del viaje, pagos, reputación y gobierno, con inventario de procesos, almacenes y flujos.",
+  "bodyClass": ""
+}
+META-->
+
+<div class="shell page">
+
+  <header class="page-head page-head--row">
+    <div>
+      <div class="eyebrow">Documento 03 · Transformación</div>
+      <h1>Diagramas de flujo de datos</h1>
+      <p class="lead">
+        Una vista por dominios y tres descomposiciones de nivel 2. Los doce procesos P01–P12
+        transforman entradas en salidas concretas y leen o escriben en almacenes identificables.
+        El recorrido cubre identidad, ciclo del viaje, pagos, reputación y gobierno.
+      </p>
+    </div>
+    <div class="page-head__meta">
+      <span class="chip chip--brand">Nivel 1 + 3 × nivel 2</span>
+      <span class="chip chip--teal">P01–P12</span>
+      <span class="chip chip--amber">D1–D6 + DR</span>
+    </div>
+  </header>
+
+  <section class="section" id="nivel-1" aria-labelledby="n1-title">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 id="n1-title">DFD nivel 1 · Vista por dominios</h2>
+        <p>Cuatro procesos agregados, almacenes D1–D6 y los flujos que conectan actores, procesos y datos. En este nivel, D5 y D6 se muestran juntos como D5–D6. Es la primera descomposición del contexto.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-1">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 1</b> · DFD nivel 1</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        {{DIAGRAMA:dfd1}}
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 1</span>
+        <span><b>Nivel 1.</b> 1.0 Identidad, 2.0 Operación del viaje, 3.0 Pagos y finanzas, 4.0 Servicio y gobierno. Los flujos externos se derivan de las interfases del contexto; los internos se numeran F10–F13 y el acceso administrativo se identifica como F14.</span>
+      </figcaption>
+    </figure>
+
+    <div class="grid grid--4 mt-2">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 20c.8-4 3.2-6 7-6s6.2 2 7 6"/></svg></div>
+        <h3>1.0 Identidad</h3>
+        <p>Registro, inicio de sesión, roles y perfiles. Alimenta de identidad al resto de dominios.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="2.5"/><circle cx="18.5" cy="17" r="2.5"/><path d="M8 17h4l2.4-5.2h3.1M11 17 9.7 13H7m7.2 0-2-3.2H9.6"/></svg></div>
+        <h3>2.0 Viaje</h3>
+        <p>Solicitud, búsqueda, asignación, cancelación, ejecución y precio. Es el eje operativo.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 15h4"/></svg></div>
+        <h3>3.0 Pagos</h3>
+        <p>Cobro al pasajero, liquidación al conductor, autorización y reverso.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.4-7 9.3-4.1-1.9-7-5.1-7-9.3V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>4.0 Gobierno</h3>
+        <p>Calificación, patrocinio, administración y reportes. Cierra el ciclo y audita.</p>
+      </div>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>Los flujos internos no son decorativos:</strong> F10 transporta la identidad y el rol; F11 lleva el viaje y su tarifa hacia pagos; F12 entrega las transacciones a gobierno; F13 habilita la calificación cuando el viaje termina.</p>
+    </div>
+  </section>
+
+  <section class="section" id="procesos" aria-labelledby="proc-title">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 id="proc-title">Inventario de procesos P01–P12</h2>
+        <p>Cada proceso tiene entradas, salidas, almacén y acontecimientos asociados. La numeración coincide con la trazabilidad del dossier.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:3.5rem">ID</th><th>Proceso</th><th>Dominio</th><th>Entradas</th><th>Salidas</th><th>Almacén</th><th>Acontecimientos</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag--fk">P01</span></td><td><strong>Registro de cuentas</strong></td><td>Identidad</td>
+            <td>Datos personales, credenciales y rol elegido.</td><td>Usuario y perfil de rol creados.</td><td>D1</td><td class="nowrap">01–02</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--fk">P02</span></td><td><strong>Inicio de sesión</strong></td><td>Identidad</td>
+            <td>Correo y contraseña.</td><td>Sesión autenticada con rol y permisos.</td><td>D1</td><td class="nowrap">03</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P03</span></td><td><strong>Solicitud de viaje</strong></td><td>Viaje</td>
+            <td>Origen, destino y pasajero autenticado.</td><td>Viaje en estado <code>solicitado</code> y paso a <code>buscando</code>.</td><td>D2</td><td class="nowrap">04–05</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P04</span></td><td><strong>Búsqueda de conductores</strong></td><td>Viaje</td>
+            <td>Viaje pendiente y disponibilidad de conductores.</td><td>Lista de candidatos compatibles.</td><td>D1, D2</td><td class="nowrap">06</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P05</span></td><td><strong>Asignación</strong></td><td>Viaje</td>
+            <td>Candidatos y respuesta del conductor.</td><td>Viaje asignado, ETA y notificación al pasajero.</td><td>D1, D2</td><td class="nowrap">07–09, 11</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P06</span></td><td><strong>Cancelación</strong></td><td>Viaje</td>
+            <td>Solicitud de cancelación del pasajero o del conductor.</td><td>Viaje en <code>cancelado</code> y liberación del conductor.</td><td>D2</td><td class="nowrap">10</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P07</span></td><td><strong>Gestión del viaje</strong></td><td>Viaje</td>
+            <td>Eventos del conductor: en camino, inicio y fin.</td><td>Estado actualizado y datos para el pasajero.</td><td>D2</td><td class="nowrap">11–14</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--ok">P08</span></td><td><strong>Cálculo del precio</strong></td><td>Viaje</td>
+            <td>Distancia, tiempo y tarifa base.</td><td>Tarifa final y recibo del servicio.</td><td>D2</td><td class="nowrap">15</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--pk">P09</span></td><td><strong>Registro y control de pagos</strong></td><td>Pagos</td>
+            <td>Pago del pasajero, autorización administrativa o incidencia.</td><td>Pago registrado, liquidación o reverso.</td><td>D3</td><td class="nowrap">16–18</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P10</span></td><td><strong>Calificación del servicio</strong></td><td>Gobierno</td>
+            <td>Puntuación, comentario y viaje finalizado.</td><td>Calificación registrada y reputación actualizada.</td><td>D2, D4</td><td class="nowrap">19</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P11</span></td><td><strong>Gestión de patrocinio</strong></td><td>Gobierno</td>
+            <td>Convenio, publicidad y pago del aliado.</td><td>Acuerdo registrado, estado y métricas.</td><td>D5, D6</td><td class="nowrap">20</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--uq">P12</span></td><td><strong>Administración general</strong></td><td>Gobierno</td>
+            <td>Gestión de usuarios, consultas y solicitudes de reporte.</td><td>Usuarios actualizados, reportes y alertas.</td><td>D1–D6, DR</td><td class="nowrap">21</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2a" aria-labelledby="n2a-title">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 id="n2a-title">DFD nivel 2A · Identidad y acceso</h2>
+        <p>Descomposición de P01 y P02. El almacén D1 concentra credenciales, rol y perfiles; la sesión resultante habilita el resto de procesos.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2a">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 2</b> · DFD nivel 2A</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        {{DIAGRAMA:dfd2a}}
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 2</span>
+        <span><b>Identidad y acceso.</b> P01 crea la cuenta y su perfil; P02 valida credenciales y emite una sesión con el rol. F6–F8 son flujos internos de persistencia y verificación.</span>
+      </figcaption>
+    </figure>
+
+    <div class="two-col mt-2">
+      <div class="card">
+        <h3>Decisiones del proceso</h3>
+        <ul class="list-check">
+          <li><strong>Un correo, una cuenta:</strong> la unicidad se valida antes de insertar y se refuerza con <code>UNIQUE</code>.</li>
+          <li><strong>Un rol, un perfil:</strong> P01 crea el usuario y su especialización en una sola transacción.</li>
+          <li><strong>Contraseña como hash:</strong> la capa de servicio aplica bcrypt o Argon2; la base solo guarda el hash.</li>
+          <li><strong>Sesión con rol:</strong> el token o la cookie de sesión incluye el rol para habilitar rutas y permisos.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Qué no hace este DFD</h3>
+        <ul class="list-x">
+          <li>No muestra la pantalla de registro ni el diseño de la interfaz.</li>
+          <li>No describe el algoritmo de hash ni la política de bloqueo por intentos.</li>
+          <li>No modela recuperación de contraseña: sería un proceso adicional P01.1 o P02.1.</li>
+          <li>No incluye autenticación social ni segundo factor; son extensiones del mismo dominio.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2b" aria-labelledby="n2b-title">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 id="n2b-title">DFD nivel 2B · Ciclo del viaje</h2>
+        <p>Descomposición de P03–P08. El viaje atraviesa solicitud, búsqueda, asignación, cancelación, ejecución y precio; cada transición actualiza D2.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2b">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 3</b> · DFD nivel 2B</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        {{DIAGRAMA:dfd2b}}
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 3</span>
+        <span><b>Ciclo del viaje.</b> P03 solicita, P04 busca, P05 asigna, P06 cancela, P07 ejecuta y P08 calcula. F17 entrega la tarifa confirmada y el recibo al pasajero.</span>
+      </figcaption>
+    </figure>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Regla de estado:</strong> cancelar no elimina el viaje. Se actualiza <code>estado = 'cancelado'</code>, se registra <code>fecha_fin</code> y se libera al conductor. La trazabilidad se conserva para auditoría y para el cálculo de reputación.</p>
+    </div>
+
+    <div class="two-col mt-2">
+      <div class="card">
+        <h3>Flujo feliz</h3>
+        <ol class="small">
+          <li>P03 registra origen y destino; el viaje queda en <code>buscando</code>.</li>
+          <li>P04 consulta disponibilidad en D1 y obtiene candidatos.</li>
+          <li>P05 notifica, recibe la aceptación y asigna; el viaje pasa a <code>asignado</code>.</li>
+          <li>P07 recibe «en camino», «inicio» y «fin»; el viaje llega a <code>finalizado</code>.</li>
+          <li>P08 confirma distancia y tarifa; el viaje queda listo para P09.</li>
+        </ol>
+      </div>
+      <div class="card card--soft">
+        <h3>Excepciones</h3>
+        <ul class="list-x">
+          <li><strong>Sin candidatos:</strong> P04 devuelve lista vacía; el viaje permanece en <code>buscando</code> o se cancela.</li>
+          <li><strong>Rechazo:</strong> P05 libera al conductor y vuelve a buscar.</li>
+          <li><strong>Cancelación:</strong> P06 actualiza el estado y libera al conductor.</li>
+          <li><strong>Incidencia en el trayecto:</strong> P07 registra el estado y deriva a P09 para el reverso si corresponde.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="nivel-2c" aria-labelledby="n2c-title">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 id="n2c-title">DFD nivel 2C · Dinero, reputación y gobierno</h2>
+        <p>Descomposición de P09–P12. Pagos, calificación, patrocinio y administración comparten el cierre del viaje y la producción de reportes.</p>
+      </div>
+    </div>
+
+    <figure class="figure figure--full" data-name="dfd-nivel-2c">
+      <div class="figure__bar">
+        <span class="figure__label"><b>Figura 4</b> · DFD nivel 2C</span>
+        <div class="figure__tools">
+          <button class="tool" type="button" data-fullscreen title="Ver en pantalla completa">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            Pantalla completa
+          </button>
+          <button class="tool" type="button" data-download-svg title="Descargar el diagrama como SVG">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            SVG
+          </button>
+        </div>
+      </div>
+      <div class="figure__canvas figure__canvas--wide">
+        {{DIAGRAMA:dfd2c}}
+      </div>
+      <figcaption class="figure__caption">
+        <span class="num">FIG. 4</span>
+        <span><b>Dinero, reputación y gobierno.</b> P09 cobra y liquida, P10 califica, P11 gestiona patrocinios y P12 administra. DR es una vista de lectura para reportes, no una tabla normalizada.</span>
+      </figcaption>
+    </figure>
+
+    <div class="grid grid--2 mt-2">
+      <div class="card">
+        <h3>P09 · Pagos</h3>
+        <p>Recibe el pago del pasajero, la autorización del administrador y las incidencias. Actualiza D3 con el estado y la referencia de la pasarela. La liquidación al conductor y el reverso son transiciones del mismo pago, no viajes nuevos.</p>
+      </div>
+      <div class="card">
+        <h3>P10 · Calificación</h3>
+        <p>Valida que el viaje esté finalizado y que no exista otra calificación. Guarda puntuación y comentario en D4. La reputación del conductor se calcula como promedio, no se almacena duplicada en <code>usuario</code>.</p>
+      </div>
+      <div class="card">
+        <h3>P11 · Patrocinio</h3>
+        <p>Gestiona patrocinadores y acuerdos en D5 y D6. Un acuerdo tiene vigencia y monto propios; el tipo de alianza preferente vive en el patrocinador. El estado del acuerdo dispara F12 hacia P12.</p>
+      </div>
+      <div class="card">
+        <h3>P12 · Administración</h3>
+        <p>Consulta D1–D6 y produce reportes desde DR. No modifica D3 directamente: cualquier ajuste de pago pasa por P09 para conservar la auditoría y la regla de autorización.</p>
+      </div>
+    </div>
+
+    <div class="callout callout--amber mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 20h18z"/><path d="M12 9v5M12 17h.01"/></svg>
+      <p><strong>DR no es una tabla:</strong> representa el conjunto de vistas y consultas agregadas que alimentan los reportes. No tiene clave primaria ni se normaliza porque no almacena hechos nuevos; solo lee D1–D6.</p>
+    </div>
+  </section>
+
+  <section class="section" id="almacenes" aria-labelledby="store-title">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <div>
+        <h2 id="store-title">Diccionario de almacenes</h2>
+        <p>Seis almacenes lógicos y un almacén de reportes. Cada uno se corresponde con una o más tablas del modelo E-R.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr><th style="width:4rem">ID</th><th>Almacén</th><th>Contenido</th><th>Clave</th><th>Procesos</th><th>Acceso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tag--fk">D1</span></td><td><strong>USUARIO</strong></td><td><code>usuario</code>, <code>pasajero</code>, <code>motoconchista</code>, <code>administrador</code>.</td><td class="mono">id_usuario</td><td>P01, P02, P04, P05, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--ok">D2</span></td><td><strong>VIAJE</strong></td><td><code>viaje</code>: origen, destino, estado, distancia, tarifa y fechas.</td><td class="mono">id_viaje</td><td>P03–P08, P10, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">D3</span></td><td><strong>PAGO</strong></td><td><code>pago</code>: monto, método, estado, referencia y autorización.</td><td class="mono">id_pago</td><td>P09, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--uq">D4</span></td><td><strong>CALIFICACION</strong></td><td><code>calificacion</code>: puntuación, comentario y fecha.</td><td class="mono">id_calificacion</td><td>P10, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--no">D5</span></td><td><strong>PATROCINADOR</strong></td><td><code>patrocinador</code>: empresa, contacto, tipo de alianza y estado.</td><td class="mono">id_patrocinador</td><td>P11, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--no">D6</span></td><td><strong>ACUERDO_PATROCINIO</strong></td><td><code>acuerdo_patrocinio</code>: monto, vigencia, estado y responsables.</td><td class="mono">id_acuerdo</td><td>P11, P12</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--nn">DR</span></td><td><strong>REPORTES</strong></td><td>Vistas <code>v_usuario_rol</code> y <code>v_acuerdo_vigente</code> más agregados de D1–D6.</td><td class="mono">— (vista)</td><td>P12</td><td>Solo lectura</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+      <p><strong>D5 y D6 están separados por diseño:</strong> un patrocinador puede existir sin acuerdo y un acuerdo no se entiende sin patrocinador. Sus ciclos de vida y reglas de borrado son distintos, por eso el DFD los trata como almacenes diferentes.</p>
+    </div>
+  </section>
+
+  <section class="section" id="flujos" aria-labelledby="flows-title">
+    <div class="section-head">
+      <span class="section-num">07</span>
+      <div>
+        <h2 id="flows-title">Inventario de flujos</h2>
+        <p>Numeración por diagrama. En los flujos bidireccionales, la etiqueta describe el par solicitud/respuesta; el detalle de cada dirección está en la tabla de interfases del contexto.</p>
+      </div>
+    </div>
+
+    <h3>Nivel 1 · F1–F14</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ 1.0 Identidad</td><td>Registro y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>Pasajero ↔ 2.0 Viaje</td><td>Solicitud y confirmación.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Pasajero ↔ 3.0 Pagos</td><td>Pago del viaje y comprobante.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>Motoconchista ↔ 1.0 Identidad</td><td>Registro y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>Motoconchista ↔ 2.0 Viaje</td><td>Oferta y estado del viaje.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>3.0 Pagos → Motoconchista</td><td>Liquidación.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>Administrador ↔ 3.0 Pagos</td><td>Autorización y reporte.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>Administrador ↔ 4.0 Gobierno</td><td>Gestión y reportes.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Patrocinador ↔ 4.0 Gobierno</td><td>Convenios y métricas.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--nn">F10</span></td><td>1.0 Identidad → 2.0 Viaje</td><td>Identidad y rol.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F11</span></td><td>2.0 Viaje → 3.0 Pagos</td><td>Viaje y tarifa.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F12</span></td><td>3.0 Pagos → 4.0 Gobierno</td><td>Transacciones.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F13</span></td><td>2.0 Viaje → 4.0 Gobierno</td><td>Viaje finalizado para calificar.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>Administrador → 1.0 Identidad</td><td>Sesión y rol administrativo.</td><td>Entrada</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2A · F1–F8</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ P01</td><td>Datos de registro.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>Motoconchista ↔ P01</td><td>Datos de registro.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Pasajero ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>Motoconchista ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>Administrador ↔ P02</td><td>Credenciales y sesión.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--nn">F6</span></td><td>P01 → P02</td><td>Usuario creado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--nn">F7</span></td><td>P01 → D1</td><td>Nuevo usuario y rol.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--nn">F8</span></td><td>P02 ↔ D1</td><td>Verificación y actualización de sesión.</td><td>Lectura / escritura</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2B · F1–F17</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero ↔ P03</td><td>Origen y destino.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>P03 → D2</td><td>Nueva solicitud.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>D2 → P04</td><td>Viajes pendientes.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>D1 → P04</td><td>Disponibilidad de conductores.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>P04 → P05</td><td>Candidatos.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>P05 ↔ Motoconchista</td><td>Solicitud y respuesta.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>P05 → D2</td><td>Asignación.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>P05 → Pasajero</td><td>Conductor asignado y ETA.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Pasajero ↔ P06</td><td>Cancelación.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F10</span></td><td>P06 → D2</td><td>Estado cancelado.</td><td>Escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F11</span></td><td>P06 ↔ Motoconchista</td><td>Cancelación del conductor.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F12</span></td><td>P07 ↔ Motoconchista</td><td>En camino, inicio y fin.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F13</span></td><td>P05 → P07</td><td>Viaje activo.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>P07 → P08</td><td>Viaje finalizado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F15</span></td><td>P08 ↔ D2</td><td>Distancia y tarifa.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F16</span></td><td>P08 → P09</td><td>Monto a cobrar.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F17</span></td><td>P08 → Pasajero</td><td>Tarifa confirmada y recibo.</td><td>Salida</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="mt-3">Nivel 2C · F1–F14</h3>
+    <div class="table-wrap mt-1">
+      <table class="data table--compact">
+        <thead><tr><th style="width:3.5rem">ID</th><th>Origen → destino</th><th>Datos</th><th>Tipo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag--pk">F1</span></td><td>Pasajero → P09</td><td>Pago y comprobante.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F2</span></td><td>P09 → Motoconchista</td><td>Liquidación.</td><td>Salida</td></tr>
+          <tr><td><span class="tag tag--pk">F3</span></td><td>Administrador → P09</td><td>Autorización o reverso.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F4</span></td><td>P09 ↔ D3</td><td>Pagos y estados.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F5</span></td><td>P09 → P10</td><td>Pago confirmado.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F6</span></td><td>Pasajero → P10</td><td>Puntuación y comentario.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F7</span></td><td>P10 ↔ D4</td><td>Calificaciones.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F8</span></td><td>P10 ↔ D2</td><td>Validación del viaje.</td><td>Lectura</td></tr>
+          <tr><td><span class="tag tag--pk">F9</span></td><td>Patrocinador → P11</td><td>Convenio y publicidad.</td><td>Entrada</td></tr>
+          <tr><td><span class="tag tag--pk">F10</span></td><td>P11 ↔ D5</td><td>Patrocinadores.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F11</span></td><td>P11 ↔ D6</td><td>Acuerdos.</td><td>Lectura / escritura</td></tr>
+          <tr><td><span class="tag tag--pk">F12</span></td><td>P11 → P12</td><td>Acuerdo activo.</td><td>Interno</td></tr>
+          <tr><td><span class="tag tag--pk">F13</span></td><td>Administrador ↔ P12</td><td>Gestión y reportes.</td><td>Bidireccional</td></tr>
+          <tr><td><span class="tag tag--pk">F14</span></td><td>P12 ↔ DR</td><td>Consulta de D1–D6.</td><td>Solo lectura</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="convenciones" aria-labelledby="conv-title">
+    <div class="section-head">
+      <span class="section-num">08</span>
+      <div>
+        <h2 id="conv-title">Convenciones y verificación</h2>
+        <p>Cómo se numeran los elementos y qué garantiza que los cuatro diagramas sean consistentes entre sí.</p>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 9v11"/></svg></div>
+        <h3>Procesos</h3>
+        <p>Los agregados usan <code>1.0</code>–<code>4.0</code>; los procesos detallados usan <code>P01</code>–<code>P12</code>. Cada P pertenece a un solo dominio y a un solo DFD de nivel 2.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v4H4zM4 14h16v4H4z"/><path d="M8 6v4M8 14v4"/></svg></div>
+        <h3>Almacenes</h3>
+        <p><code>D1</code>–<code>D6</code> son almacenes lógicos; <code>DR</code> es un almacén de reportes de solo lectura. En el nivel 1, D5 y D6 aparecen agregados como D5–D6; el nivel 2 los desdobla. Cada D se traza a una tabla del modelo E-R.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg></div>
+        <h3>Flujos</h3>
+        <p>La numeración es local a cada diagrama. Los flujos externos conservan el sentido del contexto; los internos se marcan como <em>interno</em>, <em>lectura</em> o <em>escritura</em>.</p>
+      </div>
+    </div>
+
+    <div class="two-col mt-3">
+      <div class="card">
+        <h3>Qué muestra y qué no muestra un DFD</h3>
+        <ul class="list-check">
+          <li><strong>Muestra:</strong> procesos, flujos, almacenes y actores; entradas y salidas de cada transformación.</li>
+          <li><strong>No muestra:</strong> secuencia temporal, decisiones, condiciones, protocolos ni diseño de interfaz.</li>
+          <li><strong>Tampoco muestra:</strong> el modelo físico de índices, triggers o transacciones; eso pertenece al DDL y a la arquitectura.</li>
+          <li><strong>Los cruces de líneas</strong> no implican conexión: solo los extremos con flecha indican un flujo.</li>
+        </ul>
+      </div>
+      <div class="card card--soft">
+        <h3>Checklist de consistencia</h3>
+        <ul class="list-check list-check--brand">
+          <li>Todo P01–P12 aparece en un DFD de nivel 2 y en el inventario.</li>
+          <li>Todo almacén D1–D6 tiene tabla y clave en el modelo E-R; DR es una vista.</li>
+          <li>Todo flujo tiene origen, destino y datos; los bidireccionales se leen como par solicitud/respuesta.</li>
+          <li>Los actores del nivel 1 son los mismos cuatro del contexto.</li>
+          <li>Las interfaces F1–F8 del contexto se trazan a los procesos y flujos internos.</li>
+          <li>Las reglas de estado de P05–P09 coinciden con los <code>CHECK</code> y la máquina de estados del modelo E-R.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout--teal mt-2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+      <p><strong>Verificación global:</strong> los cuatro diagramas cubren los veintiún acontecimientos, los doce procesos, los seis almacenes lógicos y las ocho interfases externas. Ningún proceso lee o escribe un almacén que no exista en el modelo E-R.</p>
+    </div>
+  </section>
+
+  <nav class="page-nav no-print" aria-label="Navegación entre documentos">
+    <a href="contexto.html">← Diagrama de contexto</a>
+    <a href="index.html">Volver al inicio →</a>
+  </nav>
+</div>

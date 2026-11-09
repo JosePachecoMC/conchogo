@@ -1,0 +1,342 @@
+<!--META
+{
+  "title": "Dossier técnico",
+  "page": "index.html",
+  "description": "Dossier técnico de MotoUber: modelo entidad-relación en 3FN, diagrama de contexto y diagramas de flujo de datos.",
+  "bodyClass": ""
+}
+META-->
+
+<div class="shell page">
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__grid">
+      <div>
+        <div class="hero__badge"><span class="dot"></span> Proyecto MotoUber · Documentación del sistema</div>
+        <h1 id="hero-title">Modelo de datos y <em>arquitectura funcional</em> de MotoUber</h1>
+        <p>
+          Dossier interactivo con el modelo entidad-relación normalizado en Tercera Forma Normal,
+          el diagrama de contexto y los diagramas de flujo de datos (DFD) que describen los
+          doce procesos y los veintiún acontecimientos del sistema.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--light" href="modelo-er.html">Explorar modelo E-R {{arrow}}</a>
+          <a class="btn btn--ghost" href="contexto.html">Abrir diagrama de contexto</a>
+          <button class="btn btn--ghost" type="button" data-print>{{printIcon}} Imprimir dossier</button>
+        </div>
+        <div class="hero__meta" aria-label="Tecnologías y alcance">
+          <span>React</span><span>API REST</span><span>MySQL / PostgreSQL</span><span>3FN</span><span>DFD Yourdon–DeMarco</span>
+        </div>
+      </div>
+      <aside class="hero__card" aria-label="Contenido del dossier">
+        <h2>En este dossier</h2>
+        <ol>
+          <li><a href="modelo-er.html">Modelo E-R, diccionario y normalización 3FN</a></li>
+          <li><a href="contexto.html">Diagrama de contexto e interfases externas</a></li>
+          <li><a href="dfd.html">DFD nivel 1 y tres descomposiciones nivel 2</a></li>
+          <li><a href="#trazabilidad">Trazabilidad de los 21 acontecimientos</a></li>
+          <li><a href="modelo-er.html#sql">Script SQL listo para ejecutar</a></li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+
+  <div class="stats" aria-label="Cifras del modelo">
+    <div class="stat"><div class="stat__num">9</div><div class="stat__label">tablas en 3FN</div></div>
+    <div class="stat"><div class="stat__num">10</div><div class="stat__label">relaciones modeladas</div></div>
+    <div class="stat"><div class="stat__num">12</div><div class="stat__label">procesos P01–P12</div></div>
+    <div class="stat"><div class="stat__num">21</div><div class="stat__label">acontecimientos</div></div>
+  </div>
+
+  <section class="section" id="mapa" aria-labelledby="mapa-title">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <div>
+        <h2 id="mapa-title">Mapa del dossier</h2>
+        <p>Tres vistas complementarias: los datos, la frontera del sistema y la transformación de la información.</p>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <a class="card link-card" href="modelo-er.html">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 300 110">
+            <g fill="none" stroke="#c7d2fe" stroke-width="1.4">
+              <path d="M75 55h35M165 55h35M118 34v-8h22M118 76v8h22"/>
+            </g>
+            <g>
+              <rect x="18" y="38" width="57" height="34" rx="5" fill="#4338ca"/>
+              <text x="46.5" y="59" text-anchor="middle" fill="#fff" font-size="8" font-family="Segoe UI" font-weight="700">USUARIO</text>
+              <rect x="110" y="14" width="56" height="26" rx="4" fill="#eef2ff" stroke="#a5b4fc"/>
+              <text x="138" y="30" text-anchor="middle" fill="#4338ca" font-size="6.6" font-family="Segoe UI" font-weight="700">PASAJERO</text>
+              <rect x="110" y="42" width="56" height="26" rx="4" fill="#eef2ff" stroke="#a5b4fc"/>
+              <text x="138" y="58" text-anchor="middle" fill="#4338ca" font-size="6.6" font-family="Segoe UI" font-weight="700">MOTO</text>
+              <rect x="110" y="70" width="56" height="26" rx="4" fill="#eef2ff" stroke="#a5b4fc"/>
+              <text x="138" y="86" text-anchor="middle" fill="#4338ca" font-size="6.6" font-family="Segoe UI" font-weight="700">ADMIN</text>
+              <rect x="200" y="38" width="46" height="34" rx="5" fill="#0f766e"/>
+              <text x="223" y="59" text-anchor="middle" fill="#fff" font-size="8" font-family="Segoe UI" font-weight="700">VIAJE</text>
+              <rect x="260" y="38" width="30" height="34" rx="4" fill="#fffbeb" stroke="#f59e0b"/>
+              <text x="275" y="59" text-anchor="middle" fill="#b45309" font-size="7" font-family="Segoe UI" font-weight="700">PAGO</text>
+            </g>
+          </svg>
+        </div>
+        <div class="link-card__top"><span class="link-card__num">DOCUMENTO 01</span><span class="chip chip--brand">3FN</span></div>
+        <h3>Modelo Entidad-Relación</h3>
+        <p>Entidades, claves, cardinalidades, diccionario de datos, reglas de normalización y script SQL.</p>
+        <span class="link-card__foot">Ver modelo E-R {{arrow}}</span>
+      </a>
+
+      <a class="card link-card" href="contexto.html">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 300 110">
+            <g fill="none" stroke="#bfdbfe" stroke-width="1.5">
+              <path d="M103 55h29M168 55h29M150 30V16M150 80v14"/>
+            </g>
+            <g>
+              <rect x="132" y="34" width="36" height="42" rx="6" fill="#1e1b4b"/>
+              <text x="150" y="58" text-anchor="middle" fill="#fff" font-size="7.4" font-family="Segoe UI" font-weight="700">SISTEMA</text>
+              <rect x="18" y="41" width="70" height="28" rx="5" fill="#eef2ff" stroke="#a5b4fc"/>
+              <text x="53" y="58" text-anchor="middle" fill="#4338ca" font-size="7" font-family="Segoe UI" font-weight="700">PASAJERO</text>
+              <rect x="212" y="41" width="70" height="28" rx="5" fill="#fffbeb" stroke="#fcd34d"/>
+              <text x="247" y="58" text-anchor="middle" fill="#b45309" font-size="7" font-family="Segoe UI" font-weight="700">ADMIN</text>
+              <rect x="114" y="4" width="72" height="20" rx="4" fill="#ecfdf5" stroke="#5eead4"/>
+              <text x="150" y="17" text-anchor="middle" fill="#0f766e" font-size="6.4" font-family="Segoe UI" font-weight="700">MOTOCONCHISTA</text>
+              <rect x="122" y="92" width="56" height="14" rx="3" fill="#fff1f2" stroke="#fda4af"/>
+              <text x="150" y="102" text-anchor="middle" fill="#be123c" font-size="6.4" font-family="Segoe UI" font-weight="700">PATROCINADOR</text>
+            </g>
+          </svg>
+        </div>
+        <div class="link-card__top"><span class="link-card__num">DOCUMENTO 02</span><span class="chip chip--teal">DFD 0</span></div>
+        <h3>Diagrama de contexto</h3>
+        <p>Frontera del sistema, cuatro actores externos y las ocho interfases de entrada y salida.</p>
+        <span class="link-card__foot">Ver contexto {{arrow}}</span>
+      </a>
+
+      <a class="card link-card" href="dfd.html">
+        <div class="thumb" aria-hidden="true">
+          <svg viewBox="0 0 300 110">
+            <g fill="none" stroke="#99f6e4" stroke-width="1.3">
+              <path d="M68 45h22M138 45h22M68 75h60M208 75h24M208 58v17"/>
+            </g>
+            <g>
+              <rect x="18" y="30" width="50" height="28" rx="5" fill="#ecfdf5" stroke="#0d9488"/>
+              <text x="43" y="47" text-anchor="middle" fill="#0f766e" font-size="6.6" font-family="Segoe UI" font-weight="700">1.0 IDENT.</text>
+              <rect x="90" y="30" width="48" height="28" rx="5" fill="#ecfdf5" stroke="#0d9488"/>
+              <text x="114" y="47" text-anchor="middle" fill="#0f766e" font-size="6.6" font-family="Segoe UI" font-weight="700">2.0 VIAJE</text>
+              <rect x="160" y="30" width="48" height="28" rx="5" fill="#fffbeb" stroke="#d97706"/>
+              <text x="184" y="47" text-anchor="middle" fill="#b45309" font-size="6.6" font-family="Segoe UI" font-weight="700">3.0 PAGOS</text>
+              <rect x="232" y="30" width="50" height="28" rx="5" fill="#fff1f2" stroke="#e11d48"/>
+              <text x="257" y="47" text-anchor="middle" fill="#be123c" font-size="6.6" font-family="Segoe UI" font-weight="700">4.0 GOBIERNO</text>
+              <rect x="18" y="62" width="50" height="12" rx="2" fill="#eef2ff" stroke="#a5b4fc"/>
+              <rect x="80" y="62" width="50" height="12" rx="2" fill="#ecfdf5" stroke="#5eead4"/>
+              <rect x="142" y="62" width="50" height="12" rx="2" fill="#fffbeb" stroke="#fcd34d"/>
+              <rect x="204" y="62" width="50" height="12" rx="2" fill="#f0fdf4" stroke="#86efac"/>
+            </g>
+          </svg>
+        </div>
+        <div class="link-card__top"><span class="link-card__num">DOCUMENTO 03</span><span class="chip chip--amber">P01–P12</span></div>
+        <h3>Diagramas de flujo de datos</h3>
+        <p>Vista por dominios, identidad, ciclo del viaje y el bloque financiero, de reputación y gobierno.</p>
+        <span class="link-card__foot">Ver DFD {{arrow}}</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="resumen" aria-labelledby="resumen-title">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <div>
+        <h2 id="resumen-title">Resumen ejecutivo</h2>
+        <p>Decisiones de modelado que sostienen la trazabilidad entre acontecimientos, procesos y datos.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Qué resuelve el modelo</h3>
+        <p>
+          MotoUber conecta pasajeros con motoconchistas y necesita registrar cada viaje, su pago,
+          su calificación y los acuerdos comerciales con patrocinadores. El modelo parte de una
+          entidad base <strong>Usuario</strong> y tres especializaciones 1:1 para separar las
+          responsabilidades de cada rol sin duplicar credenciales.
+        </p>
+        <p>
+          El <strong>Viaje</strong> es el núcleo operativo: relaciona al pasajero y al conductor,
+          conserva origen, destino, distancia y tarifa, y actúa como eje del pago y de la
+          calificación. El patrocinio se modela aparte para no mezclar la operación del viaje con
+          los convenios comerciales.
+        </p>
+        <div class="pill-row">
+          <span class="chip chip--brand">Usuario + 3 perfiles</span>
+          <span class="chip chip--teal">Viaje como eje</span>
+          <span class="chip chip--amber">Pago 1:1</span>
+          <span class="chip chip--rose">Patrocinio independiente</span>
+        </div>
+      </div>
+
+      <div class="card card--soft">
+        <h3>Decisiones clave</h3>
+        <ul class="list-check">
+          <li><strong>3FN:</strong> cada atributo depende de la clave, de toda la clave y de nada más que la clave.</li>
+          <li><strong>Especialización 1:1:</strong> <code>id_usuario</code> es FK y UNIQUE en Pasajero, Motoconchista y Administrador.</li>
+          <li><strong>Pago y calificación 1:1:</strong> un viaje genera como máximo un pago y una calificación, evitando duplicados.</li>
+          <li><strong>Tarifa histórica:</strong> se almacena el precio cobrado como instantánea; no se recalcula al consultar.</li>
+          <li><strong>Contraseña segura:</strong> la columna guarda un hash (bcrypt/Argon2), nunca texto plano.</li>
+          <li><strong>Auditoría:</strong> los cambios de estado del viaje y del pago quedan registrados para el administrador.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="trazabilidad" aria-labelledby="traz-title">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <div>
+        <h2 id="traz-title">Trazabilidad de los 21 acontecimientos</h2>
+        <p>Cada acontecimiento del negocio queda cubierto por un proceso y por una o más entidades del modelo.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data table--compact">
+        <thead>
+          <tr>
+            <th style="width:3.2rem">#</th>
+            <th>Acontecimiento</th>
+            <th>Actor</th>
+            <th>Proceso</th>
+            <th>Entidades / datos</th>
+            <th>Vista</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="num">01</td><td>El pasajero se registra</td><td>Pasajero</td><td><span class="tag tag--ok">P01</span></td><td>Usuario, Pasajero</td><td>DFD 2A</td></tr>
+          <tr><td class="num">02</td><td>El motoconchista se registra</td><td>Motoconchista</td><td><span class="tag tag--ok">P01</span></td><td>Usuario, Motoconchista</td><td>DFD 2A</td></tr>
+          <tr><td class="num">03</td><td>El usuario inicia sesión</td><td>Todos</td><td><span class="tag tag--ok">P02</span></td><td>Usuario (rol)</td><td>DFD 2A</td></tr>
+          <tr><td class="num">04</td><td>Solicita un viaje con origen y destino</td><td>Pasajero</td><td><span class="tag tag--ok">P03</span></td><td>Viaje, Pasajero</td><td>DFD 2B</td></tr>
+          <tr><td class="num">05</td><td>El sistema registra la solicitud</td><td>Sistema</td><td><span class="tag tag--ok">P03</span></td><td>Viaje</td><td>DFD 2B</td></tr>
+          <tr><td class="num">06</td><td>Busca motoconchistas cercanos</td><td>Sistema</td><td><span class="tag tag--ok">P04</span></td><td>Motoconchista, Usuario</td><td>DFD 2B</td></tr>
+          <tr><td class="num">07</td><td>El motoconchista recibe la solicitud</td><td>Motoconchista</td><td><span class="tag tag--ok">P05</span></td><td>Viaje, Motoconchista</td><td>DFD 2B</td></tr>
+          <tr><td class="num">08</td><td>Acepta o rechaza la solicitud</td><td>Motoconchista</td><td><span class="tag tag--ok">P05</span></td><td>Viaje (estado)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">09</td><td>El sistema informa la respuesta</td><td>Sistema</td><td><span class="tag tag--ok">P05</span></td><td>Viaje, Pasajero</td><td>DFD 2B</td></tr>
+          <tr><td class="num">10</td><td>Pasajero o conductor cancela</td><td>Pasajero / conductor</td><td><span class="tag tag--ok">P06</span></td><td>Viaje (estado)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">11</td><td>Consulta los datos del conductor</td><td>Pasajero</td><td><span class="tag tag--ok">P05 / P07</span></td><td>Usuario, Motoconchista, Viaje</td><td>DFD 2B</td></tr>
+          <tr><td class="num">12</td><td>El conductor llega al punto de recogida</td><td>Motoconchista</td><td><span class="tag tag--ok">P07</span></td><td>Viaje (estado)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">13</td><td>Inicia el trayecto</td><td>Motoconchista</td><td><span class="tag tag--ok">P07</span></td><td>Viaje (estado)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">14</td><td>Finaliza el viaje</td><td>Motoconchista</td><td><span class="tag tag--ok">P07</span></td><td>Viaje (fecha_fin)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">15</td><td>El sistema calcula o confirma el precio</td><td>Sistema</td><td><span class="tag tag--ok">P08</span></td><td>Viaje (tarifa)</td><td>DFD 2B</td></tr>
+          <tr><td class="num">16</td><td>El pasajero paga el servicio</td><td>Pasajero</td><td><span class="tag tag--ok">P09</span></td><td>Pago, Viaje</td><td>DFD 2C</td></tr>
+          <tr><td class="num">17</td><td>El administrador paga al conductor</td><td>Administrador</td><td><span class="tag tag--ok">P09</span></td><td>Pago, Administrador, Motoconchista</td><td>DFD 2C</td></tr>
+          <tr><td class="num">18</td><td>El administrador cancela el pago</td><td>Administrador</td><td><span class="tag tag--ok">P09</span></td><td>Pago (estado), Administrador</td><td>DFD 2C</td></tr>
+          <tr><td class="num">19</td><td>El pasajero califica el servicio</td><td>Pasajero</td><td><span class="tag tag--ok">P10</span></td><td>Calificación, Viaje</td><td>DFD 2C</td></tr>
+          <tr><td class="num">20</td><td>El patrocinador gestiona sus convenios</td><td>Patrocinador</td><td><span class="tag tag--ok">P11</span></td><td>Patrocinador, Acuerdo</td><td>DFD 2C</td></tr>
+          <tr><td class="num">21</td><td>El administrador gestiona usuarios y reportes</td><td>Administrador</td><td><span class="tag tag--ok">P12</span></td><td>Usuario, Viaje, Pago, Calificación</td><td>DFD 2C</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="convenciones" aria-labelledby="conv-title">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <div>
+        <h2 id="conv-title">Cómo leer los diagramas</h2>
+        <p>Se usan notaciones estándar de ingeniería de software para que los diagramas sean verificables.</p>
+      </div>
+    </div>
+
+    <div class="grid grid--3">
+      <div class="card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="6" rx="1"/><rect x="14" y="14" width="7" height="6" rx="1"/><path d="M10 7h3a1 1 0 0 1 1 1v9"/></svg></div>
+        <h3>Modelo E-R</h3>
+        <p>Notación de pata de gallo. <strong>PK</strong> identifica la fila; <strong>FK</strong> conecta con otra tabla; <strong>UQ</strong> restringe la unicidad. La pata de gallo indica «muchos» y el círculo indica «opcional».</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="7" height="6" rx="1"/><rect x="14" y="13" width="7" height="6" rx="1"/><path d="M10 8h6v5M10 16h4"/></svg></div>
+        <h3>DFD</h3>
+        <p>Notación Yourdon–DeMarco: proceso, flujo de datos, almacén y entidad externa. El DFD no expresa decisiones ni secuencia temporal; para eso se usaría un diagrama de actividades.</p>
+      </div>
+      <div class="card">
+        <div class="card__icon card__icon--amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h10M4 17h7"/><path d="m16 15 2 2 3-3"/></svg></div>
+        <h3>Normalización</h3>
+        <p><strong>1FN</strong> elimina grupos repetidos; <strong>2FN</strong> elimina dependencias parciales; <strong>3FN</strong> elimina dependencias transitivas. El objetivo es evitar redundancia y anomalías de actualización.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="impresion" aria-labelledby="print-title">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <div>
+        <h2 id="print-title">Impresión, PDF y capturas</h2>
+        <p>El sitio funciona sin servidor y sin conexión: se abre directamente desde el explorador de archivos.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Para imprimir o guardar en PDF</h3>
+        <ol class="small">
+          <li>Abre la página del diagrama y pulsa <strong>Imprimir</strong> (arriba a la derecha) o <kbd>Ctrl</kbd> + <kbd>P</kbd>.</li>
+          <li>Selecciona <strong>Guardar como PDF</strong>, tamaño <strong>A4</strong> y activa <strong>Gráficos de fondo</strong>.</li>
+          <li>Las páginas de diagramas usan <strong>A4 horizontal</strong>; el resto, vertical.</li>
+          <li>Verifica la vista previa y guarda. Cada figura incluye su número y su descripción.</li>
+        </ol>
+        <div class="callout mt-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+          <p>Si el navegador reduce demasiado el diagrama, desactiva <em>«Ajustar al ancho de página»</em> y elige escala 100&nbsp;%.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Para capturas de pantalla</h3>
+        <ul class="list-check">
+          <li>Usa el botón de <strong>pantalla completa</strong> de cada figura para ocultar la navegación.</li>
+          <li>El botón <strong>SVG</strong> descarga el diagrama vectorial, útil para pegar en Word, PowerPoint o Figma.</li>
+          <li>Las capturas se ven nítidas porque todos los diagramas son SVG: no hay imágenes rasterizadas.</li>
+          <li>En Windows, <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> abre la herramienta de recorte.</li>
+        </ul>
+        <div class="callout callout--teal mt-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>
+          <p>El sitio no carga fuentes, scripts ni imágenes externas. Abre <code>index.html</code> y todo funciona localmente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="alcance" aria-labelledby="alcance-title">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <div>
+        <h2 id="alcance-title">Alcance y supuestos</h2>
+        <p>Límites explícitos para que el modelo no prometa más de lo que el sistema resuelve.</p>
+      </div>
+    </div>
+    <div class="grid grid--2">
+      <div class="card">
+        <h3>Incluido en el modelo</h3>
+        <ul class="list-check">
+          <li>Registro e inicio de sesión con separación de roles.</li>
+          <li>Solicitud, búsqueda, asignación, cancelación, ejecución y precio del viaje.</li>
+          <li>Cobro al pasajero, liquidación al conductor y reverso por incidencia.</li>
+          <li>Calificación del servicio y consulta de reputación.</li>
+          <li>Patrocinadores, acuerdos comerciales y administración general.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Fuera del alcance inicial</h3>
+        <ul class="list-x">
+          <li>Rastreo GPS en tiempo real y cálculo de rutas: se integra como servicio externo de mapas.</li>
+          <li>Pasarela de pago real: el modelo registra la transacción y su estado; la pasarela es un sistema externo.</li>
+          <li>Chat, notificaciones push y seguro del viaje.</li>
+          <li>Facturación fiscal y contabilidad formal.</li>
+        </ul>
+        <p class="note mt-2">Estas integraciones se representan como dependencias técnicas, no como actores del diagrama de contexto.</p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="page-nav no-print" aria-label="Navegación entre documentos">
+    <a href="modelo-er.html">Modelo Entidad-Relación {{arrow}}</a>
+    <a href="contexto.html">Diagrama de contexto {{arrow}}</a>
+  </nav>
+</div>
